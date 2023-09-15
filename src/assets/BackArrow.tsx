@@ -1,8 +1,8 @@
-'use client';
+
 
 import React from 'react';
 
-import {Icon} from '@chakra-ui/react';
+import { Icon } from '@chakra-ui/react';
 
 const BackArrow = (props: any) => {
   return (
