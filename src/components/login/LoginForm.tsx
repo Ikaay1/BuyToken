@@ -1,5 +1,5 @@
 import {Form, Formik} from 'formik';
-import {useRouter} from 'next/navigation';
+import {useRouter} from 'next/router';
 import React from 'react';
 import * as Yup from 'yup';
 
