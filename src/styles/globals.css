@@ -9,3 +9,7 @@
 a {
   text-decoration: none;
 }
+
+#nprogress .bar {
+  background: #4cad73 !important;
+}
