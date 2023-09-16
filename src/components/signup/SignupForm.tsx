@@ -1,5 +1,5 @@
-import {Form, Formik} from 'formik';
-import {useRouter} from 'next/router';
+import { Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
 import React from 'react';
 import * as Yup from 'yup';
 
@@ -7,7 +7,7 @@ import IdCardIcon from '@/assets/IdCardIcon';
 import MessageIcon from '@/assets/MessageIcon';
 import PersonIcon from '@/assets/PersonIcon';
 import SeePasswordIcon from '@/assets/SeePasswordIcon';
-import {Box, Button, Text} from '@chakra-ui/react';
+import { Box, Button, Text } from '@chakra-ui/react';
 
 import AuthInput from '../login/AuthInput';
 
@@ -87,6 +87,7 @@ const SignupForm = () => {
               background='#4CAD73'
               borderRadius='6px'
               mt='1.1rem'
+              onClick={() => router.push('/otp')}
             >
               Signup
             </Button>
@@ -107,7 +108,7 @@ const SignupForm = () => {
         <Box
           as='span'
           color='#4CAD73'
-          onClick={() => router.push('login')}
+          onClick={() => router.push('/login')}
           cursor='pointer'
         >
           {''}Login

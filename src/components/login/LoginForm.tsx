@@ -1,18 +1,18 @@
-import {Form, Formik} from 'formik';
-import {useRouter} from 'next/router';
+import { Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
 import React from 'react';
 import * as Yup from 'yup';
 
 import MessageIcon from '@/assets/MessageIcon';
 import SeePasswordIcon from '@/assets/SeePasswordIcon';
 import {
-  Box,
-  Button,
-  Checkbox,
-  Divider,
-  Flex,
-  Link,
-  Text,
+	Box,
+	Button,
+	Checkbox,
+	Divider,
+	Flex,
+	Link,
+	Text,
 } from '@chakra-ui/react';
 
 import AuthInput from './AuthInput';
@@ -71,6 +71,7 @@ const LoginForm = () => {
               background='#4CAD73'
               borderRadius='6px'
               mt='1.1rem'
+              onClick={() => router.push('/signup')}
             >
               Login
             </Button>

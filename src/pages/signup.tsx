@@ -1,20 +1,19 @@
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import BackArrow from '@/assets/BackArrow';
 import SignupForm from '@/components/signup/SignupForm';
-import {Box, Flex, Icon, Text} from '@chakra-ui/react';
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
 
 const Signup = () => {
   const router = useRouter();
   return (
     <Flex
-      h='100vh'
       justifyContent={'center'}
-      alignItems={'center'}
       backgroundImage={'url(/assets/login_bg.png)'}
       backgroundRepeat={'no-repeat'}
-      overflowY={'auto'}
+      pt='10rem'
+      pb='6.5rem'
     >
       <Box
         width='845px'
