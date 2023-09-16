@@ -25,9 +25,9 @@ const SignupForm = () => {
         }}
         enableReinitialize
         validationSchema={Yup.object({
-          email: Yup.string().required('Email or Phone Number is Required'),
+          email: Yup.string().email().required('Email is Required'),
           name: Yup.string().required('Name is Required'),
-          phone: Yup.string().required('Phone is Required'),
+          phone: Yup.string().required('Phone Number is Required'),
           password: Yup.string().min(5).required('Password is Required'),
           confirmPassword: Yup.string()
             .min(5)

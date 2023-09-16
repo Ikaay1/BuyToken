@@ -87,6 +87,7 @@ const LoginForm = () => {
         color='#1E1E1F'
         textAlign={'center'}
         mt='.8rem'
+        onClick={() => router.push('/email')}
       >
         Forgot Password?
       </Text>
