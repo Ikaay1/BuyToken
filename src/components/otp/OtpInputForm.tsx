@@ -60,6 +60,8 @@ const OtpInputForm = () => {
             setTimeout(() => {
               setError('');
             }, 3000);
+          } else {
+            router.push('/home');
           }
         }}
       >

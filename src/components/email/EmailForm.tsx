@@ -52,9 +52,9 @@ const EmailForm = () => {
               background='#4CAD73'
               borderRadius='6px'
               mt='1.25rem'
-              onClick={() => router.push('/signup')}
+              onClick={() => router.push('/reset-password')}
             >
-              Login
+              Continue
             </Button>
           </Form>
         )}
