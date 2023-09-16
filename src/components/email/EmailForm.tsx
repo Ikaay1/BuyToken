@@ -20,7 +20,7 @@ import AuthInput from '../login/AuthInput';
 const EmailForm = () => {
   const router = useRouter();
   return (
-    <Box mt='1.2rem' width='570px'>
+    <Box mt='1.2rem' width={{lg: '570px'}}>
       <Formik
         initialValues={{
           email: '',
@@ -47,7 +47,7 @@ const EmailForm = () => {
               fontSize='16px'
               lineHeight='24px'
               color='#FFFFFF'
-              width='570px'
+              width={{base: '100%', lg: '570px'}}
               height='50px'
               background='#4CAD73'
               borderRadius='6px'

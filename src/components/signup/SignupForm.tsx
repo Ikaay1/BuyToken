@@ -14,7 +14,7 @@ import AuthInput from '../login/AuthInput';
 const SignupForm = () => {
   const router = useRouter();
   return (
-    <Box mt='1.2rem' width='570px'>
+    <Box mt='1.2rem' width={{lg: '570px'}}>
       <Formik
         initialValues={{
           email: '',
@@ -82,7 +82,7 @@ const SignupForm = () => {
               fontSize='16px'
               lineHeight='24px'
               color='#FFFFFF'
-              width='570px'
+              width={{base: '100%', lg: '570px'}}
               height='50px'
               background='#4CAD73'
               borderRadius='6px'

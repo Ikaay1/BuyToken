@@ -20,7 +20,7 @@ import AuthInput from './AuthInput';
 const LoginForm = () => {
   const router = useRouter();
   return (
-    <Box mt='1.2rem' width='570px'>
+    <Box mt='1.2rem' width={{lg: '570px'}}>
       <Formik
         initialValues={{
           email: '',
@@ -66,7 +66,7 @@ const LoginForm = () => {
               fontSize='16px'
               lineHeight='24px'
               color='#FFFFFF'
-              width='570px'
+              width={{base: '100%', lg: '570px'}}
               height='50px'
               background='#4CAD73'
               borderRadius='6px'
@@ -115,11 +115,11 @@ const LoginForm = () => {
         ></Divider>
       </Flex>
       <Button
-        width='571px'
+        width={{base: '100%', lg: '571px'}}
         height='50px'
         background={'rgba(76,173,115,0.1)'}
         borderRadius='6px'
-        fontFamily="'Poppins'"
+        fontFamily='Poppins'
         fontWeight='600'
         fontSize='14px'
         color={'rgb(76,173,115)'}

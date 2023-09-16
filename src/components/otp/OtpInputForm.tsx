@@ -10,7 +10,7 @@ const OtpInputForm = () => {
   const [error, setError] = useState('');
 
   return (
-    <Box mt='1.35rem'>
+    <Box mt='1.35rem' width={{lg: '468px'}}>
       <OTPInput
         inputStyle={{
           width: '62px',
@@ -23,7 +23,7 @@ const OtpInputForm = () => {
           color: '#717171',
         }}
         containerStyle={{
-          width: '467px',
+          width: '100%',
           display: 'flex',
           justifyContent: 'space-between',
         }}
@@ -49,7 +49,7 @@ const OtpInputForm = () => {
         fontSize='16px'
         lineHeight='24px'
         color='#FFFFFF'
-        width='468px'
+        width={{base: '100%', lg: '468px'}}
         height='50px'
         background='#4CAD73'
         borderRadius='6px'
