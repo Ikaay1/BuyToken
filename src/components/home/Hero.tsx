@@ -8,17 +8,25 @@ import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
 const Hero = () => {
   return (
-    <Box bg='white' pt='11rem' pb='5rem'>
-      <Flex w='1138px' mx='auto'>
+    <Box
+      bg='white'
+      pt={{base: '8rem', lg: '11rem'}}
+      pb={{base: '3rem', lg: '5rem'}}
+    >
+      <Flex w={{lg: '1138px'}} maxW={{base: '500px', lg: '1138px'}} mx='auto'>
         <Flex
-          w='806px'
+          w={{base: '60%', lg: '806px'}}
           background='#417657'
           boxShadow='0px 10px 20px 3px rgba(0, 0, 0, 0.1)'
-          pl='3rem'
+          pl={{base: '1rem', lg: '3rem'}}
           alignItems={'center'}
         >
-          <Box w='641px'>
-            <Text fontFamily='Inter' fontSize='24px' color='#FFFFFF'>
+          <Box w={{lg: '641px'}}>
+            <Text
+              fontFamily='Inter'
+              fontSize={{base: '14px', lg: '24px'}}
+              color='#FFFFFF'
+            >
               Save ₦100 On Bill Payments When You Transfer Directly To Your
               Meter Or Decoder’s Bank Account.
             </Text>
@@ -26,25 +34,37 @@ const Hero = () => {
               fontFamily='Raleway'
               fontStyle='normal'
               fontWeight='700'
-              fontSize='40px'
+              fontSize={{base: '16px', lg: '40px'}}
               color='#FFFFFF'
-              mt='1.6rem'
-              lineHeight={'100%'}
+              mt={{base: '1rem', lg: '1.6rem'}}
+              lineHeight={{lg: '100%'}}
             >
               Get instant value!
             </Text>
           </Box>
         </Flex>
-        <Image w='332px' src='/assets/woman.png' alt='Woman' />
+        <Image
+          w={{base: '40%', lg: '332px'}}
+          h={{base: '173px', lg: 'auto'}}
+          src='/assets/woman.png'
+          objectFit={{base: 'cover', lg: 'fill'}}
+          alt='Woman'
+        />
       </Flex>
 
-      <Box w='854px' mx='auto' mt='4.6rem'>
+      <Box
+        w={{lg: '854px'}}
+        maxW={{base: '500px', lg: '854px'}}
+        mx='auto'
+        mt={{base: '3.3rem', lg: '4.6rem'}}
+        px={{base: '.5rem', lg: 0}}
+      >
         <Text
-          w='789px'
+          w={{lg: '789px'}}
           mx='auto'
           fontFamily='Inter'
-          fontSize='32px'
-          lineHeight='39px'
+          fontSize={{base: '10px', lg: '32px'}}
+          lineHeight={{lg: '39px'}}
           textAlign='center'
           color='#000000'
         >
@@ -58,17 +78,22 @@ const Hero = () => {
               {icon: ClockIcon, name: '60 Second turnaround time'},
             ].map(({icon, name}, i) => (
               <Flex
-                w={i === 1 ? '353px' : '319.51px'}
-                justifyContent={'space-between'}
+                w={{base: '48%', lg: i === 1 ? '353px' : '319.51px'}}
+                justifyContent={{lg: 'space-between'}}
                 alignItems={'center'}
                 key={name}
               >
-                <Icon w='103.29px' h='122.07px' as={icon} />
+                <Icon
+                  w={{base: '55px', lg: '103.29px'}}
+                  h={{base: '65px', lg: '122.07px'}}
+                  mr={{base: '.6rem', lg: 0}}
+                  as={icon}
+                />
                 <Text
-                  w={i === 1 ? '215px' : '182px'}
+                  w={{lg: i === 1 ? '215px' : '182px'}}
                   fontFamily='Inter'
-                  fontSize='20px'
-                  lineHeight='24px'
+                  fontSize={{base: '12px', lg: '20px'}}
+                  lineHeight={{lg: '24px'}}
                   color='#666666'
                 >
                   {name}
@@ -76,7 +101,10 @@ const Hero = () => {
               </Flex>
             ))}
           </Flex>
-          <Flex justifyContent={'space-between'} mt='3rem'>
+          <Flex
+            justifyContent={'space-between'}
+            mt={{base: '1.5rem', lg: '3rem'}}
+          >
             {[
               {icon: NoCardIcon, name: 'No Card Exposure'},
               {
@@ -85,17 +113,22 @@ const Hero = () => {
               },
             ].map(({icon, name}, i) => (
               <Flex
-                w={i === 1 ? '353px' : '319.51px'}
-                justifyContent={'space-between'}
+                w={{base: '48%', lg: i === 1 ? '353px' : '319.51px'}}
+                justifyContent={{lg: 'space-between'}}
                 alignItems={'center'}
                 key={name}
               >
-                <Icon w='103.29px' h='122.07px' as={icon} />
+                <Icon
+                  w={{base: '55px', lg: '103.29px'}}
+                  h={{base: '65px', lg: '122.07px'}}
+                  mr={{base: '.6rem', lg: 0}}
+                  as={icon}
+                />
                 <Text
-                  w={i === 1 ? '215px' : '182px'}
+                  w={{lg: i === 1 ? '215px' : '182px'}}
                   fontFamily='Inter'
-                  fontSize='20px'
-                  lineHeight='24px'
+                  fontSize={{base: '12px', lg: '20px'}}
+                  lineHeight={{lg: '24px'}}
                   color='#666666'
                 >
                   {name}
