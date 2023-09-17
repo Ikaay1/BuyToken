@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import BulbIcon from '@/assets/BulbIcon';
@@ -17,6 +18,7 @@ import {
 } from '@chakra-ui/react';
 
 const Navbar = () => {
+  const router = useRouter();
   return (
     <Box px='7rem' pt='3.3rem' pb='10.5rem' bg='#4CAD73' position={'relative'}>
       <Flex justifyContent={'space-between'} alignItems={'center'}>
@@ -34,7 +36,14 @@ const Navbar = () => {
             </Text>
           ))}
         </Flex>
-        <Text fontFamily='Inter' h='100%' lineHeight='19px' color='#FFFFFF'>
+        <Text
+          fontFamily='Inter'
+          h='100%'
+          lineHeight='19px'
+          color='#FFFFFF'
+          cursor={'pointer'}
+          onClick={() => router.push('/login')}
+        >
           Login/Sign up
         </Text>
       </Flex>
