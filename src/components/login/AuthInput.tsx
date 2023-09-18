@@ -1,14 +1,14 @@
-import {Field} from 'formik';
+import { Field } from 'formik';
 import React from 'react';
 
 import {
-  Box,
-  FormControl,
-  FormErrorMessage,
-  Icon,
-  Input,
-  InputGroup,
-  InputRightElement,
+	Box,
+	FormControl,
+	FormErrorMessage,
+	Icon,
+	Input,
+	InputGroup,
+	InputRightElement,
 } from '@chakra-ui/react';
 
 const AuthInput = ({

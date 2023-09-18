@@ -2,10 +2,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import BackArrow from '@/assets/BackArrow';
-import LoginForm from '@/components/login/LoginForm';
+import EmailForm from '@/components/email/EmailForm';
 import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
-const Login = () => {
+const Otp = () => {
   const router = useRouter();
   return (
     <Flex
@@ -53,7 +53,7 @@ const Login = () => {
             textAlign='center'
             color='#1E1E1F'
           >
-            Welcome to BuyToken
+            Enter Your Email Address
           </Text>
           <Text
             fontFamily='Poppins'
@@ -63,13 +63,13 @@ const Login = () => {
             color='#737373'
             mt='.75rem'
           >
-            Login to your Account
+            We’ll send you a link to reset your password.
           </Text>
-          <LoginForm />
+          <EmailForm />
         </Box>
       </Box>
     </Flex>
   );
 };
 
-export default Login;
+export default Otp;

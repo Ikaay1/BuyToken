@@ -1,18 +1,18 @@
-import {Form, Formik} from 'formik';
-import {useRouter} from 'next/router';
+import { Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
 import React from 'react';
 import * as Yup from 'yup';
 
 import MessageIcon from '@/assets/MessageIcon';
 import SeePasswordIcon from '@/assets/SeePasswordIcon';
 import {
-  Box,
-  Button,
-  Checkbox,
-  Divider,
-  Flex,
-  Link,
-  Text,
+	Box,
+	Button,
+	Checkbox,
+	Divider,
+	Flex,
+	Link,
+	Text,
 } from '@chakra-ui/react';
 
 import AuthInput from './AuthInput';
@@ -20,7 +20,7 @@ import AuthInput from './AuthInput';
 const LoginForm = () => {
   const router = useRouter();
   return (
-    <Box mt='1.2rem' width='570px'>
+    <Box mt='1.2rem' width={{lg: '570px'}}>
       <Formik
         initialValues={{
           email: '',
@@ -66,11 +66,12 @@ const LoginForm = () => {
               fontSize='16px'
               lineHeight='24px'
               color='#FFFFFF'
-              width='570px'
+              width={{base: '100%', lg: '570px'}}
               height='50px'
               background='#4CAD73'
               borderRadius='6px'
               mt='1.1rem'
+              onClick={() => router.push('/signup')}
             >
               Login
             </Button>
@@ -86,6 +87,8 @@ const LoginForm = () => {
         color='#1E1E1F'
         textAlign={'center'}
         mt='.8rem'
+        cursor='pointer'
+        onClick={() => router.push('/email')}
       >
         Forgot Password?
       </Text>
@@ -112,11 +115,11 @@ const LoginForm = () => {
         ></Divider>
       </Flex>
       <Button
-        width='571px'
+        width={{base: '100%', lg: '571px'}}
         height='50px'
         background={'rgba(76,173,115,0.1)'}
         borderRadius='6px'
-        fontFamily="'Poppins'"
+        fontFamily='Poppins'
         fontWeight='600'
         fontSize='14px'
         color={'rgb(76,173,115)'}

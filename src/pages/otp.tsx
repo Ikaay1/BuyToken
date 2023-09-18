@@ -2,10 +2,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import BackArrow from '@/assets/BackArrow';
-import LoginForm from '@/components/login/LoginForm';
+import OtpInputForm from '@/components/otp/OtpInputForm';
 import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
-const Login = () => {
+const Otp = () => {
   const router = useRouter();
   return (
     <Flex
@@ -53,7 +53,7 @@ const Login = () => {
             textAlign='center'
             color='#1E1E1F'
           >
-            Welcome to BuyToken
+            OTP Verification
           </Text>
           <Text
             fontFamily='Poppins'
@@ -63,13 +63,13 @@ const Login = () => {
             color='#737373'
             mt='.75rem'
           >
-            Login to your Account
+            Enter the OTP sent to youremail@gmail.com
           </Text>
-          <LoginForm />
+          <OtpInputForm />
         </Box>
       </Box>
     </Flex>
   );
 };
 
-export default Login;
+export default Otp;

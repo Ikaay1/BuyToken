@@ -1,9 +1,9 @@
-import {switchAnatomy} from '@chakra-ui/anatomy';
+import { switchAnatomy } from '@chakra-ui/anatomy';
 import {
-  ChakraProvider,
-  createMultiStyleConfigHelpers,
-  extendTheme,
-  ThemeConfig,
+	ChakraProvider,
+	createMultiStyleConfigHelpers,
+	extendTheme,
+	ThemeConfig,
 } from '@chakra-ui/react';
 
 const {definePartsStyle, defineMultiStyleConfig} =
@@ -105,7 +105,7 @@ const components = {
 };
 
 const config: ThemeConfig = {
-  initialColorMode: 'dark',
+  initialColorMode: 'light',
   useSystemColorMode: false,
 };
 
