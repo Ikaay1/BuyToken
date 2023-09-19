@@ -30,6 +30,28 @@ const Navbar = () => {
         bg='#4CAD73'
         position={'relative'}
       >
+        <Image
+          position='absolute'
+          left='0'
+          top='31%'
+          src='/assets/leftLight.png'
+          alt='Left light'
+          display={{
+            base: 'none',
+            lg: 'block',
+          }}
+        />
+        <Image
+          position='absolute'
+          right='0'
+          top='3.9%'
+          src='/assets/rightLight.png'
+          alt='Right light'
+          display={{
+            base: 'none',
+            lg: 'block',
+          }}
+        />
         {/* Desktop */}
         <Flex
           justifyContent={'space-between'}
@@ -38,6 +60,7 @@ const Navbar = () => {
             base: 'none',
             lg: 'flex',
           }}
+          position={'relative'}
         >
           <Image src='/assets/bt_logo.png' alt='BT logo' />
           <Flex w='359px' justifyContent={'space-between'} h='100%'>
@@ -87,20 +110,6 @@ const Navbar = () => {
             Login/Sign up
           </Text>
         </Flex>
-        <Image
-          position='absolute'
-          left='0'
-          top='31.5%'
-          src='/assets/leftLight.png'
-          alt='Left light'
-        />
-        <Image
-          position='absolute'
-          right='0'
-          top='5%'
-          src='/assets/rightLight.png'
-          alt='Right light'
-        />
 
         <Box mt={{base: '1rem', lg: '6rem'}}>
           <Text
@@ -110,6 +119,7 @@ const Navbar = () => {
             lineHeight={{lg: '42px'}}
             color='#FFFFFF'
             textAlign={'center'}
+            position={'relative'}
           >
             Welcome, What are you purchasing today?
           </Text>
