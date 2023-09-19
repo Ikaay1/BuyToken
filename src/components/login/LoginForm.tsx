@@ -57,7 +57,14 @@ const LoginForm = () => {
                 height='14px'
                 borderColor='#737373'
               />
-              <Text>Remember me</Text>
+              <Text
+                fontFamily='Poppins'
+                fontSize={{base: '12px', lg: '16px'}}
+                lineHeight='24px'
+                color='#1E1E1F'
+              >
+                Remember me
+              </Text>
             </Flex>
             <Button
               type='submit'
@@ -82,7 +89,7 @@ const LoginForm = () => {
         fontFamily='Poppins'
         fontStyle='normal'
         fontWeight='600'
-        fontSize='16px'
+        fontSize={{base: '12px', lg: '16px'}}
         lineHeight='24px'
         color='#1E1E1F'
         textAlign={'center'}

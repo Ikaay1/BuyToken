@@ -24,14 +24,24 @@ const Signup = () => {
         p={{base: '1.4rem', lg: '1.9rem'}}
         position={'relative'}
       >
-        <Image
+        <Flex
+          w='91px'
+          h='91px'
+          bg='white'
+          justifyContent={'center'}
+          alignItems={'center'}
           position='absolute'
           top='-10%'
           left='50%'
           transform={'translateX(-50%)'}
-          src='/assets/bt_logo.png'
-          alt='BT Logo'
-        />
+          borderRadius={'50%'}
+          display={{lg: 'none'}}
+        >
+          <Image
+            src='/assets/bt_logo.png'
+            alt='BT Logo'
+          />
+        </Flex>
         <Icon
           onClick={() => router.back()}
           cursor='pointer'
@@ -48,8 +58,8 @@ const Signup = () => {
           <Text
             fontFamily='Raleway'
             fontWeight='600'
-            fontSize='32px'
-            lineHeight='26px'
+            fontSize={{base: '20px', lg: '32px'}}
+            lineHeight={{lg: '26px'}}
             textAlign='center'
             color='#1E1E1F'
           >
@@ -57,11 +67,11 @@ const Signup = () => {
           </Text>
           <Text
             fontFamily='Poppins'
-            fontSize='20px'
-            lineHeight='30px'
+            fontSize={{base: '12px', lg: '20px'}}
+            lineHeight={{lg: '30px'}}
             textAlign='center'
             color='#737373'
-            mt='.75rem'
+            mt={{base: '.35rem', lg: '.75rem'}}
           >
             Welcome, Please Join the BuyToken Community
           </Text>

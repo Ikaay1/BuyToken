@@ -98,7 +98,7 @@ const SignupForm = () => {
         fontFamily='Poppins'
         fontStyle='normal'
         fontWeight='600'
-        fontSize='16px'
+        fontSize={{base: '12px', lg: '16px'}}
         lineHeight='24px'
         color='#1E1E1F'
         textAlign={'center'}

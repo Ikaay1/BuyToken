@@ -87,6 +87,20 @@ const Navbar = () => {
             Login/Sign up
           </Text>
         </Flex>
+        <Image
+          position='absolute'
+          left='0'
+          top='31.5%'
+          src='/assets/leftLight.png'
+          alt='Left light'
+        />
+        <Image
+          position='absolute'
+          right='0'
+          top='5%'
+          src='/assets/rightLight.png'
+          alt='Right light'
+        />
 
         <Box mt={{base: '1rem', lg: '6rem'}}>
           <Text
@@ -132,6 +146,7 @@ const Navbar = () => {
               />
             </InputGroup>
           </Flex>
+          I
         </Box>
         <Flex
           background='#FFFFFF'

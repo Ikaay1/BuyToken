@@ -33,7 +33,7 @@ const ResetPasswordForm = () => {
           <Form>
             <Box mt='.8rem'>
               <AuthInput
-                placeholder='Password'
+                placeholder='New Password'
                 type='password'
                 icon={SeePasswordIcon}
                 value='password'
