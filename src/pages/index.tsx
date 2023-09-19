@@ -4,9 +4,11 @@ import { Box } from '@chakra-ui/react';
 
 export default function Home() {
   return (
-    <Box>
-      <Navbar />
-      <Hero />
+    <Box bg='white'>
+      <Box maxW='1400px' mx='auto'>
+        <Navbar />
+        <Hero />
+      </Box>
     </Box>
   );
 }

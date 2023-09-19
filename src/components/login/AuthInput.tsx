@@ -32,7 +32,7 @@ const AuthInput = ({
             <Input
               placeholder={placeholder}
               fontFamily='Poppins'
-              fontSize='14px'
+              fontSize={{base: '12px', lg: '14px'}}
               color='#717171'
               h='100%'
               type={type}
