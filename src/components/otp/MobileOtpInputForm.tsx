@@ -5,22 +5,19 @@ import OTPInput from 'react-otp-input';
 import { useAppSelector } from '@/redux/app/hooks';
 import {
 	useSendOTPToMobileMutation,
-	useValidateEmailOtpMutation,
+	useValidateMobileOtpMutation,
 } from '@/redux/services/auth.service';
 import { Box, Button, useToast } from '@chakra-ui/react';
 
-const OtpInputForm = () => {
+const MobileOtpInputForm = () => {
   const [otp, setOtp] = useState('');
   const router = useRouter();
   const [error, setError] = useState('');
   const mobileNumber = useAppSelector(
     (state) => state?.app?.user?.data?.mobileNumber,
   );
-  const email = useAppSelector((state) => state?.app?.user?.data?.email);
-  const otp_hash = useAppSelector((state) => state?.app?.user?.data?.otp_hash);
-  const [validateEmailOtp, validateEmailOtpStatus] =
-    useValidateEmailOtpMutation();
-  const [sendOTPToMobile, sendOTPToMobileStatus] = useSendOTPToMobileMutation();
+  const [validateMobileOtp, validateMobileOtpStatus] =
+    useValidateMobileOtpMutation();
   const toast = useToast();
 
   return (
@@ -68,9 +65,7 @@ const OtpInputForm = () => {
         background='#4CAD73'
         borderRadius='6px'
         mt='1.5rem'
-        isLoading={
-          validateEmailOtpStatus.isLoading || sendOTPToMobileStatus.isLoading
-        }
+        isLoading={validateMobileOtpStatus.isLoading}
         onClick={async () => {
           if (otp.length !== 4 || !Number(otp)) {
             setError('Please enter a valid OTP');
@@ -78,47 +73,21 @@ const OtpInputForm = () => {
               setError('');
             }, 3000);
           } else {
-            const res: any = await validateEmailOtp({
-              email,
+            const res: any = await validateMobileOtp({
+              mobileNumber,
               otp_code: otp,
-              otp_hash: otp_hash,
             });
             console.log('res', res);
             if (res?.data?.data) {
               toast({
-                title: 'Email verified successfully',
-                description: 'Your email has successfully been verified',
+                title: 'Phone Number verified successfully',
+                description: 'Your phone number has successfully been verified',
                 status: 'success',
                 duration: 5000,
                 isClosable: true,
                 position: 'top-right',
               });
-              const response: any = await sendOTPToMobile({
-                mobileNumber,
-              });
-              if (response?.data?.data) {
-                toast({
-                  title: 'OTP sent to Phone Number',
-                  description: 'An OTP has been sent to your Mobile Number',
-                  status: 'success',
-                  duration: 5000,
-                  isClosable: true,
-                  position: 'top-right',
-                });
-                router.push('/mobileOtp');
-              } else {
-                toast({
-                  title: 'Error',
-                  description:
-                    response?.error?.data?.message ||
-                    response?.data?.message ||
-                    'Something went wrong',
-                  status: 'error',
-                  duration: 3000,
-                  isClosable: true,
-                  position: 'top-right',
-                });
-              }
+              router.push('/home');
             } else {
               toast({
                 title: 'Verification Failed',
@@ -141,4 +110,4 @@ const OtpInputForm = () => {
   );
 };
 
-export default OtpInputForm;
+export default MobileOtpInputForm;

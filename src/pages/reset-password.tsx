@@ -35,7 +35,7 @@ const ResetPassword = () => {
           left='50%'
           transform={'translateX(-50%)'}
           borderRadius={'50%'}
-          display={{lg: 'none'}}
+          display={{base: 'flex', lg: 'none'}}
         >
           <Image src='/assets/bt_logo.png' alt='BT Logo' />
         </Flex>

@@ -1,12 +1,24 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import BackArrow from '@/assets/BackArrow';
-import LoginForm from '@/components/login/LoginForm';
+import OtpInputForm from '@/components/otp/OtpInputForm';
+import { useAppSelector } from '@/redux/app/hooks';
 import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
-const Login = () => {
+const Otp = () => {
   const router = useRouter();
+  const userEmail = useAppSelector((state) => state?.app?.user?.data?.email);
+
+  const [email, setEmail] = useState();
+
+  useEffect(() => {
+    if (!userEmail) {
+      router.push('/signup');
+    }
+    setEmail(userEmail);
+  }, []);
+
   return (
     <Flex
       justifyContent={'center'}
@@ -31,7 +43,7 @@ const Login = () => {
           justifyContent={'center'}
           alignItems={'center'}
           position='absolute'
-          top='-11%'
+          top='-19%'
           left='50%'
           transform={'translateX(-50%)'}
           borderRadius={'50%'}
@@ -39,7 +51,6 @@ const Login = () => {
         >
           <Image src='/assets/bt_logo.png' alt='BT Logo' />
         </Flex>
-
         <Icon
           onClick={() => router.back()}
           cursor='pointer'
@@ -61,7 +72,7 @@ const Login = () => {
             textAlign='center'
             color='#1E1E1F'
           >
-            Welcome to BuyToken
+            OTP Verification
           </Text>
           <Text
             fontFamily='Poppins'
@@ -71,13 +82,13 @@ const Login = () => {
             color='#737373'
             mt={{base: '.35rem', lg: '.75rem'}}
           >
-            Login to your Account
+            Enter the OTP sent to {email}
           </Text>
-          <LoginForm />
+          <OtpInputForm />
         </Box>
       </Box>
     </Flex>
   );
 };
 
-export default Login;
+export default Otp;
