@@ -1,12 +1,27 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import BackArrow from '@/assets/BackArrow';
-import OtpInputForm from '@/components/otp/OtpInputForm';
+import MobileOtpInputForm from '@/components/otp/MobileOtpInputForm';
+import { useAppSelector } from '@/redux/app/hooks';
 import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
 const Otp = () => {
   const router = useRouter();
+
+  const userMobileNumber = useAppSelector(
+    (state) => state?.app?.user?.data?.mobileNumber,
+  );
+
+  const [mobileNumber, setMobileNumber] = useState();
+
+  useEffect(() => {
+    if (!userMobileNumber) {
+      router.push('/signup');
+    }
+    setMobileNumber(userMobileNumber);
+  }, []);
+
   return (
     <Flex
       justifyContent={'center'}
@@ -35,7 +50,7 @@ const Otp = () => {
           left='50%'
           transform={'translateX(-50%)'}
           borderRadius={'50%'}
-          display={{lg: 'none'}}
+          display={{base: 'flex', lg: 'none'}}
         >
           <Image src='/assets/bt_logo.png' alt='BT Logo' />
         </Flex>
@@ -70,9 +85,9 @@ const Otp = () => {
             color='#737373'
             mt={{base: '.35rem', lg: '.75rem'}}
           >
-            Enter the OTP sent to youremail@gmail.com
+            Enter the OTP sent to {mobileNumber}
           </Text>
-          <OtpInputForm />
+          <MobileOtpInputForm />
         </Box>
       </Box>
     </Flex>
