@@ -26,8 +26,10 @@ export const userSlice = createSlice({
       state.userProfile = payload.data;
     },
     setData: (state, {payload: {payload}}: PayloadAction<{payload: any}>) => {
-      console.log('payload', payload);
       state.data = payload;
+    },
+    clearData: (state, {payload: {payload}}: PayloadAction<{payload: any}>) => {
+      state.data = null;
     },
     logout: () => {
       return initialState;
@@ -35,6 +37,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const {setCredentials, setData, logout} = userSlice.actions;
+export const {setCredentials, setData, logout, clearData} = userSlice.actions;
 
 export default userSlice.reducer;

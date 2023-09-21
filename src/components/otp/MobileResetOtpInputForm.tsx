@@ -3,26 +3,19 @@ import React, { useState } from 'react';
 import OTPInput from 'react-otp-input';
 
 import { useAppDispatch, useAppSelector } from '@/redux/app/hooks';
-import {
-	useLoginMutation,
-	useValidateMobileOtpMutation,
-} from '@/redux/services/auth.service';
-import { clearData, setCredentials } from '@/redux/slices/authSlice';
+import { useValidateMobileOtpMutation } from '@/redux/services/auth.service';
+import { clearData } from '@/redux/slices/authSlice';
 import { Box, Button, useToast } from '@chakra-ui/react';
 
-const MobileOtpInputForm = () => {
+const MobileResetOtpInputForm = () => {
   const [otp, setOtp] = useState('');
   const router = useRouter();
   const [error, setError] = useState('');
-  const mobileNumber = useAppSelector(
-    (state) => state?.app?.user?.data?.mobileNumber,
-  );
-  const password = useAppSelector((state) => state?.app?.user?.data?.password);
+  const userName = useAppSelector((state) => state?.app?.user?.data?.userName);
   const [validateMobileOtp, validateMobileOtpStatus] =
     useValidateMobileOtpMutation();
   const toast = useToast();
   const dispatch = useAppDispatch();
-  const [login, loginStatus] = useLoginMutation();
 
   return (
     <Box mt='1.35rem' width={{lg: '468px'}}>
@@ -69,7 +62,7 @@ const MobileOtpInputForm = () => {
         background='#4CAD73'
         borderRadius='6px'
         mt='1.5rem'
-        isLoading={validateMobileOtpStatus.isLoading || loginStatus.isLoading}
+        isLoading={validateMobileOtpStatus.isLoading}
         onClick={async () => {
           if (otp.length !== 4 || !Number(otp)) {
             setError('Please enter a valid OTP');
@@ -78,10 +71,10 @@ const MobileOtpInputForm = () => {
             }, 3000);
           } else {
             const res: any = await validateMobileOtp({
-              mobileNumber,
+              mobileNumber: userName,
               otp_code: otp,
             });
-            console.log('resSignUp', res);
+            console.log('res', res);
             if (res?.data?.data) {
               toast({
                 title: 'Phone Number verified successfully',
@@ -91,40 +84,7 @@ const MobileOtpInputForm = () => {
                 isClosable: true,
                 position: 'top-right',
               });
-              const res: any = await login({username: mobileNumber, password});
-              console.log('resLogin', res);
-              if (res?.data?.data) {
-                dispatch(
-                  setCredentials({
-                    payload: {
-                      token: res?.data?.data?.access_token,
-                      data: res?.data?.data?.user,
-                    },
-                  }),
-                );
-                toast({
-                  title: 'Sign up Successful',
-                  description: 'You have successfully signed up',
-                  status: 'success',
-                  duration: 5000,
-                  isClosable: true,
-                  position: 'top-right',
-                });
-                dispatch(clearData({payload: {}}));
-                router.push('/home');
-              } else {
-                toast({
-                  title: 'Login failed',
-                  description:
-                    res?.error?.data?.message ||
-                    res?.data?.message ||
-                    'Something went wrong',
-                  status: 'error',
-                  duration: 3000,
-                  isClosable: true,
-                  position: 'top-right',
-                });
-              }
+              router.push('/reset-password');
             } else {
               toast({
                 title: 'Verification Failed',
@@ -147,4 +107,4 @@ const MobileOtpInputForm = () => {
   );
 };
 
-export default MobileOtpInputForm;
+export default MobileResetOtpInputForm;

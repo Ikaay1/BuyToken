@@ -5,6 +5,9 @@ import * as Yup from 'yup';
 
 import MessageIcon from '@/assets/MessageIcon';
 import SeePasswordIcon from '@/assets/SeePasswordIcon';
+import { useAppDispatch } from '@/redux/app/hooks';
+import { useLoginMutation } from '@/redux/services/auth.service';
+import { setCredentials } from '@/redux/slices/authSlice';
 import {
 	Box,
 	Button,
@@ -13,12 +16,16 @@ import {
 	Flex,
 	Link,
 	Text,
+	useToast,
 } from '@chakra-ui/react';
 
 import AuthInput from './AuthInput';
 
 const LoginForm = () => {
   const router = useRouter();
+  const [login, loginStatus] = useLoginMutation();
+  const dispatch = useAppDispatch();
+  const toast = useToast();
   return (
     <Box mt='1.2rem' width={{lg: '570px'}}>
       <Formik
@@ -31,7 +38,41 @@ const LoginForm = () => {
           email: Yup.string().required('Email or Phone Number is Required'),
           password: Yup.string().min(5).required('Password is Required'),
         })}
-        onSubmit={async ({email, password}) => {}}
+        onSubmit={async ({email, password}) => {
+          const res: any = await login({username: email, password});
+          console.log('resLogin', res);
+          if (res?.data?.data) {
+            dispatch(
+              setCredentials({
+                payload: {
+                  token: res?.data?.data?.access_token,
+                  data: res?.data?.data?.user,
+                },
+              }),
+            );
+            toast({
+              title: 'Login Successful',
+              description: 'You have successfully logged in',
+              status: 'success',
+              duration: 5000,
+              isClosable: true,
+              position: 'top-right',
+            });
+            router.push('/home');
+          } else {
+            toast({
+              title: 'Login failed',
+              description:
+                res?.error?.data?.message ||
+                res?.data?.message ||
+                'Something went wrong',
+              status: 'error',
+              duration: 3000,
+              isClosable: true,
+              position: 'top-right',
+            });
+          }
+        }}
       >
         {(props) => (
           <Form>
@@ -78,7 +119,7 @@ const LoginForm = () => {
               background='#4CAD73'
               borderRadius='6px'
               mt='1.1rem'
-              onClick={() => router.push('/signup')}
+              isLoading={loginStatus.isLoading}
             >
               Login
             </Button>

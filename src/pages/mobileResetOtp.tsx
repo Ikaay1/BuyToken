@@ -1,13 +1,28 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import BackArrow from '@/assets/BackArrow';
-import SignupForm from '@/components/signup/SignupForm';
+import MobileResetOtpInputForm from '@/components/otp/MobileResetOtpInputForm';
 import AuthRoute from '@/layouts/AuthRoute';
+import { useAppSelector } from '@/redux/app/hooks';
 import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
-const Signup = () => {
+const Otp = () => {
   const router = useRouter();
+
+  const userMobileNumber = useAppSelector(
+    (state) => state?.app?.user?.data?.userName,
+  );
+
+  const [mobileNumber, setMobileNumber] = useState();
+
+  useEffect(() => {
+    if (!userMobileNumber) {
+      router.push('/login');
+    }
+    setMobileNumber(userMobileNumber);
+  }, []);
+
   return (
     <AuthRoute>
       <Flex
@@ -17,7 +32,7 @@ const Signup = () => {
         pt='10rem'
         pb='6.5rem'
         px={{base: '.8rem', lg: 0}}
-        minH={'880px'}
+        minH={"880px"}
       >
         <Box
           width={{base: '100%', lg: '845px'}}
@@ -26,7 +41,7 @@ const Signup = () => {
           borderRadius='6px'
           p={{base: '1.4rem', lg: '1.9rem'}}
           position={'relative'}
-          h='100%'
+          h="100%"
         >
           <Flex
             w='91px'
@@ -35,7 +50,7 @@ const Signup = () => {
             justifyContent={'center'}
             alignItems={'center'}
             position='absolute'
-            top='-10%'
+            top='-19%'
             left='50%'
             transform={'translateX(-50%)'}
             borderRadius={'50%'}
@@ -64,7 +79,7 @@ const Signup = () => {
               textAlign='center'
               color='#1E1E1F'
             >
-              SIGN UP
+              OTP Verification
             </Text>
             <Text
               fontFamily='Poppins'
@@ -74,9 +89,9 @@ const Signup = () => {
               color='#737373'
               mt={{base: '.35rem', lg: '.75rem'}}
             >
-              Welcome, Please Join the BuyToken Community
+              Enter the OTP sent to {mobileNumber}
             </Text>
-            <SignupForm />
+            <MobileResetOtpInputForm />
           </Box>
         </Box>
       </Flex>
@@ -84,4 +99,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Otp;

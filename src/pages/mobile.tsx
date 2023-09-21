@@ -2,11 +2,11 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import BackArrow from '@/assets/BackArrow';
-import SignupForm from '@/components/signup/SignupForm';
+import MobileForm from '@/components/mobile/MobileForm';
 import AuthRoute from '@/layouts/AuthRoute';
 import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
-const Signup = () => {
+const Otp = () => {
   const router = useRouter();
   return (
     <AuthRoute>
@@ -35,7 +35,7 @@ const Signup = () => {
             justifyContent={'center'}
             alignItems={'center'}
             position='absolute'
-            top='-10%'
+            top='-19%'
             left='50%'
             transform={'translateX(-50%)'}
             borderRadius={'50%'}
@@ -64,7 +64,7 @@ const Signup = () => {
               textAlign='center'
               color='#1E1E1F'
             >
-              SIGN UP
+              Enter Your Phone Number
             </Text>
             <Text
               fontFamily='Poppins'
@@ -74,9 +74,9 @@ const Signup = () => {
               color='#737373'
               mt={{base: '.35rem', lg: '.75rem'}}
             >
-              Welcome, Please Join the BuyToken Community
+              We’ll send you an OTP to reset your password.
             </Text>
-            <SignupForm />
+            <MobileForm />
           </Box>
         </Box>
       </Flex>
@@ -84,4 +84,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Otp;

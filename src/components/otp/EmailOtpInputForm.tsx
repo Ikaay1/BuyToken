@@ -2,27 +2,26 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import OTPInput from 'react-otp-input';
 
-import { useAppDispatch, useAppSelector } from '@/redux/app/hooks';
+import { useAppSelector } from '@/redux/app/hooks';
 import {
-	useLoginMutation,
-	useValidateMobileOtpMutation,
+	useSendOTPToMobileMutation,
+	useValidateEmailOtpMutation,
 } from '@/redux/services/auth.service';
-import { clearData, setCredentials } from '@/redux/slices/authSlice';
 import { Box, Button, useToast } from '@chakra-ui/react';
 
-const MobileOtpInputForm = () => {
+const EmailOtpInputForm = () => {
   const [otp, setOtp] = useState('');
   const router = useRouter();
   const [error, setError] = useState('');
   const mobileNumber = useAppSelector(
     (state) => state?.app?.user?.data?.mobileNumber,
   );
-  const password = useAppSelector((state) => state?.app?.user?.data?.password);
-  const [validateMobileOtp, validateMobileOtpStatus] =
-    useValidateMobileOtpMutation();
+  const email = useAppSelector((state) => state?.app?.user?.data?.email);
+  const otp_hash = useAppSelector((state) => state?.app?.user?.data?.otp_hash);
+  const [validateEmailOtp, validateEmailOtpStatus] =
+    useValidateEmailOtpMutation();
+  const [sendOTPToMobile, sendOTPToMobileStatus] = useSendOTPToMobileMutation();
   const toast = useToast();
-  const dispatch = useAppDispatch();
-  const [login, loginStatus] = useLoginMutation();
 
   return (
     <Box mt='1.35rem' width={{lg: '468px'}}>
@@ -69,7 +68,9 @@ const MobileOtpInputForm = () => {
         background='#4CAD73'
         borderRadius='6px'
         mt='1.5rem'
-        isLoading={validateMobileOtpStatus.isLoading || loginStatus.isLoading}
+        isLoading={
+          validateEmailOtpStatus.isLoading || sendOTPToMobileStatus.isLoading
+        }
         onClick={async () => {
           if (otp.length !== 4 || !Number(otp)) {
             setError('Please enter a valid OTP');
@@ -77,47 +78,40 @@ const MobileOtpInputForm = () => {
               setError('');
             }, 3000);
           } else {
-            const res: any = await validateMobileOtp({
-              mobileNumber,
+            const res: any = await validateEmailOtp({
+              email,
               otp_code: otp,
+              otp_hash: otp_hash,
             });
-            console.log('resSignUp', res);
+            console.log('res', res);
             if (res?.data?.data) {
               toast({
-                title: 'Phone Number verified successfully',
-                description: 'Your phone number has successfully been verified',
+                title: 'Email verified successfully',
+                description: 'Your email has successfully been verified',
                 status: 'success',
                 duration: 5000,
                 isClosable: true,
                 position: 'top-right',
               });
-              const res: any = await login({username: mobileNumber, password});
-              console.log('resLogin', res);
-              if (res?.data?.data) {
-                dispatch(
-                  setCredentials({
-                    payload: {
-                      token: res?.data?.data?.access_token,
-                      data: res?.data?.data?.user,
-                    },
-                  }),
-                );
+              const response: any = await sendOTPToMobile({
+                mobileNumber,
+              });
+              if (response?.data?.data) {
                 toast({
-                  title: 'Sign up Successful',
-                  description: 'You have successfully signed up',
+                  title: 'OTP sent to Phone Number',
+                  description: 'An OTP has been sent to your Mobile Number',
                   status: 'success',
                   duration: 5000,
                   isClosable: true,
                   position: 'top-right',
                 });
-                dispatch(clearData({payload: {}}));
-                router.push('/home');
+                router.push('/mobileOtp');
               } else {
                 toast({
-                  title: 'Login failed',
+                  title: 'Error',
                   description:
-                    res?.error?.data?.message ||
-                    res?.data?.message ||
+                    response?.error?.data?.message ||
+                    response?.data?.message ||
                     'Something went wrong',
                   status: 'error',
                   duration: 3000,
@@ -147,4 +141,4 @@ const MobileOtpInputForm = () => {
   );
 };
 
-export default MobileOtpInputForm;
+export default EmailOtpInputForm;
