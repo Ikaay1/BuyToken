@@ -78,6 +78,17 @@ export const authApi = createApi({
       }),
       invalidatesTags: ['Auth'],
     }),
+    resetPassword: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `auth/reset/password`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Auth'],
+    }),
   }),
 });
 
@@ -88,4 +99,5 @@ export const {
   useValidateEmailOtpMutation,
   useSendOTPToMobileMutation,
   useValidateMobileOtpMutation,
+  useResetPasswordMutation,
 } = authApi;

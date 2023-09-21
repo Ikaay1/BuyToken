@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import MessageIcon from '@/assets/MessageIcon';
 import SeePasswordIcon from '@/assets/SeePasswordIcon';
 import { useAppDispatch } from '@/redux/app/hooks';
-import { useSendOTPToEmailMutation } from '@/redux/services/auth.service';
+import { useSendOTPToMobileMutation } from '@/redux/services/auth.service';
 import { setData } from '@/redux/slices/authSlice';
 import {
 	Box,
@@ -21,29 +21,29 @@ import {
 
 import AuthInput from '../login/AuthInput';
 
-const EmailForm = () => {
+const PhoneForm = () => {
   const router = useRouter();
-  const [sendOTPToEmail, sendOTPToEmailStatus] = useSendOTPToEmailMutation();
+  const [sendOTPToMobile, sendOTPToMobileStatus] = useSendOTPToMobileMutation();
   const toast = useToast();
   const dispatch = useAppDispatch();
   return (
     <Box mt='1.2rem' width={{lg: '570px'}}>
       <Formik
         initialValues={{
-          email: '',
+          mobileNumber: '',
         }}
         enableReinitialize
         validationSchema={Yup.object({
-          email: Yup.string().email().required('Email is Required'),
+          mobileNumber: Yup.string().required('Mobile Number is Required'),
         })}
-        onSubmit={async ({email}) => {
-          const response: any = await sendOTPToEmail({
-            email,
+        onSubmit={async ({mobileNumber}) => {
+          const response: any = await sendOTPToMobile({
+            mobileNumber,
           });
           if (response?.data?.data) {
             toast({
-              title: 'OTP sent to Email',
-              description: 'An OTP has been sent to your Email',
+              title: 'OTP sent to Phone Number',
+              description: 'An OTP has been sent to your Mobile Number',
               status: 'success',
               duration: 5000,
               isClosable: true,
@@ -51,13 +51,10 @@ const EmailForm = () => {
             });
             dispatch(
               setData({
-                payload: {
-                  userName: email,
-                  otp_hash_reset: response?.data?.data.otp_hash,
-                },
+                payload: {userName: mobileNumber},
               }),
             );
-            router.push('/emailResetOtp');
+            router.push('/mobileResetOtp');
           } else {
             toast({
               title: 'Error',
@@ -76,10 +73,10 @@ const EmailForm = () => {
         {(props) => (
           <Form>
             <AuthInput
-              placeholder='Enter Your Email Address'
+              placeholder='Enter Your Mobile Number'
               type='text'
               icon={MessageIcon}
-              value='email'
+              value='mobileNumber'
             />
             <Text
               fontFamily='Poppins'
@@ -94,7 +91,7 @@ const EmailForm = () => {
               textDecoration={'underline'}
               onClick={() => router.push('/phone')}
             >
-              Use mobile number instead?
+              Use email instead?
             </Text>
 
             <Button
@@ -109,7 +106,7 @@ const EmailForm = () => {
               background='#4CAD73'
               borderRadius='6px'
               mt='1.25rem'
-              isLoading={sendOTPToEmailStatus.isLoading}
+              isLoading={sendOTPToMobileStatus.isLoading}
             >
               Continue
             </Button>
@@ -120,4 +117,4 @@ const EmailForm = () => {
   );
 };
 
-export default EmailForm;
+export default PhoneForm;

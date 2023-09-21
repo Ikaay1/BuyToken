@@ -1,21 +1,12 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import BackArrow from '@/assets/BackArrow';
-import ResetPasswordForm from '@/components/reset-password/ResetPasswordForm';
-import { useAppSelector } from '@/redux/app/hooks';
+import PhoneForm from '@/components/phone/PhoneForm';
 import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
-const ResetPassword = () => {
+const Otp = () => {
   const router = useRouter();
-  const userName = useAppSelector((state) => state?.app?.user?.data?.userName);
-
-  useEffect(() => {
-    if (!userName) {
-      router.push('/login');
-    }
-  }, []);
-
   return (
     <Flex
       justifyContent={'center'}
@@ -40,7 +31,7 @@ const ResetPassword = () => {
           justifyContent={'center'}
           alignItems={'center'}
           position='absolute'
-          top='-17.5%'
+          top='-19%'
           left='50%'
           transform={'translateX(-50%)'}
           borderRadius={'50%'}
@@ -69,7 +60,7 @@ const ResetPassword = () => {
             textAlign='center'
             color='#1E1E1F'
           >
-            Reset Password
+            Enter Your Phone Number
           </Text>
           <Text
             fontFamily='Poppins'
@@ -79,13 +70,13 @@ const ResetPassword = () => {
             color='#737373'
             mt={{base: '.35rem', lg: '.75rem'}}
           >
-            Please Reset your Password
+            We’ll send you an OTP to reset your password.
           </Text>
-          <ResetPasswordForm />
+          <PhoneForm />
         </Box>
       </Box>
     </Flex>
   );
 };
 
-export default ResetPassword;
+export default Otp;

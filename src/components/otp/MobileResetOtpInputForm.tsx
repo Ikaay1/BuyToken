@@ -7,13 +7,11 @@ import { useValidateMobileOtpMutation } from '@/redux/services/auth.service';
 import { clearData } from '@/redux/slices/authSlice';
 import { Box, Button, useToast } from '@chakra-ui/react';
 
-const MobileOtpInputForm = () => {
+const MobileResetOtpInputForm = () => {
   const [otp, setOtp] = useState('');
   const router = useRouter();
   const [error, setError] = useState('');
-  const mobileNumber = useAppSelector(
-    (state) => state?.app?.user?.data?.mobileNumber,
-  );
+  const userName = useAppSelector((state) => state?.app?.user?.data?.userName);
   const [validateMobileOtp, validateMobileOtpStatus] =
     useValidateMobileOtpMutation();
   const toast = useToast();
@@ -73,10 +71,10 @@ const MobileOtpInputForm = () => {
             }, 3000);
           } else {
             const res: any = await validateMobileOtp({
-              mobileNumber,
+              mobileNumber: userName,
               otp_code: otp,
             });
-            console.log('resSignUp', res);
+            console.log('res', res);
             if (res?.data?.data) {
               toast({
                 title: 'Phone Number verified successfully',
@@ -86,8 +84,7 @@ const MobileOtpInputForm = () => {
                 isClosable: true,
                 position: 'top-right',
               });
-              dispatch(clearData({payload: {}}));
-              router.push('/home');
+              router.push('/reset-password');
             } else {
               toast({
                 title: 'Verification Failed',
@@ -110,4 +107,4 @@ const MobileOtpInputForm = () => {
   );
 };
 
-export default MobileOtpInputForm;
+export default MobileResetOtpInputForm;

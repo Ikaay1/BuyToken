@@ -1,19 +1,25 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import BackArrow from '@/assets/BackArrow';
-import ResetPasswordForm from '@/components/reset-password/ResetPasswordForm';
+import MobileResetOtpInputForm from '@/components/otp/MobileResetOtpInputForm';
 import { useAppSelector } from '@/redux/app/hooks';
 import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
-const ResetPassword = () => {
+const Otp = () => {
   const router = useRouter();
-  const userName = useAppSelector((state) => state?.app?.user?.data?.userName);
+
+  const userMobileNumber = useAppSelector(
+    (state) => state?.app?.user?.data?.userName,
+  );
+
+  const [mobileNumber, setMobileNumber] = useState();
 
   useEffect(() => {
-    if (!userName) {
+    if (!userMobileNumber) {
       router.push('/login');
     }
+    setMobileNumber(userMobileNumber);
   }, []);
 
   return (
@@ -40,7 +46,7 @@ const ResetPassword = () => {
           justifyContent={'center'}
           alignItems={'center'}
           position='absolute'
-          top='-17.5%'
+          top='-19%'
           left='50%'
           transform={'translateX(-50%)'}
           borderRadius={'50%'}
@@ -69,7 +75,7 @@ const ResetPassword = () => {
             textAlign='center'
             color='#1E1E1F'
           >
-            Reset Password
+            OTP Verification
           </Text>
           <Text
             fontFamily='Poppins'
@@ -79,13 +85,13 @@ const ResetPassword = () => {
             color='#737373'
             mt={{base: '.35rem', lg: '.75rem'}}
           >
-            Please Reset your Password
+            Enter the OTP sent to {mobileNumber}
           </Text>
-          <ResetPasswordForm />
+          <MobileResetOtpInputForm />
         </Box>
       </Box>
     </Flex>
   );
 };
 
-export default ResetPassword;
+export default Otp;

@@ -70,7 +70,7 @@ const Otp = () => {
             color='#737373'
             mt={{base: '.35rem', lg: '.75rem'}}
           >
-            We’ll send you a link to reset your password.
+            We’ll send you an OTP to reset your password.
           </Text>
           <EmailForm />
         </Box>
