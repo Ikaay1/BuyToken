@@ -3,8 +3,11 @@ import React, { useState } from 'react';
 import OTPInput from 'react-otp-input';
 
 import { useAppDispatch, useAppSelector } from '@/redux/app/hooks';
-import { useValidateMobileOtpMutation } from '@/redux/services/auth.service';
-import { clearData } from '@/redux/slices/authSlice';
+import {
+	useLoginMutation,
+	useValidateMobileOtpMutation,
+} from '@/redux/services/auth.service';
+import { clearData, setCredentials } from '@/redux/slices/authSlice';
 import { Box, Button, useToast } from '@chakra-ui/react';
 
 const MobileOtpInputForm = () => {
@@ -14,10 +17,12 @@ const MobileOtpInputForm = () => {
   const mobileNumber = useAppSelector(
     (state) => state?.app?.user?.data?.mobileNumber,
   );
+  const password = useAppSelector((state) => state?.app?.user?.data?.password);
   const [validateMobileOtp, validateMobileOtpStatus] =
     useValidateMobileOtpMutation();
   const toast = useToast();
   const dispatch = useAppDispatch();
+  const [login, loginStatus] = useLoginMutation();
 
   return (
     <Box mt='1.35rem' width={{lg: '468px'}}>
@@ -64,7 +69,7 @@ const MobileOtpInputForm = () => {
         background='#4CAD73'
         borderRadius='6px'
         mt='1.5rem'
-        isLoading={validateMobileOtpStatus.isLoading}
+        isLoading={validateMobileOtpStatus.isLoading || loginStatus.isLoading}
         onClick={async () => {
           if (otp.length !== 4 || !Number(otp)) {
             setError('Please enter a valid OTP');
@@ -86,8 +91,40 @@ const MobileOtpInputForm = () => {
                 isClosable: true,
                 position: 'top-right',
               });
-              dispatch(clearData({payload: {}}));
-              router.push('/home');
+              const res: any = await login({username: mobileNumber, password});
+              console.log('resLogin', res);
+              if (res?.data?.data) {
+                dispatch(
+                  setCredentials({
+                    payload: {
+                      token: res?.data?.data?.access_token,
+                      data: res?.data?.data?.user,
+                    },
+                  }),
+                );
+                toast({
+                  title: 'Sign up Successful',
+                  description: 'You have successfully signed up',
+                  status: 'success',
+                  duration: 5000,
+                  isClosable: true,
+                  position: 'top-right',
+                });
+                dispatch(clearData({payload: {}}));
+                router.push('/home');
+              } else {
+                toast({
+                  title: 'Login failed',
+                  description:
+                    res?.error?.data?.message ||
+                    res?.data?.message ||
+                    'Something went wrong',
+                  status: 'error',
+                  duration: 3000,
+                  isClosable: true,
+                  position: 'top-right',
+                });
+              }
             } else {
               toast({
                 title: 'Verification Failed',

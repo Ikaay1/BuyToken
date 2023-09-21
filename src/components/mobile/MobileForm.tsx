@@ -4,24 +4,14 @@ import React from 'react';
 import * as Yup from 'yup';
 
 import MessageIcon from '@/assets/MessageIcon';
-import SeePasswordIcon from '@/assets/SeePasswordIcon';
 import { useAppDispatch } from '@/redux/app/hooks';
 import { useSendOTPToMobileMutation } from '@/redux/services/auth.service';
 import { setData } from '@/redux/slices/authSlice';
-import {
-	Box,
-	Button,
-	Checkbox,
-	Divider,
-	Flex,
-	Link,
-	Text,
-	useToast,
-} from '@chakra-ui/react';
+import { Box, Button, Text, useToast } from '@chakra-ui/react';
 
 import AuthInput from '../login/AuthInput';
 
-const PhoneForm = () => {
+const MobileForm = () => {
   const router = useRouter();
   const [sendOTPToMobile, sendOTPToMobileStatus] = useSendOTPToMobileMutation();
   const toast = useToast();
@@ -89,7 +79,7 @@ const PhoneForm = () => {
               mt='.8rem'
               cursor='pointer'
               textDecoration={'underline'}
-              onClick={() => router.push('/phone')}
+              onClick={() => router.push('/email')}
             >
               Use email instead?
             </Text>
@@ -117,4 +107,4 @@ const PhoneForm = () => {
   );
 };
 
-export default PhoneForm;
+export default MobileForm;

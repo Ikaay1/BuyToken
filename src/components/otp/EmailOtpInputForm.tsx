@@ -2,23 +2,26 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import OTPInput from 'react-otp-input';
 
-import { useAppDispatch, useAppSelector } from '@/redux/app/hooks';
-import { useValidateEmailOtpMutation } from '@/redux/services/auth.service';
-import { clearData } from '@/redux/slices/authSlice';
+import { useAppSelector } from '@/redux/app/hooks';
+import {
+	useSendOTPToMobileMutation,
+	useValidateEmailOtpMutation,
+} from '@/redux/services/auth.service';
 import { Box, Button, useToast } from '@chakra-ui/react';
 
-const OtpResetInputForm = () => {
+const EmailOtpInputForm = () => {
   const [otp, setOtp] = useState('');
   const router = useRouter();
   const [error, setError] = useState('');
-  const userName = useAppSelector((state) => state?.app?.user?.data?.userName);
-  const otp_hash_reset = useAppSelector(
-    (state) => state?.app?.user?.data?.otp_hash_reset,
+  const mobileNumber = useAppSelector(
+    (state) => state?.app?.user?.data?.mobileNumber,
   );
+  const email = useAppSelector((state) => state?.app?.user?.data?.email);
+  const otp_hash = useAppSelector((state) => state?.app?.user?.data?.otp_hash);
   const [validateEmailOtp, validateEmailOtpStatus] =
     useValidateEmailOtpMutation();
+  const [sendOTPToMobile, sendOTPToMobileStatus] = useSendOTPToMobileMutation();
   const toast = useToast();
-  const dispatch = useAppDispatch();
 
   return (
     <Box mt='1.35rem' width={{lg: '468px'}}>
@@ -65,7 +68,9 @@ const OtpResetInputForm = () => {
         background='#4CAD73'
         borderRadius='6px'
         mt='1.5rem'
-        isLoading={validateEmailOtpStatus.isLoading}
+        isLoading={
+          validateEmailOtpStatus.isLoading || sendOTPToMobileStatus.isLoading
+        }
         onClick={async () => {
           if (otp.length !== 4 || !Number(otp)) {
             setError('Please enter a valid OTP');
@@ -73,10 +78,10 @@ const OtpResetInputForm = () => {
               setError('');
             }, 3000);
           } else {
-            const res: any = await await validateEmailOtp({
-              email: userName,
+            const res: any = await validateEmailOtp({
+              email,
               otp_code: otp,
-              otp_hash: otp_hash_reset,
+              otp_hash: otp_hash,
             });
             console.log('res', res);
             if (res?.data?.data) {
@@ -88,7 +93,32 @@ const OtpResetInputForm = () => {
                 isClosable: true,
                 position: 'top-right',
               });
-              router.push('/reset-password');
+              const response: any = await sendOTPToMobile({
+                mobileNumber,
+              });
+              if (response?.data?.data) {
+                toast({
+                  title: 'OTP sent to Phone Number',
+                  description: 'An OTP has been sent to your Mobile Number',
+                  status: 'success',
+                  duration: 5000,
+                  isClosable: true,
+                  position: 'top-right',
+                });
+                router.push('/mobileOtp');
+              } else {
+                toast({
+                  title: 'Error',
+                  description:
+                    response?.error?.data?.message ||
+                    response?.data?.message ||
+                    'Something went wrong',
+                  status: 'error',
+                  duration: 3000,
+                  isClosable: true,
+                  position: 'top-right',
+                });
+              }
             } else {
               toast({
                 title: 'Verification Failed',
@@ -111,4 +141,4 @@ const OtpResetInputForm = () => {
   );
 };
 
-export default OtpResetInputForm;
+export default EmailOtpInputForm;

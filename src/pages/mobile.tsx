@@ -1,28 +1,13 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import BackArrow from '@/assets/BackArrow';
-import EmailResetOtpInputForm from '@/components/otp/EmailResetOtpInputForm';
+import MobileForm from '@/components/mobile/MobileForm';
 import AuthRoute from '@/layouts/AuthRoute';
-import { useAppSelector } from '@/redux/app/hooks';
 import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
 const Otp = () => {
   const router = useRouter();
-  const userEmail = useAppSelector((state) => state?.app?.user?.data?.userName);
-  const otp_hash = useAppSelector(
-    (state) => state?.app?.user?.data?.otp_hash_reset,
-  );
-
-  const [email, setEmail] = useState();
-
-  useEffect(() => {
-    if (!userEmail || !otp_hash) {
-      router.push('/login');
-    }
-    setEmail(userEmail);
-  }, []);
-
   return (
     <AuthRoute>
       <Flex
@@ -32,7 +17,7 @@ const Otp = () => {
         pt='10rem'
         pb='6.5rem'
         px={{base: '.8rem', lg: 0}}
-        minH='880px'
+        minH={'880px'}
       >
         <Box
           width={{base: '100%', lg: '845px'}}
@@ -79,7 +64,7 @@ const Otp = () => {
               textAlign='center'
               color='#1E1E1F'
             >
-              OTP Verification
+              Enter Your Phone Number
             </Text>
             <Text
               fontFamily='Poppins'
@@ -89,9 +74,9 @@ const Otp = () => {
               color='#737373'
               mt={{base: '.35rem', lg: '.75rem'}}
             >
-              Enter the OTP sent to {email}
+              We’ll send you an OTP to reset your password.
             </Text>
-            <EmailResetOtpInputForm />
+            <MobileForm />
           </Box>
         </Box>
       </Flex>

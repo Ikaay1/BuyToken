@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 
 import BackArrow from '@/assets/BackArrow';
 import ResetPasswordForm from '@/components/reset-password/ResetPasswordForm';
+import AuthRoute from '@/layouts/AuthRoute';
 import { useAppSelector } from '@/redux/app/hooks';
 import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
@@ -17,6 +18,7 @@ const ResetPassword = () => {
   }, []);
 
   return (
+    <AuthRoute>
     <Flex
       justifyContent={'center'}
       backgroundImage={'url(/assets/login_bg.png)'}
@@ -24,6 +26,7 @@ const ResetPassword = () => {
       pt='10rem'
       pb='6.5rem'
       px={{base: '.8rem', lg: 0}}
+      minH="880px"
     >
       <Box
         width={{base: '100%', lg: '845px'}}
@@ -32,6 +35,7 @@ const ResetPassword = () => {
         borderRadius='6px'
         p={{base: '1.4rem', lg: '1.9rem'}}
         position={'relative'}
+        h="100%"
       >
         <Flex
           w='91px'
@@ -84,7 +88,7 @@ const ResetPassword = () => {
           <ResetPasswordForm />
         </Box>
       </Box>
-    </Flex>
+    </Flex></AuthRoute>
   );
 };
 

@@ -156,7 +156,6 @@ const Navbar = () => {
               />
             </InputGroup>
           </Flex>
-          I
         </Box>
         <Flex
           background='#FFFFFF'

@@ -4,20 +4,10 @@ import React from 'react';
 import * as Yup from 'yup';
 
 import MessageIcon from '@/assets/MessageIcon';
-import SeePasswordIcon from '@/assets/SeePasswordIcon';
 import { useAppDispatch } from '@/redux/app/hooks';
 import { useSendOTPToEmailMutation } from '@/redux/services/auth.service';
 import { setData } from '@/redux/slices/authSlice';
-import {
-	Box,
-	Button,
-	Checkbox,
-	Divider,
-	Flex,
-	Link,
-	Text,
-	useToast,
-} from '@chakra-ui/react';
+import { Box, Button, Text, useToast } from '@chakra-ui/react';
 
 import AuthInput from '../login/AuthInput';
 
@@ -92,7 +82,7 @@ const EmailForm = () => {
               mt='.8rem'
               cursor='pointer'
               textDecoration={'underline'}
-              onClick={() => router.push('/phone')}
+              onClick={() => router.push('/mobile')}
             >
               Use mobile number instead?
             </Text>
