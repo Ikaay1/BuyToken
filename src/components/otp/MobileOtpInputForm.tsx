@@ -102,14 +102,14 @@ const MobileOtpInputForm = () => {
                     },
                   }),
                 );
-                toast({
-                  title: 'Sign up Successful',
-                  description: 'You have successfully signed up',
-                  status: 'success',
-                  duration: 5000,
-                  isClosable: true,
-                  position: 'top-right',
-                });
+                // toast({
+                //   title: 'Sign up Successful',
+                //   description: 'You have successfully signed up',
+                //   status: 'success',
+                //   duration: 5000,
+                //   isClosable: true,
+                //   position: 'top-right',
+                // });
                 dispatch(clearData({payload: {}}));
                 router.push('/home');
               } else {
