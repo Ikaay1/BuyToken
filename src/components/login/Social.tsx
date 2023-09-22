@@ -43,25 +43,43 @@ const Social = ({
         .then(async (userInfo) => {
           console.log(userInfo);
           if (userInfo?.data?.email) {
-            const {family_name, given_name, picture, email} = userInfo.data;
+            const {name, email} = userInfo.data;
             console.log('userInfo', userInfo);
             if (router.asPath === '/signup') {
               const res: any = await signup({
-                name: family_name + '' + given_name,
+                name,
                 email,
                 password: 'aa',
               });
+
               if ('data' in res) {
-                dispatch(
-                  setCredentials({
-                    payload: {
-                      data: res?.data?.data?.user,
-                      token: res?.data?.data?.access_token,
-                    },
-                  }),
-                );
-                router.push('/home');
-                setLoading(false);
+                const response: any = await login({
+                  username: email,
+                });
+                console.log('resSignupGoogle', response);
+                if ('data' in response) {
+                  dispatch(
+                    setCredentials({
+                      payload: {
+                        data: res?.data?.data?.user,
+                        token: res?.data?.data?.access_token,
+                      },
+                    }),
+                  );
+                  router.push('/home');
+                  setLoading(false);
+                } else {
+                  toast({
+                    title: 'Login failed',
+                    description:
+                      res?.error?.data?.message || 'Something went wrong',
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true,
+                    position: 'top-right',
+                  });
+                  setLoading(false);
+                }
               } else {
                 toast({
                   title: 'Register failed',
@@ -72,19 +90,19 @@ const Social = ({
                   isClosable: true,
                   position: 'top-right',
                 });
-                console.log('res', res);
                 setLoading(false);
               }
             } else {
               const res: any = await login({
                 username: email,
               });
+              console.log('resLoginGoogle', res);
               if (res?.data?.data) {
                 dispatch(
                   setCredentials({
                     payload: {
-                      data: res?.data?.data?.userInfo,
-                      token: res?.data?.data?.token,
+                      data: res?.data?.data?.user,
+                      token: res?.data?.data?.access_token,
                     },
                   }),
                 );
@@ -125,18 +143,35 @@ const Social = ({
             name,
             email,
             password: 'aa',
-          }).then((res: any) => {
+          }).then(async (res: any) => {
             if ('data' in res) {
-              dispatch(
-                setCredentials({
-                  payload: {
-                    data: res?.data?.data?.user,
-                    token: res?.data?.data?.access_token,
-                  },
-                }),
-              );
-              router.push('/home');
-              setLoading(false);
+              const response: any = await login({
+                username: email,
+              });
+              console.log('resSignupGoogle', response);
+              if ('data' in response) {
+                dispatch(
+                  setCredentials({
+                    payload: {
+                      data: res?.data?.data?.user,
+                      token: res?.data?.data?.access_token,
+                    },
+                  }),
+                );
+                router.push('/home');
+                setLoading(false);
+              } else {
+                toast({
+                  title: 'Login failed',
+                  description:
+                    res?.error?.data?.message || 'Something went wrong',
+                  status: 'error',
+                  duration: 3000,
+                  isClosable: true,
+                  position: 'top-right',
+                });
+                setLoading(false);
+              }
             } else {
               toast({
                 title: 'Register failed',
@@ -173,8 +208,8 @@ const Social = ({
               dispatch(
                 setCredentials({
                   payload: {
-                    data: res?.data?.data?.userInfo,
-                    token: res?.data?.data?.token,
+                    data: res?.data?.data?.user,
+                    token: res?.data?.data?.access_token,
                   },
                 }),
               );

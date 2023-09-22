@@ -43,14 +43,14 @@ const LoginForm = () => {
                 },
               }),
             );
-            toast({
-              title: 'Login Successful',
-              description: 'You have successfully logged in',
-              status: 'success',
-              duration: 5000,
-              isClosable: true,
-              position: 'top-right',
-            });
+            // toast({
+            //   title: 'Login Successful',
+            //   description: 'You have successfully logged in',
+            //   status: 'success',
+            //   duration: 5000,
+            //   isClosable: true,
+            //   position: 'top-right',
+            // });
             router.push('/home');
           } else {
             toast({
