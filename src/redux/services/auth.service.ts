@@ -23,9 +23,31 @@ export const authApi = createApi({
       }),
       invalidatesTags: ['Auth'],
     }),
+    socialLogin: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `auth/social/login`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Auth'],
+    }),
     signup: builder.mutation<any, any>({
       query: (body) => ({
         url: `auth/register`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Auth'],
+    }),
+    socialSignup: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `auth/social/register`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,4 +122,6 @@ export const {
   useSendOTPToMobileMutation,
   useValidateMobileOtpMutation,
   useResetPasswordMutation,
+  useSocialLoginMutation,
+  useSocialSignupMutation,
 } = authApi;

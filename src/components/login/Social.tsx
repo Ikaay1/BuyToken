@@ -5,8 +5,8 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 
 import { useAppDispatch } from '@/redux/app/hooks';
 import {
-	useLoginMutation,
-	useSignupMutation,
+	useSocialLoginMutation,
+	useSocialSignupMutation,
 } from '@/redux/services/auth.service';
 import { setCredentials } from '@/redux/slices/authSlice';
 import {
@@ -28,8 +28,8 @@ const Social = ({
   const toast = useToast();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [login] = useLoginMutation();
-  const [signup] = useSignupMutation();
+  const [login] = useSocialLoginMutation();
+  const [signup] = useSocialSignupMutation();
   const loginGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       console.log('entered login');
@@ -49,6 +49,7 @@ const Social = ({
               const res: any = await signup({
                 name: family_name + '' + given_name,
                 email,
+                password: 'aa',
               });
               if ('data' in res) {
                 dispatch(
@@ -76,9 +77,7 @@ const Social = ({
               }
             } else {
               const res: any = await login({
-                email,
-                password: '',
-                authType: 'social',
+                username: email,
               });
               if (res?.data?.data) {
                 dispatch(
@@ -125,6 +124,7 @@ const Social = ({
           signup({
             name,
             email,
+            password: 'aa',
           }).then((res: any) => {
             if ('data' in res) {
               dispatch(
