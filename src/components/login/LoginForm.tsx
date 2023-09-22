@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import MessageIcon from '@/assets/MessageIcon';
@@ -8,24 +8,17 @@ import SeePasswordIcon from '@/assets/SeePasswordIcon';
 import { useAppDispatch } from '@/redux/app/hooks';
 import { useLoginMutation } from '@/redux/services/auth.service';
 import { setCredentials } from '@/redux/slices/authSlice';
-import {
-	Box,
-	Button,
-	Checkbox,
-	Divider,
-	Flex,
-	Link,
-	Text,
-	useToast,
-} from '@chakra-ui/react';
+import { Box, Button, Checkbox, Flex, Text, useToast } from '@chakra-ui/react';
 
 import AuthInput from './AuthInput';
+import Social from './Social';
 
 const LoginForm = () => {
   const router = useRouter();
   const [login, loginStatus] = useLoginMutation();
   const dispatch = useAppDispatch();
   const toast = useToast();
+  const [loading, setLoading] = useState(false);
   return (
     <Box mt='1.2rem' width={{lg: '570px'}}>
       <Formik
@@ -119,7 +112,7 @@ const LoginForm = () => {
               background='#4CAD73'
               borderRadius='6px'
               mt='1.1rem'
-              isLoading={loginStatus.isLoading}
+              isLoading={loginStatus.isLoading || loading}
             >
               Login
             </Button>
@@ -140,28 +133,20 @@ const LoginForm = () => {
       >
         Forgot Password?
       </Text>
-      <Flex justifyContent={'space-between'} alignItems={'flex-end'} mt='.2rem'>
-        <Divider
-          w='47.5%'
-          borderWidth={'1.3px'}
-          borderColor={'#CCCCCC'}
-        ></Divider>
-        <Text
-          fontFamily='Poppins'
-          fontWeight='600'
-          fontSize='14px'
-          lineHeight='21px'
-          color='#737373'
-          alignSelf={'center'}
-        >
-          Or
-        </Text>
-        <Divider
-          w='47.5%'
-          borderWidth={'1.3px'}
-          borderColor={'#CCCCCC'}
-        ></Divider>
-      </Flex>
+      <Social setLoading={setLoading} />
+      <Text
+        fontFamily='Poppins'
+        fontStyle='normal'
+        fontSize={{base: '12px', lg: '16px'}}
+        lineHeight='24px'
+        color='#1E1E1F'
+        textAlign={'center'}
+        mt='1.3rem'
+        cursor='pointer'
+        onClick={() => router.push('/email')}
+      >
+        Don&apos;t have an account?
+      </Text>
       <Button
         width={{base: '100%', lg: '571px'}}
         height='50px'
@@ -172,7 +157,7 @@ const LoginForm = () => {
         fontSize='14px'
         color={'rgb(76,173,115)'}
         onClick={() => router.push('/signup')}
-        mt='1.3rem'
+        mt='.8rem'
       >
         Sign up for free
       </Button>

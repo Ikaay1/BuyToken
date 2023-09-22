@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 
 import IdCardIcon from '@/assets/IdCardIcon';
@@ -13,12 +13,14 @@ import { setData } from '@/redux/slices/authSlice';
 import { Box, Button, Text, useToast } from '@chakra-ui/react';
 
 import AuthInput from '../login/AuthInput';
+import Social from '../login/Social';
 
 const SignupForm = () => {
   const router = useRouter();
   const [signup, signupStatus] = useSignupMutation();
   const dispatch = useAppDispatch();
   const toast = useToast();
+  const [loading, setLoading] = useState(false);
   return (
     <Box mt='1.2rem' width={{lg: '570px'}}>
       <Formik
@@ -136,13 +138,14 @@ const SignupForm = () => {
               background='#4CAD73'
               borderRadius='6px'
               mt='1.1rem'
-              isLoading={signupStatus.isLoading}
+              isLoading={signupStatus.isLoading || loading}
             >
               Signup
             </Button>
           </Form>
         )}
       </Formik>
+      <Social setLoading={setLoading} />
       <Text
         fontFamily='Poppins'
         fontStyle='normal'

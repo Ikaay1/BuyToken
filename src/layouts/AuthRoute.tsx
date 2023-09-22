@@ -7,11 +7,11 @@ const AuthRoute = ({children}: {children: any}) => {
   const router = useRouter();
   const accessToken = useAppSelector((state) => state?.app?.user?.token);
 
-  useEffect(() => {
-    if (accessToken) {
-      router.push(`/home`);
-    }
-  }, [accessToken]);
+  //   useEffect(() => {
+  //     if (accessToken) {
+  //       router.push(`/home`);
+  //     }
+  //   }, [accessToken]);
 
   return <>{children}</>;
 };
