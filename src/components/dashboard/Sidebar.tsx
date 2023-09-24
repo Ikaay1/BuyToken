@@ -10,7 +10,7 @@ import {Box, Flex, Icon, Image, Text} from '@chakra-ui/react';
 const Sidebar = () => {
   const router = useRouter();
   return (
-    <Box mt='.8rem' w={{base: '300px', mlg: '316px'}} background='#FAF9F6'>
+    <Box pt='.8rem' w={{base: '300px', mlg: '316px'}} background='#FAF9F6'>
       <Image ml='1.7rem' src='/assets/bt_logo.png' alt='Bt logo' />
       <Box ml='1.7rem' mt='4.5rem'>
         <Flex alignItems={'center'} pr='.6rem'>

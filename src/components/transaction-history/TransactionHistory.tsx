@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TransactionHistory = () => {
-  return <div>TransactionHistory</div>;
+  return <div>Transaction History</div>;
 };
 
 export default TransactionHistory;
