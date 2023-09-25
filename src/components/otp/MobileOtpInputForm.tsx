@@ -1,14 +1,14 @@
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import {useRouter} from 'next/router';
+import React, {useState} from 'react';
 import OTPInput from 'react-otp-input';
 
-import { useAppDispatch, useAppSelector } from '@/redux/app/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
 import {
-	useLoginMutation,
-	useValidateMobileOtpMutation,
+  useLoginMutation,
+  useValidateMobileOtpMutation,
 } from '@/redux/services/auth.service';
-import { clearData, setCredentials } from '@/redux/slices/authSlice';
-import { Box, Button, useToast } from '@chakra-ui/react';
+import {clearData, setCredentials} from '@/redux/slices/authSlice';
+import {Box, Button, useToast} from '@chakra-ui/react';
 
 const MobileOtpInputForm = () => {
   const [otp, setOtp] = useState('');
@@ -111,7 +111,7 @@ const MobileOtpInputForm = () => {
                 //   position: 'top-right',
                 // });
                 dispatch(clearData({payload: {}}));
-                router.push('/home');
+                router.push('/dashboard');
               } else {
                 toast({
                   title: 'Login failed',

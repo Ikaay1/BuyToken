@@ -1,14 +1,14 @@
-import { Form, Formik } from 'formik';
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import {Form, Formik} from 'formik';
+import {useRouter} from 'next/router';
+import React, {useState} from 'react';
 import * as Yup from 'yup';
 
 import MessageIcon from '@/assets/MessageIcon';
 import SeePasswordIcon from '@/assets/SeePasswordIcon';
-import { useAppDispatch } from '@/redux/app/hooks';
-import { useLoginMutation } from '@/redux/services/auth.service';
-import { setCredentials } from '@/redux/slices/authSlice';
-import { Box, Button, Checkbox, Flex, Text, useToast } from '@chakra-ui/react';
+import {useAppDispatch} from '@/redux/app/hooks';
+import {useLoginMutation} from '@/redux/services/auth.service';
+import {setCredentials} from '@/redux/slices/authSlice';
+import {Box, Button, Checkbox, Flex, Text, useToast} from '@chakra-ui/react';
 
 import AuthInput from './AuthInput';
 import Social from './Social';
@@ -51,7 +51,7 @@ const LoginForm = () => {
             //   isClosable: true,
             //   position: 'top-right',
             // });
-            router.push('/home');
+            router.push('/dashboard');
           } else {
             toast({
               title: 'Login failed',

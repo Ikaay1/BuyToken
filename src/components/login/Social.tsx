@@ -1,24 +1,24 @@
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import React from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
-import { useAppDispatch } from '@/redux/app/hooks';
+import {useAppDispatch} from '@/redux/app/hooks';
 import {
-	useSocialLoginMutation,
-	useSocialSignupMutation,
+  useSocialLoginMutation,
+  useSocialSignupMutation,
 } from '@/redux/services/auth.service';
-import { setCredentials } from '@/redux/slices/authSlice';
+import {setCredentials} from '@/redux/slices/authSlice';
 import {
-	Box,
-	Button,
-	Divider,
-	Flex,
-	Image,
-	Text,
-	useToast,
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Image,
+  Text,
+  useToast,
 } from '@chakra-ui/react';
-import { useGoogleLogin } from '@react-oauth/google';
+import {useGoogleLogin} from '@react-oauth/google';
 
 const Social = ({
   setLoading,
@@ -66,7 +66,7 @@ const Social = ({
                       },
                     }),
                   );
-                  router.push('/home');
+                  router.push('/dashboard');
                   setLoading(false);
                 } else {
                   toast({
@@ -106,7 +106,7 @@ const Social = ({
                     },
                   }),
                 );
-                router.push('/home');
+                router.push('/dashboard');
                 setLoading(false);
               } else {
                 toast({
@@ -158,7 +158,7 @@ const Social = ({
                     },
                   }),
                 );
-                router.push('/home');
+                router.push('/dashboard');
                 setLoading(false);
               } else {
                 toast({
@@ -213,7 +213,7 @@ const Social = ({
                   },
                 }),
               );
-              router.push('/home');
+              router.push('/dashboard');
               setLoading(false);
             } else {
               toast({
