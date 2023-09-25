@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import {useRouter} from 'next/router';
+import {useEffect} from 'react';
 
-import { useAppSelector } from '@/redux/app/hooks';
+import {useAppSelector} from '@/redux/app/hooks';
 
 const AuthRoute = ({children}: {children: any}) => {
   const router = useRouter();
@@ -9,9 +9,9 @@ const AuthRoute = ({children}: {children: any}) => {
 
   useEffect(() => {
     if (accessToken) {
-      router.push(`/home`);
+      router.push(`/dashboard`);
     }
-  }, [accessToken]);
+  }, []);
 
   return <>{children}</>;
 };

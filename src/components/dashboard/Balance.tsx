@@ -1,9 +1,10 @@
 import React from 'react';
 
-import FundWalletIcon from '@/assets/FundWalletIcon';
 import HideIcon from '@/assets/HideIcon';
 import WalletIcon from '@/assets/WalletIcon';
-import {Box, Flex, Icon, Image, Text} from '@chakra-ui/react';
+import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
+
+import FundWalletModal from './FundWalletModal';
 
 const Balance = () => {
   return (
@@ -77,18 +78,7 @@ const Balance = () => {
             </Text>
           </Box>
         </Flex>
-        <Flex justifyContent={'center'} alignItems={'center'} mt='.45rem'>
-          <Text
-            fontFamily='Inter'
-            fontWeight='500'
-            fontSize='14px'
-            color='#417657'
-            mr='.45rem'
-          >
-            Fund Wallet
-          </Text>
-          <Icon as={FundWalletIcon} />
-        </Flex>
+        <FundWalletModal />
       </Box>
     </Box>
   );
