@@ -50,9 +50,9 @@ const NotificationModal = () => {
             borderRadius='6px'
             py='1.4rem'
             px='.89rem'
-            right={{base: '0', lg: '-280px'}}
+            right={{base: '50px', lg: '-280px'}}
             pos='absolute'
-            top={{base: '10vh', lg: '0'}}
+            top={{base: '0', lg: '0'}}
             boxShadow='0px 4px 35px 5px rgba(0, 0, 0, 0.25)'
             maxH='210px'
             bg='#FFFFFF'

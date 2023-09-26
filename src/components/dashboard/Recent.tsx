@@ -7,6 +7,7 @@ import RightVector from '@/assets/RightVector';
 import {scrollbarStyle, scrollbarStyle2} from '@/constants/utils';
 import {
   Box,
+  Divider,
   Flex,
   Icon,
   Table,
@@ -22,17 +23,19 @@ import {
 const Recent = () => {
   return (
     <Box
-      h='599px'
+      minH={{base: '285px', lg: '599px'}}
+      maxH={{base: '599px', lg: '599px'}}
       borderRadius='16px'
       overflowY={'auto'}
       sx={scrollbarStyle}
       bg='#FFFFFF'
       pl='.9rem'
+      pr={{base: '.9rem', lg: 0}}
       pt='1rem'
       pb='1.5rem'
       mt='1.25rem'
     >
-      <Flex pr='1rem' justifyContent={'space-between'}>
+      <Flex pr={{lg: '1rem'}} justifyContent={'space-between'}>
         <Text
           fontFamily='Raleway'
           fontWeight='700'
@@ -54,7 +57,13 @@ const Recent = () => {
           <Icon width='7.41px' height='12px' as={RightVector} />
         </Flex>
       </Flex>
-      <TableContainer mt='1.7rem' sx={scrollbarStyle2}>
+
+      {/* Desktop */}
+      <TableContainer
+        mt='1.7rem'
+        sx={scrollbarStyle2}
+        display={{base: 'none', lg: 'block'}}
+      >
         <Table variant='simple'>
           <Thead>
             <Tr>
@@ -122,7 +131,7 @@ const Recent = () => {
                     //   background='#C20B0B'
                     //   background='#E6CBB3'
                     borderRadius='1000px'
-                    fontFamily='Lato'
+                    fontFamily='Inter'
                     fontSize='14px'
                     color='#417657'
                     //   color='#FFFFFF'
@@ -138,14 +147,102 @@ const Recent = () => {
           </Tbody>
         </Table>
       </TableContainer>
-      {/* <Box mt='5.5rem'>
+
+      {/* Mobile */}
+      <Box px='.7rem' mt='1.2rem' display={{lg: 'none'}}>
+        {[1, 2, 3].map((each) => (
+          <Box mt='.8rem' key={each}>
+            <Flex alignItems={'center'} justifyContent={'space-between'}>
+              <Flex alignItems={'center'}>
+                <Flex
+                  width='26px'
+                  height='26px'
+                  background='#F5F5F5'
+                  boxShadow='0px 0px 4px rgba(0, 0, 0, 0.15)'
+                  borderRadius='50px'
+                  justifyContent={'center'}
+                  alignItems={'center'}
+                >
+                  <Icon
+                    as={InflowIcon}
+                    //   as={OutflowIcon}
+                    w='18px'
+                    h='18px'
+                  />
+                </Flex>
+                <Text
+                  w='102px'
+                  fontFamily='Inter'
+                  fontSize='13px'
+                  lineHeight='30px'
+                  color='#929292'
+                >
+                  56287W78E8E...
+                </Text>
+              </Flex>
+              <Text fontFamily='Inter' fontWeight='600' color='#313131'>
+                ₦9,900.00
+              </Text>
+            </Flex>
+            <Flex
+              alignItems={'center'}
+              justifyContent={'space-between'}
+              mt='.5rem'
+            >
+              <Text
+                fontFamily='Inter'
+                fontWeight='500'
+                fontSize='14px'
+                color='#606060'
+              >
+                Funded wallet
+              </Text>
+              <Text fontFamily='Inter' fontSize='14px' color='#929292'>
+                Funding
+              </Text>
+            </Flex>
+            <Flex
+              alignItems={'center'}
+              justifyContent={'space-between'}
+              mt='.5rem'
+            >
+              <Text fontFamily='Inter' fontSize='13px' color='#929292'>
+                19th Sep, 2023
+              </Text>
+              <Text
+                width='69px'
+                height='25px'
+                background='#F4FCF7'
+                //   background='#C20B0B'
+                //   background='#E6CBB3'
+                borderRadius='100px'
+                fontFamily='Inter'
+                fontSize='14px'
+                color='#417657'
+                //   color='#FFFFFF'
+                display={'flex'}
+                justifyContent={'center'}
+                alignItems={'center'}
+              >
+                Success
+              </Text>
+            </Flex>
+            <Divider mt='.6rem' width='100%' border='1px solid #E9EFF5' />
+          </Box>
+        ))}
+      </Box>
+      {/* <Box mt={{base: '3.5rem', lg: '5.5rem'}}>
         <Flex justifyContent={'center'}>
-          <Icon as={EmptyTransactionIcon} w='67px' h='67px' />
+          <Icon
+            as={EmptyTransactionIcon}
+            w={{base: '37px', lg: '67px'}}
+            h={{base: '37px', lg: '67px'}}
+          />
         </Flex>
         <Text
           width='260px'
           fontFamily="'Inter'"
-          fontSize='14px'
+          fontSize={{base: '13px', lg: '14px'}}
           lineHeight='20px'
           textAlign='center'
           color='#929292'

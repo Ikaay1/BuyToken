@@ -3,7 +3,7 @@ import React from 'react';
 import Dashboard from '@/components/dashboard/Dashboard';
 import Sidebar from '@/components/dashboard/Sidebar';
 import ProtectedRoute from '@/layouts/ProtectedRoute';
-import {Flex} from '@chakra-ui/react';
+import {Box, Flex} from '@chakra-ui/react';
 
 const Home = () => {
   return (

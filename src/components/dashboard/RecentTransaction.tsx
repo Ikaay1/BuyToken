@@ -10,7 +10,7 @@ const RecentTransaction = ({children}: {children: React.JSX.Element}) => {
   return (
     <Box bg='#FAF9F6'>
       <Navbar />
-      <Box px='2rem' h='calc(100vh - 77px)'>
+      <Box px={{lg: '2rem'}} h='calc(100vh - 77px)'>
         <Box>{children}</Box>
         <Recent />
         <Footer />

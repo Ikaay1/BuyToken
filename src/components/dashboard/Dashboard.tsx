@@ -9,9 +9,9 @@ import Wallet from './Wallet';
 const Dashboard = () => {
   return (
     <Box
-      w={{base: 'calc(100% - 300px)', mlg: 'calc(100% - 316px)'}}
+      w={{base: '100%', lg: 'calc(100% - 300px)', mlg: 'calc(100% - 316px)'}}
       overflowY={'auto'}
-      sx={scrollbarStyle}
+      sx={{lg: scrollbarStyle}}
       bg='#FAF9F6'
     >
       <RecentTransaction>
