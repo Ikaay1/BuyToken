@@ -56,8 +56,13 @@ const SidebarHamburgerMenu = () => {
                 justifyContent={'space-between'}
                 alignItems={'center'}
               >
-                <Image src='/assets/bt_logo.png' alt='Bt logo' />
-                <Icon onClick={onClose} as={CloseIcon} w='30px' h='30px' />
+                <Image
+                  src='/assets/bt_logo.png'
+                  w='47px'
+                  h='46px'
+                  alt='Bt logo'
+                />
+                <Icon onClick={onClose} as={CloseIcon} w='17.5px' h='17.5px' />
               </Flex>
               <Box ml='1.7rem' mt='4.5rem'>
                 <Flex flexDirection={'column'} alignItems={'center'} pr='.6rem'>
