@@ -55,7 +55,7 @@ const colors = {
     red: '#BA1A1A',
     faintGrey: '#A1A1A1',
     bgGrey2: '#F5F5F5',
-    modalOverlay: 'rgba(0, 0, 0, 0.8)',
+    modalOverlay: 'rgba(0, 0, 0, 0.6)',
     navDark: '#0B0B0A',
     greyText: '#707070',
   },
