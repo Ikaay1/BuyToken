@@ -1,12 +1,13 @@
 import jwtDecode from 'jwt-decode';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import {useRouter} from 'next/router';
+import {useEffect} from 'react';
 
 // import { FacebookLoginClient } from '@greatsumini/react-facebook-login';
 // import { googleLogout } from '@react-oauth/google';
-import { useAppDispatch, useAppSelector } from '@/redux/app/hooks';
-import { logout } from '@/redux/slices/authSlice';
-import { useToast } from '@chakra-ui/react';
+import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
+import {logout} from '@/redux/slices/authSlice';
+import {useToast} from '@chakra-ui/react';
+import {googleLogout} from '@react-oauth/google';
 
 const ProtectedRoute = ({children}: {children: any}) => {
   const router = useRouter();
@@ -32,8 +33,7 @@ const ProtectedRoute = ({children}: {children: any}) => {
             isClosable: true,
           });
           dispatch(logout());
-          //   googleLogout();
-          //   FacebookLoginClient.logout(() => {});
+          googleLogout();
           window.location.href = '/login';
         }
       }

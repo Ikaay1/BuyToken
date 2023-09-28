@@ -9,7 +9,9 @@ const Home = () => {
   return (
     <ProtectedRoute>
       <Flex h='100vh'>
-        <Sidebar />
+        <Box display={{base: 'none', lg: 'block'}}>
+          <Sidebar />
+        </Box>
         <Dashboard />
       </Flex>
     </ProtectedRoute>

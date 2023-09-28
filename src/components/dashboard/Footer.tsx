@@ -11,7 +11,11 @@ const Footer = () => {
         alignItems={'center'}
         mx='auto'
       >
-        <Text fontFamily='Inter' fontSize='14px' color='#929292'>
+        <Text
+          fontFamily='Inter'
+          fontSize={{base: '13px', lg: '14px'}}
+          color='#929292'
+        >
           Terms & Conditions
         </Text>
         <Box
@@ -20,7 +24,11 @@ const Footer = () => {
           background='#242424'
           borderRadius={'50%'}
         ></Box>
-        <Text fontFamily='Inter' fontSize='14px' color='#929292'>
+        <Text
+          fontFamily='Inter'
+          fontSize={{base: '13px', lg: '14px'}}
+          color='#929292'
+        >
           Privacy Policy
         </Text>
         <Box
@@ -29,13 +37,17 @@ const Footer = () => {
           background='#242424'
           borderRadius={'50%'}
         ></Box>
-        <Text fontFamily='Inter' fontSize='14px' color='#929292'>
+        <Text
+          fontFamily='Inter'
+          fontSize={{base: '13px', lg: '14px'}}
+          color='#929292'
+        >
           Help
         </Text>
       </Flex>
       <Text
         fontFamily='Inter'
-        fontSize='14px'
+        fontSize={{base: '13px', lg: '14px'}}
         color='#242424'
         textAlign={'center'}
         mt='.25rem'
