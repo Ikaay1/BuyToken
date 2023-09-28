@@ -1,5 +1,6 @@
 import React from 'react';
 
+import EmptyTransactionIcon from '@/assets/EmptyTransactionIcon';
 import InflowIcon from '@/assets/InflowIcon';
 import OutflowIcon from '@/assets/OutflowIcon';
 import RightVector from '@/assets/RightVector';
@@ -137,6 +138,24 @@ const Recent = () => {
           </Tbody>
         </Table>
       </TableContainer>
+      {/* <Box mt='5.5rem'>
+        <Flex justifyContent={'center'}>
+          <Icon as={EmptyTransactionIcon} w='67px' h='67px' />
+        </Flex>
+        <Text
+          width='260px'
+          fontFamily="'Inter'"
+          fontSize='14px'
+          lineHeight='20px'
+          textAlign='center'
+          color='#929292'
+          mx='auto'
+          mt='.85rem'
+        >
+          You haven&apos;t made any transactions yet. When you do, they&apos;ll
+          appear here
+        </Text>
+      </Box> */}
     </Box>
   );
 };

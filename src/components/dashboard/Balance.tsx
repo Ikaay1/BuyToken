@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import HideIcon from '@/assets/HideIcon';
+import ShowIcon from '@/assets/ShowIcon';
 import WalletIcon from '@/assets/WalletIcon';
-import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
+import {Box, Flex, Icon, Image, Text} from '@chakra-ui/react';
 
 import FundWalletModal from './FundWalletModal';
 
 const Balance = () => {
+  const [show, setShow] = useState(false);
   return (
     <Box
       w='48%'
@@ -37,11 +39,15 @@ const Balance = () => {
           <Text fontFamily='Inter' fontWeight='500' color='#313131'>
             Wallet
           </Text>
-          <Flex alignItems={'center'}>
+          <Flex
+            alignItems={'center'}
+            onClick={() => setShow((prevShow) => !prevShow)}
+            cursor='pointer'
+          >
             <Text mr='.5rem' fontFamily='Inter' fontSize='14px' color='#242424'>
-              Hide
+              {show ? 'Hide' : 'Show'}
             </Text>
-            <Icon as={HideIcon} w='16px' h='16px' />
+            <Icon as={show ? HideIcon : ShowIcon} w='16px' h='16px' />
           </Flex>
         </Flex>
         <Flex pl='2.1rem' mt='1.3rem'>
@@ -70,11 +76,12 @@ const Balance = () => {
             <Text
               fontFamily='Raleway'
               fontWeight='700'
-              fontSize='32px'
+              fontSize={show ? '32px' : '50px'}
               color='#313131'
               lineHeight={'48px'}
+              mt={show ? '0' : '.88rem'}
             >
-              ₦5,000.00
+              {show ? '₦5,000.00' : '*********'}
             </Text>
           </Box>
         </Flex>

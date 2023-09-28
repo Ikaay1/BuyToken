@@ -3,6 +3,8 @@ import React from 'react';
 import AddIcon from '@/assets/AddIcon';
 import {Box, Flex, Icon, Text} from '@chakra-ui/react';
 
+import EditUtilities from './EditUtilities';
+
 const FrequentlyUsed = () => {
   return (
     <Box
@@ -15,9 +17,12 @@ const FrequentlyUsed = () => {
       py='.9rem'
       boxShadow='0px 4px 4px rgba(0, 0, 0, 0.25)'
     >
-      <Text fontFamily='Inter' fontWeight='500' color='#313131'>
-        Frequently used
-      </Text>
+      <Flex justifyContent={'space-between'} alignItems={'center'}>
+        <Text fontFamily='Inter' fontWeight='500' color='#313131'>
+          Frequently used
+        </Text>
+        <EditUtilities />
+      </Flex>
       <Flex mt='1.6rem' justifyContent={'space-between'}>
         {[1, 2, 3, 4].map((each) => (
           <Flex
