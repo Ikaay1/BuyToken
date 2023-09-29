@@ -41,7 +41,7 @@ const FundWalletModal = () => {
         <ModalOverlay bg='token.modalOverlay' />
         <ModalContent justifyContent={'center'} alignItems={'center'}>
           <Box
-            width='438px'
+            width={{base: '100%', lg: '438px'}}
             background='#FFFFFF'
             borderRadius='10px'
             pt='.8rem'

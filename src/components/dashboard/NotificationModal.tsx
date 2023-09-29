@@ -2,6 +2,7 @@ import React from 'react';
 
 import ErrorBadge from '@/assets/ErrorBadge';
 import InfoBadge from '@/assets/InfoBadge';
+import NoNoticationsIcon from '@/assets/NoNoticationsIcon';
 import NotificationIcon from '@/assets/NotificationIcon';
 import SuccessfulBadge from '@/assets/SuccessfulBadge';
 import {scrollbarStyle} from '@/constants/utils';
@@ -50,9 +51,9 @@ const NotificationModal = () => {
             borderRadius='6px'
             py='1.4rem'
             px='.89rem'
-            right={{base: '0', lg: '-280px'}}
+            right={{base: '50px', lg: '-280px'}}
             pos='absolute'
-            top={{base: '10vh', lg: '0'}}
+            top={{base: '0', lg: '0'}}
             boxShadow='0px 4px 35px 5px rgba(0, 0, 0, 0.25)'
             maxH='210px'
             bg='#FFFFFF'
@@ -104,6 +105,21 @@ const NotificationModal = () => {
                 </Box>
               ))}
             </Box>
+            {/* <Box mt='2rem'>
+              <Flex justifyContent={'center'}>
+                <Icon as={NoNoticationsIcon} w='30px' h='30px' />
+              </Flex>
+              <Text
+                fontFamily='Inter'
+                fontSize='10px'
+                lineHeight='20px'
+                textAlign='center'
+                color='#929292'
+                mt='1.1rem'
+              >
+                You do not have any notifications yet.
+              </Text>
+            </Box> */}
           </Box>
         </ModalContent>
       </Modal>

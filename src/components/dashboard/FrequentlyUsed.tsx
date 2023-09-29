@@ -8,17 +8,23 @@ import EditUtilities from './EditUtilities';
 const FrequentlyUsed = () => {
   return (
     <Box
-      width='48%'
-      height='223px'
+      width={{lg: '48%'}}
+      height={{lg: '223px'}}
       background='#FFFFFF'
-      borderRadius='10px'
+      borderRadius={{lg: '10px'}}
       pl='.8rem'
       pr='1.5rem'
-      py='.9rem'
+      py={{base: '1.3rem', lg: '.9rem'}}
       boxShadow='0px 4px 4px rgba(0, 0, 0, 0.25)'
+      mt={{base: '1.45rem', lg: 0}}
     >
       <Flex justifyContent={'space-between'} alignItems={'center'}>
-        <Text fontFamily='Inter' fontWeight='500' color='#313131'>
+        <Text
+          fontSize={{base: '14px', lg: '16px'}}
+          fontFamily='Inter'
+          fontWeight='500'
+          color='#313131'
+        >
           Frequently used
         </Text>
         <EditUtilities />
@@ -26,9 +32,9 @@ const FrequentlyUsed = () => {
       <Flex mt='1.6rem' justifyContent={'space-between'}>
         {[1, 2, 3, 4].map((each) => (
           <Flex
-            w='23%'
+            w={{base: '21%', lg: '23%'}}
             maxWidth='82.23px'
-            height='83.69px'
+            height={{base: '75px', md: '83.69px'}}
             background='#F5F5F5'
             borderRadius='4.70398px'
             justifyContent={'center'}
@@ -43,7 +49,7 @@ const FrequentlyUsed = () => {
         width='339px'
         fontFamily='Inter'
         fontWeight='500'
-        fontSize='12px'
+        fontSize={{base: '11px', lg: '12px'}}
         lineHeight='170%'
         textAlign='center'
         color='#929292'

@@ -9,20 +9,32 @@ import FrequentlyUsed from './FrequentlyUsed';
 const Wallet = () => {
   return (
     <Box mt='2rem'>
-      <Flex justifyContent={'space-between'}>
+      <Flex
+        display={{base: 'block', lg: 'flex'}}
+        justifyContent={'space-between'}
+      >
         <Balance />
         <FrequentlyUsed />
       </Flex>
-      <Flex height='168px' mt='1.9rem'>
-        <Box h='100%' w='60%' background='#417657'>
+      <Flex
+        display={{base: 'block', lg: 'flex'}}
+        height={{lg: '168px'}}
+        mt='1.9rem'
+      >
+        <Box
+          h='100%'
+          w={{lg: '60%'}}
+          py={{base: '1rem', lg: 0}}
+          background='#417657'
+        >
           <Text
             fontFamily='Poppins'
-            fontSize='18px'
-            lineHeight='146.5%'
+            fontSize={{base: '14px', lg: '18px'}}
+            lineHeight={{lg: '146.5%'}}
             color='#FFFFFF'
-            w='400px'
+            w={{base: '300px', lg: '400px'}}
             mx='auto'
-            mt='1.3rem'
+            mt={{lg: '1.3rem'}}
           >
             Are you out of Electricity Units and Cash? We’ve got you covered.
             Try{' '}
@@ -30,7 +42,7 @@ const Wallet = () => {
               as='span'
               fontFamily='Raleway'
               fontWeight='700'
-              fontSize='18px'
+              fontSize={{base: '14px', lg: '18px'}}
               color='#FFFFFF'
             >
               BORROW NOW!
@@ -56,8 +68,8 @@ const Wallet = () => {
           </Flex>
         </Box>
         <Image
-          w='40%'
-          h='100%'
+          w={{base: '100%', lg: '40%'}}
+          h={{base: '154px', lg: '100%'}}
           objectFit={'cover'}
           src='/assets/man.jpg'
           alt='Man'
