@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import React from 'react';
 
 import BulbIcon from '@/assets/BulbIcon';
@@ -7,14 +7,14 @@ import InternetIcon from '@/assets/InternetIcon';
 import PhoneIcon from '@/assets/PhoneIcon';
 import SearchIcon from '@/assets/SearchIcon';
 import {
-	Box,
-	Flex,
-	Icon,
-	Image,
-	Input,
-	InputGroup,
-	InputLeftElement,
-	Text,
+  Box,
+  Flex,
+  Icon,
+  Image,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Text,
 } from '@chakra-ui/react';
 
 import HamburgerMenu from './HamburgerMenu';
@@ -173,7 +173,7 @@ const Navbar = () => {
         >
           {[
             {icon: BulbIcon, name: 'Electricity'},
-            {icon: PhoneIcon, name: 'AitTime'},
+            {icon: PhoneIcon, name: 'Airtime'},
             {icon: ComputerIcon, name: 'Cable TV'},
             {icon: InternetIcon, name: 'Internet'},
           ].map(({icon, name}) => (
