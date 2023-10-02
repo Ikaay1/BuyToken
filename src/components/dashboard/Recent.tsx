@@ -35,7 +35,11 @@ const Recent = () => {
       pb='1.5rem'
       mt='1.25rem'
     >
-      <Flex pr={{lg: '1rem'}} justifyContent={'space-between'}>
+      <Flex
+        pr={{lg: '1rem'}}
+        justifyContent={'space-between'}
+        alignItems={'center'}
+      >
         <Text
           fontFamily='Raleway'
           fontWeight='700'
