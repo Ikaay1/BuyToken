@@ -17,7 +17,7 @@ import {
 
 const UtilityPaymentElectricity = () => {
   return (
-    <Box pl='2rem' mt='1.9rem'>
+    <Box pl={{lg: '2rem'}} mt='1.9rem'>
       <Box pr='2rem'>
         {[
           {name: 'Meter Number:', value: '1234567890'},
@@ -38,27 +38,36 @@ const UtilityPaymentElectricity = () => {
               fontFamily='Poppins'
               fontWeight='500'
               color='#000000'
-              w='142px'
-              mr='3.4rem'
+              w={{base: '100px', lg: '142px'}}
+              mr={{base: '1.5rem', lg: '3.4rem'}}
+              fontSize={{base: '11px', lg: '16px'}}
             >
               {name}
             </Text>
-            <Text fontFamily='Poppins' color='#000000'>
+            <Text
+              fontFamily='Poppins'
+              color='#000000'
+              fontSize={{base: '11px', lg: '16px'}}
+            >
               {value}
             </Text>
           </Flex>
         ))}
       </Box>
-      <Flex justifyContent={'flex-end'} mt='6rem'>
+      <Flex
+        justifyContent={{base: 'center', lg: 'flex-end'}}
+        mt={{base: '4.6rem', lg: '6rem'}}
+      >
         <Button
-          height='33px'
+          height={{base: '47px', lg: '33px'}}
           background='#417657'
-          box-shadow='0px 24.2056px 48.4112px 7.26168px rgba(0, 0, 0, 0.1)'
+          boxShadow='0px 24.2056px 48.4112px 7.26168px rgba(0, 0, 0, 0.1)'
           borderRadius='5px'
           px='1.2rem'
           fontFamily='Raleway'
           fontWeight='600'
           color='#FFFFFF'
+          w={{base: '100%', lg: 'auto'}}
         >
           Pay N20,000
         </Button>

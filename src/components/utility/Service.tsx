@@ -15,18 +15,18 @@ const Service = ({
   setProvider: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   return (
-    <Box pl={{lg: '2.5rem', mlg: '3.5rem'}} mt='1.9rem'>
-      <Flex w='448px' justifyContent={'space-between'}>
+    <Box pl={{lg: '2.5rem', mlg: '3.5rem'}} mt={{base: '2.4rem', lg: '1.9rem'}}>
+      <Flex w={{base: '100%', lg: '448px'}} justifyContent={'space-between'}>
         {[
           {icon: BulbIcon, name: 'Electricity'},
           {icon: PhoneIcon, name: 'Airtime'},
           {icon: ComputerIcon, name: 'Cable TV'},
           {icon: InternetIcon, name: 'Internet'},
         ].map(({icon, name}) => (
-          <Box key={name}>
+          <Box key={name} w={{base: '20%', lg: 'auto'}}>
             <Flex
-              width='82.23px'
-              height='83.69px'
+              width={{base: '100%', lg: '82.23px'}}
+              height={{base: '68.35px', lg: '83.69px'}}
               background='#DBEFE3'
               borderRadius='4.70398px'
               justifyContent={'center'}
@@ -41,11 +41,15 @@ const Service = ({
               }}
               cursor='pointer'
             >
-              <Icon as={icon} w='28.78px' h='41.84px' />
+              <Icon
+                as={icon}
+                w={{base: '14.17px', lg: '28.78px'}}
+                h={{base: '20px', lg: '41.84px'}}
+              />
             </Flex>
             <Text
               fontFamily='Poppins'
-              fontSize='13px'
+              fontSize={{base: '12px', lg: '13px'}}
               textAlign='center'
               color='#313131'
               mt='.5rem'
@@ -55,7 +59,7 @@ const Service = ({
           </Box>
         ))}
       </Flex>
-      <Flex display='block' mt='4rem'>
+      <Flex display='block' mt={{base: '3rem', lg: '4rem'}}>
         <Box h='100%' py='.7rem' background='#417657'>
           <Text
             fontFamily='Poppins'

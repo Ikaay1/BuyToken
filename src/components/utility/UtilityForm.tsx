@@ -20,7 +20,7 @@ const UtilityForm = ({
   setState: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   return (
-    <Box px='2rem' mt='1.9rem'>
+    <Box px={{lg: '2rem'}} mt='1.9rem'>
       <InputGroup
         border={'none'}
         outline='none'
@@ -28,7 +28,7 @@ const UtilityForm = ({
         background={'#F5F5F5'}
       >
         <Input
-          width={{lg: '480px', mlg: '570px'}}
+          width={{base: '100%', lg: '480px', mlg: '570px'}}
           height='50px'
           border={'none'}
           outline='none'
@@ -36,12 +36,13 @@ const UtilityForm = ({
           fontFamily='Poppins'
           color='#717171'
           focusBorderColor='white'
+          fontSize={{base: '12px', lg: '16px'}}
         />
         <InputRightElement pointerEvents='none' h='100%'>
           <Icon as={PersonIcon} />
         </InputRightElement>
       </InputGroup>
-      <Flex mt='1.4rem'>
+      <Flex mt={{base: '1rem', lg: '1.4rem'}}>
         {['Prepaid', 'Postpaid'].map((each) => (
           <Flex alignItems={'center'} key={each} mr='3.5rem'>
             <Checkbox
@@ -58,17 +59,26 @@ const UtilityForm = ({
         ))}
       </Flex>
       <Box mt='1.8rem'>
-        <Text fontFamily='Poppins' fontWeight='500' color='#000000'>
+        <Text
+          fontSize={{base: '14px', lg: '16px'}}
+          fontFamily='Poppins'
+          fontWeight='500'
+          color='#000000'
+        >
           Moses Ikechukwu
         </Text>
-        <Text fontFamily='Poppins' color='#000000'>
+        <Text
+          fontSize={{base: '14px', lg: '16px'}}
+          fontFamily='Poppins'
+          color='#000000'
+        >
           No 10 Akintola road Ikeja, Lagos
         </Text>
       </Box>
       <Input
         borderRadius={'6px'}
         background={'#F5F5F5'}
-        width={{lg: '480px', mlg: '570px'}}
+        width={{base: '100%', lg: '480px', mlg: '570px'}}
         height='50px'
         border={'none'}
         outline='none'
@@ -76,28 +86,36 @@ const UtilityForm = ({
         fontFamily='Poppins'
         color='#717171'
         focusBorderColor='white'
-        mt='2rem'
+        mt={{base: '1rem', lg: '2rem'}}
+        fontSize={{base: '12px', lg: '16px'}}
       />
-      <Flex justifyContent={'flex-end'}>
+      <Flex
+        justifyContent={{base: 'center', lg: 'flex-end'}}
+        mt={{base: '3.3rem', lg: '3rem'}}
+      >
         <Button
           display={'flex'}
           alignItems={'center'}
-          justifyContent={'space-between'}
-          width='132px'
-          height='33px'
+          justifyContent={{base: 'center', lg: 'space-between'}}
+          width={{base: '90%', lg: '132px'}}
+          height={{base: '47px', lg: '33px'}}
           background='#417657'
           boxShadow='0px 24.2056px 48.4112px 7.26168px rgba(0, 0, 0, 0.1)'
           borderRadius='5px'
           fontFamily='Raleway'
           fontWeight='500'
-          fontSize='13px'
+          fontSize={{lg: '13px'}}
           color='#FFFFFF'
-          pl='3rem'
-          mt='3rem'
+          pl={{lg: '3rem'}}
           onClick={() => setState('payment')}
         >
           Next
-          <Icon as={WhiteArrowRight} w='13px' h='13px' />
+          <Icon
+            display={{base: 'none', lg: 'block'}}
+            as={WhiteArrowRight}
+            w='13px'
+            h='13px'
+          />
         </Button>
       </Flex>
     </Box>
