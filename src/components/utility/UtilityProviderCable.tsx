@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Box, Flex, Image, Input} from '@chakra-ui/react';
 
-const UtilityProviderAirtime = ({
+const UtilityProviderCable = ({
   setState,
 }: {
   setState: React.Dispatch<React.SetStateAction<string>>;
@@ -26,7 +26,7 @@ const UtilityProviderAirtime = ({
           flexWrap={'wrap'}
           fontSize={{base: '12px', lg: '13px'}}
         >
-          {['mtn', 'glo', 'airtel', '9mobile'].map((each) => (
+          {['gotv', 'dstv', 'startimes'].map((each) => (
             <Image
               key={each}
               src={`/assets/${each}.png`}
@@ -44,4 +44,4 @@ const UtilityProviderAirtime = ({
   );
 };
 
-export default UtilityProviderAirtime;
+export default UtilityProviderCable;

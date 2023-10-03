@@ -13,7 +13,7 @@ const TransactionHistory = () => {
       w={{base: '100%', lg: 'calc(100% - 300px)', mlg: 'calc(100% - 316px)'}}
       overflowY={'auto'}
       sx={{lg: scrollbarStyle}}
-      bg='#FAF9F6'
+      bg='#F6F6F6'
     >
       <Navbar />
       <Box px={{lg: '2rem'}} h='calc(100vh - 77px)'>

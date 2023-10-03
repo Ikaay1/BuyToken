@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Box, Flex, Image, Input} from '@chakra-ui/react';
 
-const UtilityProviderAirtime = ({
+const UtilityProviderInternet = ({
   setState,
 }: {
   setState: React.Dispatch<React.SetStateAction<string>>;
@@ -44,4 +44,4 @@ const UtilityProviderAirtime = ({
   );
 };
 
-export default UtilityProviderAirtime;
+export default UtilityProviderInternet;

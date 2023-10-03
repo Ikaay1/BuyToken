@@ -12,7 +12,7 @@ const Dashboard = () => {
       w={{base: '100%', lg: 'calc(100% - 300px)', mlg: 'calc(100% - 316px)'}}
       overflowY={'auto'}
       sx={{lg: scrollbarStyle}}
-      bg='#FAF9F6'
+      bg='#F6F6F6'
     >
       <RecentTransaction>
         <Wallet />

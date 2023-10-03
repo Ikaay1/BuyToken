@@ -8,7 +8,7 @@ import Recent from './Recent';
 
 const RecentTransaction = ({children}: {children: React.JSX.Element}) => {
   return (
-    <Box bg='#FAF9F6'>
+    <Box bg='#F6F6F6'>
       <Navbar />
       <Box px={{lg: '2rem'}} h='calc(100vh - 77px)'>
         <Box>{children}</Box>

@@ -13,7 +13,6 @@ const Balance = () => {
     <Box
       w={{lg: '48%'}}
       background='#FFFDFD'
-      boxShadow='0px 4px 4px rgba(0, 0, 0, 0.25)'
       borderRadius={{lg: '16px'}}
       px='1.1rem'
       pt='1.4rem'

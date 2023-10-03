@@ -37,6 +37,10 @@ const Service = ({
                   setProvider('Electricity');
                 } else if (name === 'Airtime') {
                   setProvider('Airtime');
+                } else if (name === 'Internet') {
+                  setProvider('Internet');
+                } else {
+                  setProvider('Cable TV');
                 }
               }}
               cursor='pointer'
