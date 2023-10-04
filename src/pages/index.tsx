@@ -5,7 +5,7 @@ import {Box} from '@chakra-ui/react';
 export default function Home() {
   return (
     <Box bg='white'>
-      <Box maxW='1450px' mx='auto'>
+      <Box maxW='1445px' mx='auto'>
         <Navbar />
         <Hero />
       </Box>

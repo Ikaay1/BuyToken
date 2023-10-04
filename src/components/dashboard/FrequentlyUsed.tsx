@@ -15,7 +15,6 @@ const FrequentlyUsed = () => {
       pl='.8rem'
       pr='1.5rem'
       py={{base: '1.3rem', lg: '.9rem'}}
-      boxShadow='0px 4px 4px rgba(0, 0, 0, 0.25)'
       mt={{base: '1.45rem', lg: 0}}
     >
       <Flex justifyContent={'space-between'} alignItems={'center'}>

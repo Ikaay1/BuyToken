@@ -8,12 +8,14 @@ import {Box, Flex} from '@chakra-ui/react';
 const Home = () => {
   return (
     <ProtectedRoute>
-      <Flex h='100vh'>
-        <Box display={{base: 'none', lg: 'block'}}>
-          <Sidebar />
-        </Box>
-        <TransactionHistory />
-      </Flex>
+      <Box bg='white'>
+        <Flex h='100vh' maxW='1445px' mx='auto'>
+          <Box display={{base: 'none', lg: 'block'}}>
+            <Sidebar />
+          </Box>
+          <TransactionHistory />
+        </Flex>
+      </Box>
     </ProtectedRoute>
   );
 };

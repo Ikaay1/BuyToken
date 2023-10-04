@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 
+import BackArrowIcon from '@/assets/BackArrowIcon';
 import IdCardIcon from '@/assets/IdCardIcon';
 import PersonIcon from '@/assets/PersonIcon';
 import WhiteArrowRight from '@/assets/WhiteArrowRight';
@@ -19,9 +20,13 @@ import {
 import Service from './Service';
 import UtilityForm from './UtilityForm';
 import UtilityPaymentAirtime from './UtilityPaymentAirtime';
+import UtilityPaymentCable from './UtilityPaymentCable';
 import UtilityPaymentElectricity from './UtilityPaymentElectricity';
+import UtilityPaymentInternet from './UtilityPaymentInternet';
 import UtilityProviderAirtime from './UtilityProviderAirtime';
+import UtilityProviderCable from './UtilityProviderCable';
 import UtilityProviderElectricity from './UtilityProviderElectricity';
+import UtilityProviderInternet from './UtilityProviderInternet';
 import UtilitySteps from './UtilitySteps';
 
 const UtilityServices = () => {
@@ -36,15 +41,65 @@ const UtilityServices = () => {
       mt='1.25rem'
       mx={{base: '.5rem', lg: 0}}
     >
-      <Text
-        fontFamily='Raleway'
-        fontWeight='700'
-        fontSize={{lg: '20px'}}
-        color='#000000'
-        textAlign={'center'}
+      <Flex
+        alignItems={'center'}
+        pl={{base: '0', lg: '3.3rem', mlg: '4.3rem'}}
+        position='relative'
       >
-        Utility Services
-      </Text>
+        <Flex
+          alignItems={'center'}
+          cursor='pointer'
+          onClick={() => {
+            if (provider === 'Electricity') {
+              if (state === 'Provider') {
+                setState('Service');
+                setProvider('');
+              }
+              if (state === 'Form') {
+                setState('Provider');
+              }
+              if (state === 'payment') {
+                setState('Form');
+              }
+            } else {
+              if (state === 'Provider') {
+                setState('Service');
+                setProvider('');
+              }
+              if (state === 'payment') {
+                setState('Provider');
+              }
+            }
+          }}
+        >
+          <Icon
+            mr={{base: '.3rem', lg: '.55rem'}}
+            w={{base: '16px', lg: '24px'}}
+            h={{base: '16px', lg: '24px'}}
+            as={BackArrowIcon}
+          />
+          <Text
+            fontFamily='Inter'
+            fontSize={{base: '12px', lg: '14px'}}
+            color='#000000'
+          >
+            Back
+          </Text>
+        </Flex>
+        <Text
+          fontFamily='Raleway'
+          fontWeight='700'
+          fontSize={{lg: '20px'}}
+          color='#000000'
+          textAlign={'center'}
+          position='absolute'
+          left='50%'
+          transform='translateX(-50%)'
+        >
+          Utility Services
+        </Text>
+      </Flex>
+
       <Flex
         mt={{base: '2rem', lg: '1.8rem'}}
         display={{base: 'block', lg: 'flex'}}
@@ -101,19 +156,23 @@ const UtilityServices = () => {
           ) : state === 'Provider' ? (
             provider === 'Electricity' ? (
               <UtilityProviderElectricity setState={setState} />
+            ) : provider === 'Airtime' ? (
+              <UtilityProviderAirtime setState={setState} />
+            ) : provider === 'Internet' ? (
+              <UtilityProviderInternet setState={setState} />
             ) : (
-              //  : provider === 'Airtime' ? (
-              //   <UtilityProviderAirtime setState={setState} />
-              // )
-              <Box></Box>
+              <UtilityProviderCable setState={setState} />
             )
           ) : state === 'Form' ? (
             <UtilityForm setState={setState} />
           ) : provider === 'Electricity' ? (
             <UtilityPaymentElectricity />
+          ) : provider === 'Airtime' ? (
+            <UtilityPaymentAirtime />
+          ) : provider === 'Internet' ? (
+            <UtilityPaymentInternet />
           ) : (
-            // <UtilityPaymentAirtime />
-            <Box></Box>
+            <UtilityPaymentCable />
           )}
         </>
       </Flex>

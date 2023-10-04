@@ -9,9 +9,10 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Select,
 } from '@chakra-ui/react';
 
-const UtilityPaymentAirtime = () => {
+const UtilityPaymentInternet = () => {
   return (
     <Box px={{lg: '2rem'}} mt={{base: '4rem', lg: '1.9rem'}}>
       <InputGroup
@@ -35,6 +36,24 @@ const UtilityPaymentAirtime = () => {
           <Icon as={IdCardIcon} />
         </InputRightElement>
       </InputGroup>
+      <Select
+        width={{base: '100%', lg: '480px', mlg: '570px'}}
+        height='50px'
+        border={'none'}
+        outline='none'
+        placeholder='Select Data bundle'
+        fontFamily='Poppins'
+        color='#717171'
+        focusBorderColor='white'
+        borderRadius={'6px'}
+        background={'#F5F5F5'}
+        fontSize={{base: '12px', lg: '16px'}}
+        mt={{base: '1.6rem', lg: '2rem'}}
+      >
+        {['Yeah', 'Okay', 'Yes'].map((each) => (
+          <option key={each}>{each}</option>
+        ))}
+      </Select>
       <Input
         width={{base: '100%', lg: '480px', mlg: '570px'}}
         height='50px'
@@ -71,4 +90,4 @@ const UtilityPaymentAirtime = () => {
   );
 };
 
-export default UtilityPaymentAirtime;
+export default UtilityPaymentInternet;
