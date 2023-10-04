@@ -28,7 +28,7 @@ const ResetPassword = () => {
           pb='6.5rem'
           px={{base: '.8rem', lg: 0}}
           minH='880px'
-          maxW='1450px'
+          maxW='1445px'
           mx='auto'
         >
           <Box

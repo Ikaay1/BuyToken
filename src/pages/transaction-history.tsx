@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <ProtectedRoute>
       <Box bg='white'>
-        <Flex h='100vh' maxW='1450px' mx='auto'>
+        <Flex h='100vh' maxW='1445px' mx='auto'>
           <Box display={{base: 'none', lg: 'block'}}>
             <Sidebar />
           </Box>
