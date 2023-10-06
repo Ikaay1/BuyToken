@@ -1,25 +1,26 @@
 import {
-	FLUSH,
-	PAUSE,
-	PERSIST,
-	persistReducer,
-	persistStore,
-	PURGE,
-	REGISTER,
-	REHYDRATE,
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import userReducer from '@/redux/slices/authSlice';
 import {
-	Action,
-	combineReducers,
-	configureStore,
-	ThunkAction,
+  Action,
+  combineReducers,
+  configureStore,
+  ThunkAction,
 } from '@reduxjs/toolkit';
-import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import {setupListeners} from '@reduxjs/toolkit/dist/query';
 
-import { authApi } from '../services/auth.service';
+import {authApi} from '../services/auth.service';
+import {electricityApi} from '../services/electricity.service';
 
 const persistConfig = {
   key: 'root',
@@ -33,13 +34,14 @@ export const store: any = configureStore({
   reducer: {
     app: persistedReducer,
     [authApi.reducerPath]: authApi.reducer,
+    [electricityApi.reducerPath]: electricityApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat([authApi.middleware]),
+    }).concat([authApi.middleware, electricityApi.middleware]),
 });
 
 setupListeners(store.dispatch);

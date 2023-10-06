@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import PersonIcon from '@/assets/PersonIcon';
 import WhiteArrowRight from '@/assets/WhiteArrowRight';
+import {
+  CustomerDetailsInterface,
+  ElectricityDetailsInterface,
+} from '@/constants/interface';
+import {useValidateCustomerMutation} from '@/redux/services/electricity.service';
 import {
   Box,
   Button,
@@ -11,14 +16,94 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Skeleton,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 
 const UtilityForm = ({
   setState,
+  electricityDetails,
+  customerDetails,
+  setCustomerDetails,
 }: {
   setState: React.Dispatch<React.SetStateAction<string>>;
+  electricityDetails: ElectricityDetailsInterface;
+  customerDetails: CustomerDetailsInterface;
+  setCustomerDetails: React.Dispatch<
+    React.SetStateAction<CustomerDetailsInterface>
+  >;
 }) => {
+  const [meterNumber, setMeterNumber] = useState('');
+  const [isCheckedPrepaid, setIsCheckedPrepaid] = useState(false);
+  const [isCheckedPostPaid, setIsCheckedPostPaid] = useState(false);
+  const [validateCustomer, validateCustomerStatus] =
+    useValidateCustomerMutation();
+  const toast = useToast();
+
+  const [meterError, setMeterError] = useState('');
+  const [checkboxError, setCheckboxError] = useState('');
+  const [amountError, setAmountError] = useState('');
+  const [amount, setAmount] = useState('');
+
+  useEffect(() => {
+    const checkCustomer = async () => {
+      setCustomerDetails({
+        FirstName: '',
+        LastName: '',
+        CustomerAddress: '',
+        meterNumber: '',
+        meterType: '',
+        amount: '',
+      });
+      if (
+        (isCheckedPostPaid || isCheckedPrepaid) &&
+        meterNumber.length === 11
+      ) {
+        const res: any = await validateCustomer({
+          customerId: meterNumber,
+          MerchantFk: electricityDetails?.merchantId,
+          accountType: isCheckedPrepaid ? '1' : '2',
+        });
+        console.log('customerDetails', res);
+        if (res?.data) {
+          setCustomerDetails({
+            ...res?.data,
+            meterNumber,
+            meterType: isCheckedPrepaid ? '1' : '2',
+          });
+        } else {
+          toast({
+            title: 'Verification failed',
+            description:
+              res?.error?.data?.message ||
+              res?.data?.message ||
+              "Couldn't verify customer. Something went wrong",
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+            position: 'top-right',
+          });
+        }
+      }
+    };
+    checkCustomer();
+  }, [isCheckedPrepaid, isCheckedPostPaid, meterNumber]);
+
+  useEffect(() => {
+    if (meterNumber) {
+      if (meterNumber.length !== 11) {
+        setMeterError('Meter Number must be 11 digits');
+      } else {
+        setMeterError('');
+      }
+    } else {
+      setMeterError('');
+    }
+  }, [meterNumber]);
+
+  console.log('isPrepaidChecked', isCheckedPrepaid);
+
   return (
     <Box px={{lg: '2rem'}} mt='1.9rem'>
       <InputGroup
@@ -37,11 +122,22 @@ const UtilityForm = ({
           color='#717171'
           focusBorderColor='white'
           fontSize={{base: '12px', lg: '16px'}}
+          required={true}
+          maxLength={11}
+          value={meterNumber}
+          onChange={(e) => setMeterNumber(e.target.value)}
         />
         <InputRightElement pointerEvents='none' h='100%'>
           <Icon as={PersonIcon} />
         </InputRightElement>
       </InputGroup>
+      <Text
+        color='red'
+        fontSize={{base: '12px', lg: '15px'}}
+        fontFamily={'Poppins'}
+      >
+        {meterError}
+      </Text>
       <Flex mt={{base: '1rem', lg: '1.4rem'}}>
         {['Prepaid', 'Postpaid'].map((each) => (
           <Flex alignItems={'center'} key={each} mr='3.5rem'>
@@ -51,6 +147,26 @@ const UtilityForm = ({
               background='#F5F5F5'
               borderRadius='2px'
               mr='.5rem'
+              isChecked={
+                each === 'Prepaid' ? isCheckedPrepaid : isCheckedPostPaid
+              }
+              onChange={
+                each === 'Prepaid'
+                  ? (e) => {
+                      if (e.target.checked === true) {
+                        setIsCheckedPostPaid(false);
+                      }
+                      setIsCheckedPrepaid(e.target.checked);
+                      setCheckboxError('');
+                    }
+                  : (e) => {
+                      if (e.target.checked === true) {
+                        setIsCheckedPrepaid(false);
+                      }
+                      setIsCheckedPostPaid(e.target.checked);
+                      setCheckboxError('');
+                    }
+              }
             />
             <Text fontFamily='Poppins' color='#717171'>
               {each}
@@ -58,23 +174,40 @@ const UtilityForm = ({
           </Flex>
         ))}
       </Flex>
-      <Box mt='1.8rem'>
-        <Text
-          fontSize={{base: '14px', lg: '16px'}}
-          fontFamily='Poppins'
-          fontWeight='500'
-          color='#000000'
-        >
-          Moses Ikechukwu
-        </Text>
-        <Text
-          fontSize={{base: '14px', lg: '16px'}}
-          fontFamily='Poppins'
-          color='#000000'
-        >
-          No 10 Akintola road Ikeja, Lagos
-        </Text>
-      </Box>
+      <Text
+        color='red'
+        fontSize={{base: '12px', lg: '15px'}}
+        fontFamily={'Poppins'}
+      >
+        {checkboxError}
+      </Text>
+      {validateCustomerStatus.isLoading ? (
+        <Box mt='1.8rem'>
+          <Skeleton height='20px' w={{base: '50%', lg: '200px'}}></Skeleton>
+          <Box mt='1rem'>
+            <Skeleton height='20px' w={{base: '75%', lg: '400px'}}></Skeleton>
+          </Box>
+        </Box>
+      ) : (
+        <Box mt='1.8rem'>
+          <Text
+            fontSize={{base: '14px', lg: '16px'}}
+            fontFamily='Poppins'
+            fontWeight='500'
+            color='#000000'
+          >
+            {customerDetails?.FirstName + ' ' + customerDetails?.LastName}
+          </Text>
+          <Text
+            fontSize={{base: '14px', lg: '16px'}}
+            fontFamily='Poppins'
+            color='#000000'
+            maxW={{base: '100%', lg: '480px', mlg: '570px'}}
+          >
+            {customerDetails?.CustomerAddress}
+          </Text>
+        </Box>
+      )}
       <Input
         borderRadius={'6px'}
         background={'#F5F5F5'}
@@ -88,7 +221,22 @@ const UtilityForm = ({
         focusBorderColor='white'
         mt={{base: '1rem', lg: '2rem'}}
         fontSize={{base: '12px', lg: '16px'}}
+        required={true}
+        disabled={!customerDetails?.FirstName}
+        value={amount}
+        onChange={(e) => {
+          setAmount(e.target.value);
+          setAmountError('');
+        }}
+        type='number'
       />
+      <Text
+        color='red'
+        fontSize={{base: '12px', lg: '15px'}}
+        fontFamily={'Poppins'}
+      >
+        {amountError}
+      </Text>
       <Flex
         justifyContent={{base: 'center', lg: 'flex-end'}}
         mt={{base: '3.3rem', lg: '3rem'}}
@@ -107,7 +255,41 @@ const UtilityForm = ({
           fontSize={{lg: '13px'}}
           color='#FFFFFF'
           pl={{lg: '3rem'}}
-          onClick={() => setState('payment')}
+          isLoading={validateCustomerStatus.isLoading}
+          onClick={() => {
+            if (!meterNumber) {
+              setMeterError('Meter Number is required');
+              return;
+            }
+            if (meterNumber.length !== 11) {
+              setMeterError('Meter Number must be 11 digits');
+              return;
+            }
+            if (!isCheckedPrepaid && !isCheckedPostPaid) {
+              setCheckboxError('Please select either Prepaid or Postpaid');
+              return;
+            }
+            if (!customerDetails?.FirstName) {
+              toast({
+                title: 'Wrong Meter Details',
+                description: 'Please give a correct Meter Details',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+                position: 'top-right',
+              });
+              return;
+            }
+            if (!amount) {
+              setAmountError('Amount is required');
+              return;
+            }
+            setCustomerDetails((prevCustomerDetails) => ({
+              ...prevCustomerDetails,
+              amount,
+            }));
+            setState('payment');
+          }}
         >
           Next
           <Icon

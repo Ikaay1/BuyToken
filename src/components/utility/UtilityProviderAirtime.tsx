@@ -22,7 +22,7 @@ const UtilityProviderAirtime = ({
       />
       <Box w={{lg: '480px', mlg: '559px'}} mt='2.7rem'>
         <Flex
-          justifyContent={'space-between'}
+          // justifyContent={'space-between'}
           flexWrap={'wrap'}
           fontSize={{base: '12px', lg: '13px'}}
         >
@@ -36,6 +36,7 @@ const UtilityProviderAirtime = ({
               objectFit={'cover'}
               onClick={() => setState('payment')}
               cursor='pointer'
+              mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
             />
           ))}
         </Flex>
