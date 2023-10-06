@@ -37,6 +37,16 @@ const UtilityServices = () => {
     merchantId: '',
     name: '',
   });
+  const [airtimeDetails, setAirtimeDetails] = useState({
+    _id: '',
+    merchantId: '',
+    name: '',
+  });
+  const [internetDetails, setInternetDetails] = useState({
+    _id: '',
+    merchantId: '',
+    name: '',
+  });
   const [customerDetails, setCustomerDetails] = useState({
     FirstName: '',
     LastName: '',
@@ -173,9 +183,15 @@ const UtilityServices = () => {
                 setElectricityDetails={setElectricityDetails}
               />
             ) : provider === 'Airtime' ? (
-              <UtilityProviderAirtime setState={setState} />
+              <UtilityProviderAirtime
+                setState={setState}
+                setAirtimeDetails={setAirtimeDetails}
+              />
             ) : provider === 'Internet' ? (
-              <UtilityProviderInternet setState={setState} />
+              <UtilityProviderInternet
+                setInternetDetails={setInternetDetails}
+                setState={setState}
+              />
             ) : (
               <UtilityProviderCable setState={setState} />
             )
@@ -192,9 +208,9 @@ const UtilityServices = () => {
               customerDetails={customerDetails}
             />
           ) : provider === 'Airtime' ? (
-            <UtilityPaymentAirtime />
+            <UtilityPaymentAirtime airtimeDetails={airtimeDetails} />
           ) : provider === 'Internet' ? (
-            <UtilityPaymentInternet />
+            <UtilityPaymentInternet internetDetails={internetDetails} />
           ) : (
             <UtilityPaymentCable />
           )}

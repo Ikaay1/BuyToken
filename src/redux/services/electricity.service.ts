@@ -35,6 +35,16 @@ export const electricityApi = createApi({
       }),
       providesTags: ['Electricity'],
     }),
+    getInternetProviders: builder.query<any, any>({
+      query: () => ({
+        url: `biller/get/airtime/provider`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Electricity'],
+    }),
     validateCustomer: builder.mutation<any, any>({
       query: (body) => ({
         url: `biller/power/validateCustomer`,
@@ -57,6 +67,17 @@ export const electricityApi = createApi({
       }),
       invalidatesTags: ['Electricity'],
     }),
+    buyAirtime: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `biller/airtime/buy`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Electricity'],
+    }),
   }),
 });
 
@@ -65,4 +86,6 @@ export const {
   useValidateCustomerMutation,
   useBuyPowerMutation,
   useGetAirtimeProvidersQuery,
+  useBuyAirtimeMutation,
+  useGetInternetProvidersQuery,
 } = electricityApi;

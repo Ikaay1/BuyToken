@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import IdCardIcon from '@/assets/IdCardIcon';
+import {ElectricityDetailsInterface} from '@/constants/interface';
 import {
   Box,
   Button,
@@ -12,7 +13,13 @@ import {
   Select,
 } from '@chakra-ui/react';
 
-const UtilityPaymentInternet = () => {
+const UtilityPaymentInternet = ({
+  internetDetails,
+}: {
+  internetDetails: ElectricityDetailsInterface;
+}) => {
+  useEffect(() => {}, []);
+
   return (
     <Box px={{lg: '2rem'}} mt={{base: '4rem', lg: '1.9rem'}}>
       <InputGroup

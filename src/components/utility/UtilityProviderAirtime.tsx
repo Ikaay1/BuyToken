@@ -6,8 +6,12 @@ import {Box, Flex, Image, Input, Skeleton} from '@chakra-ui/react';
 
 const UtilityProviderAirtime = ({
   setState,
+  setAirtimeDetails,
 }: {
   setState: React.Dispatch<React.SetStateAction<string>>;
+  setAirtimeDetails: React.Dispatch<
+    React.SetStateAction<ElectricityDetailsInterface>
+  >;
 }) => {
   const {data, isLoading} = useGetAirtimeProvidersQuery('');
   console.log('airtimeProviders', data);
@@ -47,7 +51,13 @@ const UtilityProviderAirtime = ({
                   w={{base: '22%', lg: '21%', mlg: '22%'}}
                   h={{base: '50px', lg: '70px'}}
                   objectFit={'cover'}
-                  onClick={() => setState('payment')}
+                  onClick={() => {
+                    setState('payment');
+                    setAirtimeDetails({
+                      ...each,
+                      merchantId: each?.merchantId.trim(),
+                    });
+                  }}
                   cursor='pointer'
                   mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
                 />
