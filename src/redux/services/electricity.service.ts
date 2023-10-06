@@ -37,7 +37,7 @@ export const electricityApi = createApi({
     }),
     getInternetProviders: builder.query<any, any>({
       query: () => ({
-        url: `biller/get/airtime/provider`,
+        url: `biller/get/data/provider`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -48,6 +48,17 @@ export const electricityApi = createApi({
     validateCustomer: builder.mutation<any, any>({
       query: (body) => ({
         url: `biller/power/validateCustomer`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Electricity'],
+    }),
+    priceList: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `biller/data/price/list`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,6 +89,17 @@ export const electricityApi = createApi({
       }),
       invalidatesTags: ['Electricity'],
     }),
+    buyData: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `biller/data/buy`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Electricity'],
+    }),
   }),
 });
 
@@ -88,4 +110,6 @@ export const {
   useGetAirtimeProvidersQuery,
   useBuyAirtimeMutation,
   useGetInternetProvidersQuery,
+  usePriceListMutation,
+  useBuyDataMutation,
 } = electricityApi;

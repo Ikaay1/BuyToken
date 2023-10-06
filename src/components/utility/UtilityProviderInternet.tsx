@@ -53,10 +53,7 @@ const UtilityProviderInternet = ({
                   objectFit={'cover'}
                   onClick={() => {
                     setState('payment');
-                    setInternetDetails({
-                      ...each,
-                      merchantId: each?.merchantId.trim(),
-                    });
+                    setInternetDetails(each);
                   }}
                   cursor='pointer'
                   mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
