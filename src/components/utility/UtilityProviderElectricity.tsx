@@ -14,7 +14,7 @@ const UtilityProviderElectricity = ({
   >;
 }) => {
   const {data, isLoading} = useGetPowerProvidersQuery('');
-  console.log('providers', data);
+  console.log('powerProviders', data);
   return (
     <Box px={{lg: '2rem'}} pt={{base: '2rem', lg: 0}}>
       <Input
@@ -36,15 +36,12 @@ const UtilityProviderElectricity = ({
         >
           {isLoading
             ? [1, 2, 3, 4].map((each) => (
-                <Box
-                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
+                <Skeleton
                   key={each}
-                >
-                  <Skeleton
-                    w={{base: '22%', lg: '21%', mlg: '22%'}}
-                    h={{base: '50px', lg: '70px'}}
-                  ></Skeleton>
-                </Box>
+                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
+                  w={{base: '22%', lg: '21%', mlg: '22%'}}
+                  h={{base: '50px', lg: '70px'}}
+                ></Skeleton>
               ))
             : data?.data?.map((each: ElectricityDetailsInterface) => (
                 <Image
