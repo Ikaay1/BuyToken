@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {useGetAirtimeProvidersQuery} from '@/redux/services/electricity.service';
 import {Box, Flex, Image, Input} from '@chakra-ui/react';
 
 const UtilityProviderAirtime = ({
@@ -7,6 +8,7 @@ const UtilityProviderAirtime = ({
 }: {
   setState: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+  const {data, isLoading} = useGetAirtimeProvidersQuery('');
   return (
     <Box px={{lg: '2rem'}} pt={{base: '2rem', lg: 0}}>
       <Input

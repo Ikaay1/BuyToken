@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {ElectricityDetailsInterface} from '@/constants/interface';
-import {useGetProvidersQuery} from '@/redux/services/electricity.service';
+import {useGetPowerProvidersQuery} from '@/redux/services/electricity.service';
 import {Box, Flex, Image, Input, Skeleton} from '@chakra-ui/react';
 
 const UtilityProviderElectricity = ({
@@ -13,7 +13,7 @@ const UtilityProviderElectricity = ({
     React.SetStateAction<ElectricityDetailsInterface>
   >;
 }) => {
-  const {data, isLoading} = useGetProvidersQuery('');
+  const {data, isLoading} = useGetPowerProvidersQuery('');
   console.log('providers', data);
   return (
     <Box px={{lg: '2rem'}} pt={{base: '2rem', lg: 0}}>
@@ -36,11 +36,15 @@ const UtilityProviderElectricity = ({
         >
           {isLoading
             ? [1, 2, 3, 4].map((each) => (
-                <Skeleton
+                <Box
+                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
                   key={each}
-                  w={{base: '22%', lg: '21%', mlg: '22%'}}
-                  h={{base: '50px', lg: '70px'}}
-                ></Skeleton>
+                >
+                  <Skeleton
+                    w={{base: '22%', lg: '21%', mlg: '22%'}}
+                    h={{base: '50px', lg: '70px'}}
+                  ></Skeleton>
+                </Box>
               ))
             : data?.data?.map((each: ElectricityDetailsInterface) => (
                 <Image

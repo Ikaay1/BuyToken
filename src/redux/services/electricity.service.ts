@@ -15,9 +15,19 @@ export const electricityApi = createApi({
   }),
   tagTypes: ['Electricity'],
   endpoints: (builder) => ({
-    getProviders: builder.query<any, any>({
+    getPowerProviders: builder.query<any, any>({
       query: () => ({
         url: `biller/get/power/provider`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Electricity'],
+    }),
+    getAirtimeProviders: builder.query<any, any>({
+      query: () => ({
+        url: `biller/get/airtime/provider`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -51,7 +61,8 @@ export const electricityApi = createApi({
 });
 
 export const {
-  useGetProvidersQuery,
+  useGetPowerProvidersQuery,
   useValidateCustomerMutation,
   useBuyPowerMutation,
+  useGetAirtimeProvidersQuery,
 } = electricityApi;
