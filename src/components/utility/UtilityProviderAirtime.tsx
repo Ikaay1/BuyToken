@@ -28,7 +28,7 @@ const UtilityProviderAirtime = ({
         <Flex
           // justifyContent={'space-between'}
           flexWrap={'wrap'}
-          fontSize={{base: '12px', lg: '13px'}}
+          gap={{base: '2.5rem 0', lg: '1.35rem 0'}}
         >
           {isLoading
             ? [1, 2, 3, 4].map((each) => (
