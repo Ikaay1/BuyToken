@@ -78,7 +78,6 @@ const UtilityForm = ({
             title: 'Verification failed',
             description:
               res?.error?.data?.message ||
-              res?.data?.message ||
               "Couldn't verify customer. Something went wrong",
             status: 'error',
             duration: 3000,

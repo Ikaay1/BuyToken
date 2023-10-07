@@ -56,7 +56,6 @@ const UtilityPaymentInternet = ({
           title: 'Error',
           description:
             res?.error?.data?.message ||
-            res?.data?.message ||
             "Couldn't fetch data data list. Something went wrong",
           status: 'error',
           duration: 3000,

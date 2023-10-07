@@ -67,9 +67,7 @@ const UtilityPaymentCable = ({
           toast({
             title: 'Verification failed',
             description:
-              res?.error?.data?.message ||
-              res?.data?.message ||
-              "Couldn't verify customer",
+              res?.error?.data?.message || "Couldn't verify customer",
             status: 'error',
             duration: 3000,
             isClosable: true,
@@ -83,7 +81,6 @@ const UtilityPaymentCable = ({
             title: 'Error',
             description:
               response?.error?.data?.message ||
-              response?.data?.message ||
               "Couldn't fetch price list. Something went wrong",
             status: 'error',
             duration: 3000,
