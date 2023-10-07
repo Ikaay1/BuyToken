@@ -47,6 +47,11 @@ const UtilityServices = () => {
     merchantId: '',
     name: '',
   });
+  const [cableDetails, setCableDetails] = useState({
+    _id: '',
+    merchantId: '',
+    name: '',
+  });
   const [customerDetails, setCustomerDetails] = useState({
     FirstName: '',
     LastName: '',
@@ -193,7 +198,10 @@ const UtilityServices = () => {
                 setState={setState}
               />
             ) : (
-              <UtilityProviderCable setState={setState} />
+              <UtilityProviderCable
+                setState={setState}
+                setCableDetails={setCableDetails}
+              />
             )
           ) : state === 'Form' ? (
             <UtilityForm
@@ -212,7 +220,7 @@ const UtilityServices = () => {
           ) : provider === 'Internet' ? (
             <UtilityPaymentInternet internetDetails={internetDetails} />
           ) : (
-            <UtilityPaymentCable />
+            <UtilityPaymentCable cableDetails={cableDetails} />
           )}
         </>
       </Flex>

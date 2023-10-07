@@ -192,7 +192,10 @@ const UtilityPaymentInternet = ({
               fontSize={{base: '12px', lg: '16px'}}
               mt={{base: '1.6rem', lg: '2rem'}}
               value={bundleCode}
-              onChange={(e) => setBundleCode(e.target.value)}
+              onChange={(e) => {
+                setBundleCode(e.target.value);
+                setBundleCodeError('');
+              }}
             >
               {dataList?.map(
                 (each: {
