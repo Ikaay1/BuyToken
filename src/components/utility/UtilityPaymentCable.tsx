@@ -1,3 +1,4 @@
+import {useRouter} from 'next/router';
 import React, {useEffect, useState} from 'react';
 
 import PersonIcon from '@/assets/PersonIcon';
@@ -41,7 +42,7 @@ const UtilityPaymentCable = ({
   const [productCode, setProductCode] = useState('');
   const [productCodeError, setProductCodeError] = useState('');
   const [buyCable, buyCableStatus] = useBuyCableMutation();
-  const router = useToast();
+  const router = useRouter();
   const toast = useToast();
 
   useEffect(() => {
