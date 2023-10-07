@@ -1,7 +1,13 @@
+import {useRouter} from 'next/router';
 import React, {useState} from 'react';
 
 import PersonIcon from '@/assets/PersonIcon';
 import WhiteArrowRight from '@/assets/WhiteArrowRight';
+import {
+  CustomerDetailsInterface,
+  ElectricityDetailsInterface,
+} from '@/constants/interface';
+import {useBuyPowerMutation} from '@/redux/services/electricity.service';
 import {
   Box,
   Button,
@@ -13,21 +19,40 @@ import {
   InputLeftElement,
   InputRightElement,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 
-const UtilityPaymentElectricity = () => {
+const UtilityPaymentElectricity = ({
+  electricityDetails,
+  customerDetails,
+}: {
+  electricityDetails: ElectricityDetailsInterface;
+  customerDetails: CustomerDetailsInterface;
+}) => {
+  const [buyPower, buyPowerStatus] = useBuyPowerMutation();
+  const toast = useToast();
+  const router = useRouter();
   return (
     <Box pl={{lg: '2rem'}} mt='1.9rem'>
       <Box pr='2rem'>
         {[
-          {name: 'Meter Number:', value: '1234567890'},
-          {name: 'Meter Type:', value: 'Prepaid'},
-          {name: 'Customer Name:', value: 'Moses Ikechukwu'},
+          {name: 'Meter Number:', value: customerDetails?.meterNumber},
+          {
+            name: 'Meter Type:',
+            value:
+              customerDetails?.meterType && customerDetails?.meterType === '1'
+                ? 'Prepaid'
+                : 'Postpaid',
+          },
+          {
+            name: 'Customer Name:',
+            value: customerDetails?.FirstName + ' ' + customerDetails?.LastName,
+          },
           {
             name: 'Address:',
-            value: 'No 10 Akintola road  Ikeja, Lagos',
+            value: customerDetails?.CustomerAddress,
           },
-          {name: 'Amount:', value: 'N20,000'},
+          {name: 'Amount:', value: `N${customerDetails?.amount}`},
         ].map(({name, value}) => (
           <Flex
             alignItems={'center'}
@@ -68,8 +93,52 @@ const UtilityPaymentElectricity = () => {
           fontWeight='600'
           color='#FFFFFF'
           w={{base: '100%', lg: 'auto'}}
+          onClick={async () => {
+            if (
+              (electricityDetails?.merchantId &&
+                customerDetails?.meterNumber &&
+                customerDetails?.meterType &&
+                customerDetails?.FirstName &&
+                customerDetails?.LastName,
+              customerDetails?.amount)
+            ) {
+              const res: any = await buyPower({
+                customerId: customerDetails?.meterNumber,
+                MerchantFK: Number(electricityDetails?.merchantId),
+                accountType: Number(customerDetails?.meterType),
+                customerName:
+                  customerDetails?.FirstName + ' ' + customerDetails?.LastName,
+                amount: Number(customerDetails?.amount),
+              });
+              console.log('buyResp', res);
+              if (res?.data?.data) {
+                toast({
+                  title: 'Purchase successful',
+                  description: 'Your purchase has been successful',
+                  status: 'success',
+                  duration: 5000,
+                  isClosable: true,
+                  position: 'top-right',
+                });
+                router.push('/dashboard');
+              } else {
+                toast({
+                  title: 'Purchase failed',
+                  description:
+                    res?.error?.data?.message ||
+                    res?.data?.message ||
+                    "Couldn't make the purchase. Something went wrong",
+                  status: 'error',
+                  duration: 3000,
+                  isClosable: true,
+                  position: 'top-right',
+                });
+              }
+            }
+          }}
+          isLoading={buyPowerStatus.isLoading}
         >
-          Pay N20,000
+          Pay N{customerDetails?.amount}
         </Button>
       </Flex>
     </Box>

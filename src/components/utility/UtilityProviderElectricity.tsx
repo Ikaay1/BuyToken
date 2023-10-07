@@ -1,12 +1,20 @@
 import React from 'react';
 
-import {Box, Flex, Image, Input} from '@chakra-ui/react';
+import {ElectricityDetailsInterface} from '@/constants/interface';
+import {useGetPowerProvidersQuery} from '@/redux/services/electricity.service';
+import {Box, Flex, Image, Input, Skeleton} from '@chakra-ui/react';
 
 const UtilityProviderElectricity = ({
   setState,
+  setElectricityDetails,
 }: {
   setState: React.Dispatch<React.SetStateAction<string>>;
+  setElectricityDetails: React.Dispatch<
+    React.SetStateAction<ElectricityDetailsInterface>
+  >;
 }) => {
+  const {data, isLoading} = useGetPowerProvidersQuery('');
+  console.log('powerProviders', data);
   return (
     <Box px={{lg: '2rem'}} pt={{base: '2rem', lg: 0}}>
       <Input
@@ -22,31 +30,35 @@ const UtilityProviderElectricity = ({
       />
       <Box w={{lg: '480px', mlg: '559px'}} mt={{base: '1.7rem', lg: '2.7rem'}}>
         <Flex
-          justifyContent={'space-between'}
+          // justifyContent={'space-between'}
           flexWrap={'wrap'}
           gap={{base: '2.5rem 0', lg: '1.35rem 0'}}
         >
-          {[
-            'provider1',
-            'provider2',
-            'provider3',
-            'provider4',
-            'provider1',
-            'provider2',
-            'provider3',
-            'provider4',
-          ].map((each) => (
-            <Image
-              key={each}
-              src={`/assets/${each}.png`}
-              alt='Provider'
-              w={{base: '22%', lg: '21%', mlg: '22%'}}
-              h={{base: '50px', lg: '70px'}}
-              objectFit={'cover'}
-              onClick={() => setState('Form')}
-              cursor='pointer'
-            />
-          ))}
+          {isLoading
+            ? [1, 2, 3, 4].map((each) => (
+                <Skeleton
+                  key={each}
+                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
+                  w={{base: '22%', lg: '21%', mlg: '22%'}}
+                  h={{base: '50px', lg: '70px'}}
+                ></Skeleton>
+              ))
+            : data?.data?.map((each: ElectricityDetailsInterface) => (
+                <Image
+                  key={each?._id}
+                  src={`/assets/provider1.png`}
+                  alt='Provider'
+                  w={{base: '22%', lg: '21%', mlg: '22%'}}
+                  h={{base: '50px', lg: '70px'}}
+                  objectFit={'cover'}
+                  onClick={() => {
+                    setState('Form');
+                    setElectricityDetails(each);
+                  }}
+                  cursor='pointer'
+                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
+                />
+              ))}
         </Flex>
       </Box>
     </Box>

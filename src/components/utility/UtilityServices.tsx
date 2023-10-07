@@ -32,6 +32,29 @@ import UtilitySteps from './UtilitySteps';
 const UtilityServices = () => {
   const [state, setState] = useState('Service');
   const [provider, setProvider] = useState('');
+  const [electricityDetails, setElectricityDetails] = useState({
+    _id: '',
+    merchantId: '',
+    name: '',
+  });
+  const [airtimeDetails, setAirtimeDetails] = useState({
+    _id: '',
+    merchantId: '',
+    name: '',
+  });
+  const [internetDetails, setInternetDetails] = useState({
+    _id: '',
+    merchantId: '',
+    name: '',
+  });
+  const [customerDetails, setCustomerDetails] = useState({
+    FirstName: '',
+    LastName: '',
+    CustomerAddress: '',
+    meterNumber: '',
+    meterType: '',
+    amount: '',
+  });
   return (
     <Box
       borderRadius='16px'
@@ -155,22 +178,39 @@ const UtilityServices = () => {
             <Service setState={setState} setProvider={setProvider} />
           ) : state === 'Provider' ? (
             provider === 'Electricity' ? (
-              <UtilityProviderElectricity setState={setState} />
+              <UtilityProviderElectricity
+                setState={setState}
+                setElectricityDetails={setElectricityDetails}
+              />
             ) : provider === 'Airtime' ? (
-              <UtilityProviderAirtime setState={setState} />
+              <UtilityProviderAirtime
+                setState={setState}
+                setAirtimeDetails={setAirtimeDetails}
+              />
             ) : provider === 'Internet' ? (
-              <UtilityProviderInternet setState={setState} />
+              <UtilityProviderInternet
+                setInternetDetails={setInternetDetails}
+                setState={setState}
+              />
             ) : (
               <UtilityProviderCable setState={setState} />
             )
           ) : state === 'Form' ? (
-            <UtilityForm setState={setState} />
+            <UtilityForm
+              electricityDetails={electricityDetails}
+              setState={setState}
+              customerDetails={customerDetails}
+              setCustomerDetails={setCustomerDetails}
+            />
           ) : provider === 'Electricity' ? (
-            <UtilityPaymentElectricity />
+            <UtilityPaymentElectricity
+              electricityDetails={electricityDetails}
+              customerDetails={customerDetails}
+            />
           ) : provider === 'Airtime' ? (
-            <UtilityPaymentAirtime />
+            <UtilityPaymentAirtime airtimeDetails={airtimeDetails} />
           ) : provider === 'Internet' ? (
-            <UtilityPaymentInternet />
+            <UtilityPaymentInternet internetDetails={internetDetails} />
           ) : (
             <UtilityPaymentCable />
           )}
