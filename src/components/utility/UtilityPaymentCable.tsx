@@ -2,7 +2,6 @@ import {useRouter} from 'next/router';
 import React, {useEffect, useState} from 'react';
 
 import PersonIcon from '@/assets/PersonIcon';
-import WhiteArrowRight from '@/assets/WhiteArrowRight';
 import {ElectricityDetailsInterface} from '@/constants/interface';
 import {
   useBuyCableMutation,
@@ -12,7 +11,6 @@ import {
 import {
   Box,
   Button,
-  Checkbox,
   Flex,
   Icon,
   Input,
@@ -68,7 +66,10 @@ const UtilityPaymentCable = ({
         } else {
           toast({
             title: 'Verification failed',
-            description: "Couldn't verify customer",
+            description:
+              res?.error?.data?.message ||
+              res?.data?.message ||
+              "Couldn't verify customer",
             status: 'error',
             duration: 3000,
             isClosable: true,
@@ -80,7 +81,10 @@ const UtilityPaymentCable = ({
         } else {
           toast({
             title: 'Error',
-            description: "Couldn't fetch price list. Something went wrong",
+            description:
+              response?.error?.data?.message ||
+              response?.data?.message ||
+              "Couldn't fetch price list. Something went wrong",
             status: 'error',
             duration: 3000,
             isClosable: true,

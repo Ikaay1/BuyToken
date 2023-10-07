@@ -51,6 +51,7 @@ const UtilityForm = ({
       setCustomerDetails({
         FirstName: '',
         LastName: '',
+        CustomerName: '',
         CustomerAddress: '',
         meterNumber: '',
         meterType: '',
@@ -62,13 +63,13 @@ const UtilityForm = ({
       ) {
         const res: any = await validateCustomer({
           customerId: meterNumber,
-          MerchantFk: electricityDetails?.merchantId,
+          MerchantFK: electricityDetails?.merchantId,
           accountType: isCheckedPrepaid ? '1' : '2',
         });
         console.log('customerDetails', res);
-        if (res?.data) {
+        if (res?.data?.data) {
           setCustomerDetails({
-            ...res?.data,
+            ...res?.data?.data,
             meterNumber,
             meterType: isCheckedPrepaid ? '1' : '2',
           });
@@ -196,7 +197,7 @@ const UtilityForm = ({
             fontWeight='500'
             color='#000000'
           >
-            {customerDetails?.FirstName + ' ' + customerDetails?.LastName}
+            {customerDetails?.CustomerName}
           </Text>
           <Text
             fontSize={{base: '14px', lg: '16px'}}
@@ -222,7 +223,7 @@ const UtilityForm = ({
         mt={{base: '1rem', lg: '2rem'}}
         fontSize={{base: '12px', lg: '16px'}}
         required={true}
-        disabled={!customerDetails?.FirstName}
+        disabled={!customerDetails?.CustomerName}
         value={amount}
         onChange={(e) => {
           setAmount(e.target.value);
@@ -269,7 +270,7 @@ const UtilityForm = ({
               setCheckboxError('Please select either Prepaid or Postpaid');
               return;
             }
-            if (!customerDetails?.FirstName) {
+            if (!customerDetails?.CustomerName) {
               toast({
                 title: 'Wrong Meter Details',
                 description: 'Please give a correct Meter Details',

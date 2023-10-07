@@ -46,7 +46,7 @@ const UtilityPaymentElectricity = ({
           },
           {
             name: 'Customer Name:',
-            value: customerDetails?.FirstName + ' ' + customerDetails?.LastName,
+            value: customerDetails?.CustomerName,
           },
           {
             name: 'Address:',
@@ -95,20 +95,18 @@ const UtilityPaymentElectricity = ({
           w={{base: '100%', lg: 'auto'}}
           onClick={async () => {
             if (
-              (electricityDetails?.merchantId &&
-                customerDetails?.meterNumber &&
-                customerDetails?.meterType &&
-                customerDetails?.FirstName &&
-                customerDetails?.LastName,
-              customerDetails?.amount)
+              electricityDetails?.merchantId &&
+              customerDetails?.meterNumber &&
+              customerDetails?.meterType &&
+              customerDetails?.CustomerName &&
+              customerDetails?.amount
             ) {
               const res: any = await buyPower({
                 customerId: customerDetails?.meterNumber,
-                MerchantFK: Number(electricityDetails?.merchantId),
-                accountType: Number(customerDetails?.meterType),
-                customerName:
-                  customerDetails?.FirstName + ' ' + customerDetails?.LastName,
-                amount: Number(customerDetails?.amount),
+                MerchantFK: electricityDetails?.merchantId,
+                accountType: customerDetails?.meterType,
+                customerName: customerDetails?.CustomerName,
+                amount: customerDetails?.amount,
               });
               console.log('buyResp', res);
               if (res?.data?.data) {

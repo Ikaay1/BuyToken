@@ -55,6 +55,7 @@ const UtilityServices = () => {
   const [customerDetails, setCustomerDetails] = useState({
     FirstName: '',
     LastName: '',
+    CustomerName: '',
     CustomerAddress: '',
     meterNumber: '',
     meterType: '',

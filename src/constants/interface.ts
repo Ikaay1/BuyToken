@@ -7,6 +7,7 @@ export interface ElectricityDetailsInterface {
 export interface CustomerDetailsInterface {
   FirstName: string;
   LastName: string;
+  CustomerName: string;
   CustomerAddress: string;
   meterNumber: string;
   meterType: string;
