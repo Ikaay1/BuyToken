@@ -47,11 +47,11 @@ const ResetPassword = () => {
               justifyContent={'center'}
               alignItems={'center'}
               position='absolute'
-              top='-17.5%'
+              top={{base: '-17.5%', lg: '-13%'}}
               left='50%'
               transform={'translateX(-50%)'}
               borderRadius={'50%'}
-              display={{base: 'flex', lg: 'none'}}
+              // display={{base: 'flex', lg: 'none'}}
             >
               <Image src='/assets/bt_logo.png' alt='BT Logo' />
             </Flex>
