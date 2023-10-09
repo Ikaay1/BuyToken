@@ -1,7 +1,7 @@
-import {APP_TOKEN, baseUrl} from '@/constants/utils';
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { APP_TOKEN, baseUrl } from '@/constants/utils';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import {store} from '../app/store';
+import { store } from '../app/store';
 
 export const electricityApi = createApi({
   reducerPath: 'electricityApi',
@@ -45,6 +45,16 @@ export const electricityApi = createApi({
       }),
       providesTags: ['Electricity'],
     }),
+    getCableProviders: builder.query<any, any>({
+      query: () => ({
+        url: `biller/get/cable/provider`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Electricity'],
+    }),
     validateCustomer: builder.mutation<any, any>({
       query: (body) => ({
         url: `biller/power/validateCustomer`,
@@ -56,9 +66,31 @@ export const electricityApi = createApi({
       }),
       invalidatesTags: ['Electricity'],
     }),
+    validateCableCustomer: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `biller/cable/validate/request`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Electricity'],
+    }),
     priceList: builder.mutation<any, any>({
       query: (body) => ({
         url: `biller/data/price/list`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Electricity'],
+    }),
+    cablePriceList: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `biller/cable/price/list`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,6 +132,17 @@ export const electricityApi = createApi({
       }),
       invalidatesTags: ['Electricity'],
     }),
+    buyCable: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `biller/cable/buy`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Electricity'],
+    }),
   }),
 });
 
@@ -112,4 +155,8 @@ export const {
   useGetInternetProvidersQuery,
   usePriceListMutation,
   useBuyDataMutation,
+  useGetCableProvidersQuery,
+  useValidateCableCustomerMutation,
+  useCablePriceListMutation,
+  useBuyCableMutation
 } = electricityApi;

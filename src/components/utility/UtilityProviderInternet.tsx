@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {ElectricityDetailsInterface} from '@/constants/interface';
 import {useGetInternetProvidersQuery} from '@/redux/services/electricity.service';
@@ -15,6 +15,18 @@ const UtilityProviderInternet = ({
 }) => {
   const {data, isLoading} = useGetInternetProvidersQuery('');
   console.log('internetProviders', data);
+  const [providers, setProviders] = useState([]);
+  const [filterText, setFilterText] = useState('');
+
+  useEffect(() => {
+    if (data) {
+      setProviders(
+        data?.data?.filter((each: ElectricityDetailsInterface) =>
+          each?.name?.toLowerCase().includes(filterText.toLowerCase()),
+        ),
+      );
+    }
+  }, [filterText]);
   return (
     <Box px={{lg: '2rem'}} pt={{base: '2rem', lg: 0}}>
       <Input
@@ -27,6 +39,8 @@ const UtilityProviderInternet = ({
         fontSize={{base: '12px', lg: '13px'}}
         color='#717171'
         focusBorderColor='white'
+        value={filterText}
+        onChange={(e) => setFilterText(e.target.value)}
       />
       <Box w={{lg: '480px', mlg: '559px'}} mt='2.7rem'>
         <Flex
@@ -42,6 +56,23 @@ const UtilityProviderInternet = ({
                   w={{base: '22%', lg: '21%', mlg: '22%'}}
                   h={{base: '50px', lg: '70px'}}
                 ></Skeleton>
+              ))
+            : filterText
+            ? providers?.map((each: ElectricityDetailsInterface) => (
+                <Image
+                  key={each._id}
+                  src={`/assets/glo.png`}
+                  alt='Provider'
+                  w={{base: '22%', lg: '21%', mlg: '22%'}}
+                  h={{base: '50px', lg: '70px'}}
+                  objectFit={'cover'}
+                  onClick={() => {
+                    setState('payment');
+                    setInternetDetails(each);
+                  }}
+                  cursor='pointer'
+                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
+                />
               ))
             : data?.data?.map((each: ElectricityDetailsInterface) => (
                 <Image

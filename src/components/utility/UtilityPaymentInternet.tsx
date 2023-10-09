@@ -49,15 +49,14 @@ const UtilityPaymentInternet = ({
         MerchantFK: internetDetails?.merchantId,
       });
       console.log('dataList: ', res);
-      if (res?.data) {
+      if (res?.data?.data?.BundleList) {
         setDataList(res?.data?.data?.BundleList);
       } else {
         toast({
           title: 'Error',
           description:
             res?.error?.data?.message ||
-            res?.data?.message ||
-            'Something went wrong',
+            "Couldn't fetch data data list. Something went wrong",
           status: 'error',
           duration: 3000,
           isClosable: true,
@@ -192,7 +191,10 @@ const UtilityPaymentInternet = ({
               fontSize={{base: '12px', lg: '16px'}}
               mt={{base: '1.6rem', lg: '2rem'}}
               value={bundleCode}
-              onChange={(e) => setBundleCode(e.target.value)}
+              onChange={(e) => {
+                setBundleCode(e.target.value);
+                setBundleCodeError('');
+              }}
             >
               {dataList?.map(
                 (each: {
