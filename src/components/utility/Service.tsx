@@ -87,7 +87,14 @@ const Service = ({
           <Flex justifyContent={'center'} mt='.95rem'>
             <Icon as={DummyIcon} width='48.71px' height='8.14px' />
           </Flex>
-          <Flex justifyContent={'center'} mt='.7rem'>
+          <Flex
+            justifyContent={'center'}
+            mt='.7rem'
+            onClick={() => {
+              setState('Provider');
+              setProvider('Borrow');
+            }}
+          >
             <Button
               width='160px'
               height='28px'

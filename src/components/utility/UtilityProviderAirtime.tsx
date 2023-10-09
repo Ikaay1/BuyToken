@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import {ElectricityDetailsInterface} from '@/constants/interface';
 import {useGetAirtimeProvidersQuery} from '@/redux/services/electricity.service';
-import {Box, Flex, Image, Input, Skeleton} from '@chakra-ui/react';
+import {Box, Flex, Image, Input, Skeleton, Text} from '@chakra-ui/react';
 
 const UtilityProviderAirtime = ({
   setState,
@@ -42,7 +42,7 @@ const UtilityProviderAirtime = ({
         value={filterText}
         onChange={(e) => setFilterText(e.target.value)}
       />
-      <Box w={{lg: '480px', mlg: '559px'}} mt='2.7rem'>
+      <Box w={{lg: '480px', mlg: '570px'}} mt='2.7rem'>
         <Flex
           // justifyContent={'space-between'}
           flexWrap={'wrap'}
@@ -50,22 +50,23 @@ const UtilityProviderAirtime = ({
         >
           {isLoading
             ? [1, 2, 3, 4].map((each) => (
-                <Skeleton
+                <Box
                   key={each}
                   mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
                   w={{base: '22%', lg: '21%', mlg: '22%'}}
                   h={{base: '50px', lg: '70px'}}
-                ></Skeleton>
+                >
+                  <Skeleton w='100%' h='100%'></Skeleton>
+                  <Flex justifyContent={'center'} mt='.4rem'>
+                    <Skeleton w={'30px'} h={'10px'}></Skeleton>
+                  </Flex>
+                </Box>
               ))
             : filterText
             ? providers?.map((each: ElectricityDetailsInterface) => (
-                <Image
-                  key={each._id}
-                  src={`/assets/mtn.png`}
-                  alt='Provider'
+                <Box
+                  key={each?._id}
                   w={{base: '22%', lg: '21%', mlg: '22%'}}
-                  h={{base: '50px', lg: '70px'}}
-                  objectFit={'cover'}
                   onClick={() => {
                     setState('payment');
                     setAirtimeDetails({
@@ -75,16 +76,30 @@ const UtilityProviderAirtime = ({
                   }}
                   cursor='pointer'
                   mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
-                />
+                >
+                  <Image
+                    src={`/assets/mtn.png`}
+                    alt='Provider'
+                    w='100%'
+                    h={{base: '50px', lg: '70px'}}
+                    objectFit={'cover'}
+                  />
+                  <Text
+                    fontFamily='Poppins'
+                    fontSize={{base: '8px', lg: '11px'}}
+                    lineHeight={{base: '12px', lg: '16px'}}
+                    textAlign='center'
+                    color='#929292'
+                    mt='.2rem'
+                  >
+                    {each?.name}
+                  </Text>
+                </Box>
               ))
             : data?.data?.map((each: ElectricityDetailsInterface) => (
-                <Image
-                  key={each._id}
-                  src={`/assets/mtn.png`}
-                  alt='Provider'
+                <Box
+                  key={each?._id}
                   w={{base: '22%', lg: '21%', mlg: '22%'}}
-                  h={{base: '50px', lg: '70px'}}
-                  objectFit={'cover'}
                   onClick={() => {
                     setState('payment');
                     setAirtimeDetails({
@@ -94,7 +109,25 @@ const UtilityProviderAirtime = ({
                   }}
                   cursor='pointer'
                   mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
-                />
+                >
+                  <Image
+                    src={`/assets/mtn.png`}
+                    alt='Provider'
+                    w='100%'
+                    h={{base: '50px', lg: '70px'}}
+                    objectFit={'cover'}
+                  />
+                  <Text
+                    fontFamily='Poppins'
+                    fontSize={{base: '8px', lg: '11px'}}
+                    lineHeight={{base: '12px', lg: '16px'}}
+                    textAlign='center'
+                    color='#929292'
+                    mt='.2rem'
+                  >
+                    {each?.name}
+                  </Text>
+                </Box>
               ))}
         </Flex>
       </Box>

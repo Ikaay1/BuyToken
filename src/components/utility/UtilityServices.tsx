@@ -18,12 +18,15 @@ import {
 } from '@chakra-ui/react';
 
 import Service from './Service';
+import UtilityBorrowForm from './UtilityBorrowForm';
 import UtilityForm from './UtilityForm';
 import UtilityPaymentAirtime from './UtilityPaymentAirtime';
+import UtilityPaymentBorrowElectricity from './UtilityPaymentBorrowElectricity';
 import UtilityPaymentCable from './UtilityPaymentCable';
 import UtilityPaymentElectricity from './UtilityPaymentElectricity';
 import UtilityPaymentInternet from './UtilityPaymentInternet';
 import UtilityProviderAirtime from './UtilityProviderAirtime';
+import UtilityProviderBorrowElectricity from './UtilityProviderBorrowElectricity';
 import UtilityProviderCable from './UtilityProviderCable';
 import UtilityProviderElectricity from './UtilityProviderElectricity';
 import UtilityProviderInternet from './UtilityProviderInternet';
@@ -33,6 +36,11 @@ const UtilityServices = () => {
   const [state, setState] = useState('Service');
   const [provider, setProvider] = useState('');
   const [electricityDetails, setElectricityDetails] = useState({
+    _id: '',
+    merchantId: '',
+    name: '',
+  });
+  const [electricityBorrowDetails, setElectricityBorrowDetails] = useState({
     _id: '',
     merchantId: '',
     name: '',
@@ -61,6 +69,15 @@ const UtilityServices = () => {
     meterType: '',
     amount: '',
   });
+  const [customerBorrowDetails, setCustomerBorrowDetails] = useState({
+    FirstName: '',
+    LastName: '',
+    CustomerName: '',
+    CustomerAddress: '',
+    meterNumber: '',
+    meterType: '',
+    amount: '',
+  });
   return (
     <Box
       borderRadius='16px'
@@ -79,7 +96,7 @@ const UtilityServices = () => {
           alignItems={'center'}
           cursor='pointer'
           onClick={() => {
-            if (provider === 'Electricity') {
+            if (provider === 'Electricity' || provider === 'Borrow') {
               if (state === 'Provider') {
                 setState('Service');
                 setProvider('');
@@ -144,7 +161,7 @@ const UtilityServices = () => {
           <Box w='100%' top='20%' position={'absolute'} display={{lg: 'none'}}>
             <Box width='260px' border='2px solid #F5F5F5' mx='auto'></Box>
           </Box>
-          {provider === 'Electricity' || !provider
+          {provider === 'Electricity' || provider === 'Borrow' || !provider
             ? [
                 'Select Service',
                 'Select Service Provider',
@@ -188,6 +205,11 @@ const UtilityServices = () => {
                 setState={setState}
                 setElectricityDetails={setElectricityDetails}
               />
+            ) : provider === 'Borrow' ? (
+              <UtilityProviderBorrowElectricity
+                setState={setState}
+                setElectricityDetails={setElectricityBorrowDetails}
+              />
             ) : provider === 'Airtime' ? (
               <UtilityProviderAirtime
                 setState={setState}
@@ -205,16 +227,30 @@ const UtilityServices = () => {
               />
             )
           ) : state === 'Form' ? (
-            <UtilityForm
-              electricityDetails={electricityDetails}
-              setState={setState}
-              customerDetails={customerDetails}
-              setCustomerDetails={setCustomerDetails}
-            />
+            provider === 'Electricity' ? (
+              <UtilityForm
+                electricityDetails={electricityDetails}
+                setState={setState}
+                customerDetails={customerDetails}
+                setCustomerDetails={setCustomerDetails}
+              />
+            ) : (
+              <UtilityBorrowForm
+                electricityDetails={electricityBorrowDetails}
+                setState={setState}
+                customerDetails={customerBorrowDetails}
+                setCustomerDetails={setCustomerBorrowDetails}
+              />
+            )
           ) : provider === 'Electricity' ? (
             <UtilityPaymentElectricity
               electricityDetails={electricityDetails}
               customerDetails={customerDetails}
+            />
+          ) : provider === 'Borrow' ? (
+            <UtilityPaymentBorrowElectricity
+              electricityDetails={electricityBorrowDetails}
+              customerDetails={customerBorrowDetails}
             />
           ) : provider === 'Airtime' ? (
             <UtilityPaymentAirtime airtimeDetails={airtimeDetails} />

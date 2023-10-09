@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from 'react';
 
 import {ElectricityDetailsInterface} from '@/constants/interface';
-import {useGetCableProvidersQuery} from '@/redux/services/electricity.service';
+import {useGetPowerProvidersQuery} from '@/redux/services/electricity.service';
 import {Box, Flex, Image, Input, Skeleton, Text} from '@chakra-ui/react';
 
-const UtilityProviderCable = ({
+const UtilityProviderBorrowElectricity = ({
   setState,
-  setCableDetails,
+  setElectricityDetails,
 }: {
   setState: React.Dispatch<React.SetStateAction<string>>;
-  setCableDetails: React.Dispatch<
+  setElectricityDetails: React.Dispatch<
     React.SetStateAction<ElectricityDetailsInterface>
   >;
 }) => {
-  const {data, isLoading} = useGetCableProvidersQuery('');
-  console.log('cableProviders', data);
+  const {data, isLoading} = useGetPowerProvidersQuery('');
+  console.log('powerProviders', data);
   const [providers, setProviders] = useState([]);
   const [filterText, setFilterText] = useState('');
 
@@ -27,6 +27,7 @@ const UtilityProviderCable = ({
       );
     }
   }, [filterText]);
+
   return (
     <Box px={{lg: '2rem'}} pt={{base: '2rem', lg: 0}}>
       <Input
@@ -42,7 +43,7 @@ const UtilityProviderCable = ({
         value={filterText}
         onChange={(e) => setFilterText(e.target.value)}
       />
-      <Box w={{lg: '480px', mlg: '570px'}} mt='2.7rem'>
+      <Box w={{lg: '480px', mlg: '570px'}} mt={{base: '1.7rem', lg: '2.7rem'}}>
         <Flex
           // justifyContent={'space-between'}
           flexWrap={'wrap'}
@@ -68,14 +69,14 @@ const UtilityProviderCable = ({
                   key={each?._id}
                   w={{base: '22%', lg: '21%', mlg: '22%'}}
                   onClick={() => {
-                    setState('payment');
-                    setCableDetails(each);
+                    setState('Form');
+                    setElectricityDetails(each);
                   }}
                   cursor='pointer'
                   mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
                 >
                   <Image
-                    src={`/assets/gotv.png`}
+                    src={`/assets/provider1.png`}
                     alt='Provider'
                     w='100%'
                     h={{base: '50px', lg: '70px'}}
@@ -98,14 +99,14 @@ const UtilityProviderCable = ({
                   key={each?._id}
                   w={{base: '22%', lg: '21%', mlg: '22%'}}
                   onClick={() => {
-                    setState('payment');
-                    setCableDetails(each);
+                    setState('Form');
+                    setElectricityDetails(each);
                   }}
                   cursor='pointer'
                   mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
                 >
                   <Image
-                    src={`/assets/gotv.png`}
+                    src={`/assets/provider1.png`}
                     alt='Provider'
                     w='100%'
                     h={{base: '50px', lg: '70px'}}
@@ -129,4 +130,4 @@ const UtilityProviderCable = ({
   );
 };
 
-export default UtilityProviderCable;
+export default UtilityProviderBorrowElectricity;

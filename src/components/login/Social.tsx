@@ -51,12 +51,12 @@ const Social = ({
                 email,
                 password: 'aa',
               });
-
+              console.log('resSignupGoogle', res);
               if ('data' in res) {
                 const response: any = await login({
                   username: email,
                 });
-                console.log('resSignupGoogle', response);
+                console.log('resLoginGoogle', response);
                 if ('data' in response) {
                   dispatch(
                     setCredentials({
