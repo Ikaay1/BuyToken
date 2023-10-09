@@ -50,11 +50,11 @@ const Otp = () => {
               justifyContent={'center'}
               alignItems={'center'}
               position='absolute'
-              top='-19%'
+              top={{base: '-19%', lg: '-14.5%'}}
               left='50%'
               transform={'translateX(-50%)'}
               borderRadius={'50%'}
-              display={{base: 'flex', lg: 'none'}}
+              // display={{base: 'flex', lg: 'none'}}
             >
               <Image src='/assets/bt_logo.png' alt='BT Logo' />
             </Flex>
