@@ -161,7 +161,7 @@ const UtilityPaymentAirtime = ({
                 type='submit'
                 isLoading={buyAirtimeStatus.isLoading}
               >
-                Pay N980
+                Pay {props.values.amount ? 'N' + props.values.amount : ''}
               </Button>
             </Flex>
           </Form>
