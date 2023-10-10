@@ -142,7 +142,19 @@ const UtilityServices = () => {
           left='50%'
           transform='translateX(-50%)'
         >
-          Utility Services
+          {`${
+            state === 'Service'
+              ? 'Utility'
+              : provider === 'Electricity'
+              ? 'Electricity'
+              : provider === 'Borrow'
+              ? 'Borrow Electricity'
+              : provider === 'Internet'
+              ? 'Internet'
+              : provider === 'Airtime'
+              ? 'Airtime'
+              : 'Cable'
+          } Services`}
         </Text>
       </Flex>
 

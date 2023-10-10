@@ -257,7 +257,10 @@ const UtilityPaymentInternet = ({
                 w={{base: '100%', lg: 'auto'}}
                 type='submit'
               >
-                Pay N980
+                Pay{' '}
+                {bundleCode?.split('$')[2]
+                  ? 'N' + bundleCode?.split('$')[2]
+                  : ''}
               </Button>
             </Flex>
           </Form>
