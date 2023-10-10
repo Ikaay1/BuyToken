@@ -1,7 +1,7 @@
-import { APP_TOKEN, baseUrl } from '@/constants/utils';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {APP_TOKEN, baseUrl} from '@/constants/utils';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-import { store } from '../app/store';
+import {store} from '../app/store';
 
 export const electricityApi = createApi({
   reducerPath: 'electricityApi',
@@ -66,6 +66,17 @@ export const electricityApi = createApi({
       }),
       invalidatesTags: ['Electricity'],
     }),
+    checkMeterEligibility: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `biller/power/checkMeterEligibility`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Electricity'],
+    }),
     validateCableCustomer: builder.mutation<any, any>({
       query: (body) => ({
         url: `biller/cable/validate/request`,
@@ -91,6 +102,17 @@ export const electricityApi = createApi({
     cablePriceList: builder.mutation<any, any>({
       query: (body) => ({
         url: `biller/cable/price/list`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Electricity'],
+    }),
+    borrowPower: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `biller/power/borrow`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -158,5 +180,7 @@ export const {
   useGetCableProvidersQuery,
   useValidateCableCustomerMutation,
   useCablePriceListMutation,
-  useBuyCableMutation
+  useBuyCableMutation,
+  useCheckMeterEligibilityMutation,
+  useBorrowPowerMutation,
 } = electricityApi;
