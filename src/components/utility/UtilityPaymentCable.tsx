@@ -44,59 +44,33 @@ const UtilityPaymentCable = ({
   const toast = useToast();
 
   useEffect(() => {
-    const checkCustomer = async () => {
-      setCustomerDetails({
-        CustomerName: '',
-        CustomerAddress: '',
+    const getPlans = async () => {
+      const response: any = await priceList({
+        beneficiary: '000',
+        MerchantFk: cableDetails?.merchantId,
       });
-      if (smartCardNumber.length === 11 && cableDetails?.merchantId) {
-        console.log('MerchantFK', cableDetails?.merchantId);
-        const res: any = await validateCustomer({
-          beneficiary: smartCardNumber,
-          MerchantFK: cableDetails?.merchantId,
+      if (response?.data?.data?.plans) {
+        setCableList(response?.data?.data?.plans);
+      } else {
+        toast({
+          title: 'Error',
+          description:
+            response?.error?.data?.message ||
+            "Couldn't fetch price list. Something went wrong",
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right',
         });
-        const response: any = await priceList({
-          beneficiary: smartCardNumber,
-          MerchantFk: cableDetails?.merchantId,
-        });
-        console.log('customerDetails', res);
-        console.log('priceList', response);
-        if (res?.data?.CustomerName) {
-          setCustomerDetails(res?.data);
-        } else {
-          toast({
-            title: 'Verification failed',
-            description:
-              res?.error?.data?.message || "Couldn't verify customer",
-            status: 'error',
-            duration: 3000,
-            isClosable: true,
-            position: 'top-right',
-          });
-        }
-        if (response?.data?.data?.plans) {
-          setCableList(response?.data?.data?.plans);
-        } else {
-          toast({
-            title: 'Error',
-            description:
-              response?.error?.data?.message ||
-              "Couldn't fetch price list. Something went wrong",
-            status: 'error',
-            duration: 3000,
-            isClosable: true,
-            position: 'top-right',
-          });
-        }
       }
     };
-    checkCustomer();
-  }, [smartCardNumber]);
+    getPlans();
+  }, [cableDetails?.merchantId]);
 
   useEffect(() => {
     if (smartCardNumber) {
-      if (smartCardNumber.length !== 11) {
-        setSmartCardError('SmartCard Number must be 11 digits');
+      if (smartCardNumber.length < 8) {
+        setSmartCardError('SmartCard Number must be greater than 8 digits');
       } else {
         setSmartCardError('');
       }
@@ -123,9 +97,37 @@ const UtilityPaymentCable = ({
           color='#717171'
           focusBorderColor='white'
           fontSize={{base: '12px', lg: '16px'}}
-          maxLength={11}
+          minLength={8}
           value={smartCardNumber}
-          onChange={(e) => setSmartCardNumber(e.target.value)}
+          onChange={(e) => {
+            setSmartCardNumber(e.target.value);
+            setCustomerDetails({
+              CustomerName: '',
+              CustomerAddress: '',
+            });
+          }}
+          onBlur={async () => {
+            if (smartCardNumber.length > 7 && cableDetails?.merchantId) {
+              const res: any = await validateCustomer({
+                beneficiary: smartCardNumber,
+                MerchantFK: cableDetails?.merchantId,
+              });
+              console.log('customerDetails', res);
+              if (res?.data?.CustomerName) {
+                setCustomerDetails(res?.data);
+              } else {
+                toast({
+                  title: 'Verification failed',
+                  description:
+                    res?.error?.data?.message || "Couldn't verify customer",
+                  status: 'error',
+                  duration: 3000,
+                  isClosable: true,
+                  position: 'top-right',
+                });
+              }
+            }
+          }}
         />
         <InputRightElement pointerEvents='none' h='100%'>
           <Icon as={PersonIcon} />
@@ -248,8 +250,10 @@ const UtilityPaymentCable = ({
               setSmartCardError('SmartCard Number is required');
               return;
             }
-            if (smartCardNumber.length !== 11) {
-              setSmartCardError('SmartCard Number must be 11 digits');
+            if (smartCardNumber.length < 8) {
+              setSmartCardError(
+                'SmartCard Number must be greater than 8 digits',
+              );
               return;
             }
             if (!customerDetails?.CustomerName) {
