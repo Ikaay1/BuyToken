@@ -1,6 +1,8 @@
 import React from 'react';
 
 import InflowIcon from '@/assets/InflowIcon';
+import OutflowIcon from '@/assets/OutflowIcon';
+import {TransactionInterface} from '@/constants/interface';
 import {
   Box,
   Divider,
@@ -15,7 +17,11 @@ import {
 
 import TransactionDetails from './TransactionDetails';
 
-const EachTransactionModalMobile = () => {
+const EachTransactionModalMobile = ({
+  eachTransaction,
+}: {
+  eachTransaction: TransactionInterface;
+}) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   return (
     <>
@@ -30,26 +36,26 @@ const EachTransactionModalMobile = () => {
               borderRadius='50px'
               justifyContent={'center'}
               alignItems={'center'}
+              mr='.5rem'
             >
               <Icon
-                as={InflowIcon}
-                //   as={OutflowIcon}
+                as={
+                  eachTransaction?.transactionType === 'debit'
+                    ? OutflowIcon
+                    : InflowIcon
+                }
                 w='18px'
                 h='18px'
               />
             </Flex>
-            <Text
-              w='102px'
-              fontFamily='Inter'
-              fontSize='13px'
-              lineHeight='30px'
-              color='#929292'
-            >
-              56287W78E8E...
+            <Text w='102px' fontFamily='Inter' fontSize='13px' color='#929292'>
+              {eachTransaction?.refNumber?.length > 10
+                ? `${eachTransaction?.refNumber?.slice(0, 11)}....`
+                : eachTransaction?.refNumber}
             </Text>
           </Flex>
           <Text fontFamily='Inter' fontWeight='600' color='#313131'>
-            ₦9,900.00
+            ₦{eachTransaction?.amount}
           </Text>
         </Flex>
         <Flex alignItems={'center'} justifyContent={'space-between'} mt='.5rem'>
@@ -59,32 +65,42 @@ const EachTransactionModalMobile = () => {
             fontSize='14px'
             color='#606060'
           >
-            Funded wallet
+            {eachTransaction?.description}
           </Text>
           <Text fontFamily='Inter' fontSize='14px' color='#929292'>
-            Funding
+            {eachTransaction?.billerType[0]?.toUpperCase() +
+              eachTransaction?.billerType.slice(1)}
           </Text>
         </Flex>
         <Flex alignItems={'center'} justifyContent={'space-between'} mt='.5rem'>
           <Text fontFamily='Inter' fontSize='13px' color='#929292'>
-            19th Sep, 2023
+            {new Date(eachTransaction?.createdAt).toString().slice(0, 15)}
           </Text>
           <Text
             width='69px'
             height='25px'
-            background='#F4FCF7'
-            //   background='#C20B0B'
-            //   background='#E6CBB3'
+            background={
+              eachTransaction?.status === 'success'
+                ? '#F4FCF7'
+                : eachTransaction?.status === 'failed'
+                ? '#C20B0B'
+                : '#E6CBB3'
+            }
             borderRadius='100px'
             fontFamily='Inter'
             fontSize='14px'
-            color='#417657'
-            //   color='#FFFFFF'
+            color={
+              eachTransaction?.status === 'success' ? '#417657' : '#FFFFFF'
+            }
             display={'flex'}
             justifyContent={'center'}
             alignItems={'center'}
           >
-            Success
+            {eachTransaction?.status === 'success'
+              ? 'Success'
+              : eachTransaction?.status === 'failed'
+              ? 'Failed'
+              : 'Pending'}
           </Text>
         </Flex>
         <Divider mt='.6rem' width='100%' border='1px solid #E9EFF5' />

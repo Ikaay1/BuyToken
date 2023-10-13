@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import InflowIcon from '@/assets/InflowIcon';
+import {TransactionInterface} from '@/constants/interface';
 import {scrollbarStyle, scrollbarStyle2} from '@/constants/utils';
+import {useGetTransactionsQuery} from '@/redux/services/electricity.service';
 import {
   Box,
   Divider,
@@ -9,6 +11,7 @@ import {
   Icon,
   Input,
   Select,
+  Skeleton,
   Table,
   TableContainer,
   Tbody,
@@ -19,11 +22,16 @@ import {
   Tr,
 } from '@chakra-ui/react';
 
+import TransactionEmptyState from '../dashboard/TransactionEmptyState';
 import EachTransactionModalDesktop from './EachTransactionModalDesktop';
 import EachTransactionModalMobile from './EachTransactionModalMobile';
 import Paginate from './Paginate';
 
 const TransactHistory = () => {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(8);
+  const {data, isFetching} = useGetTransactionsQuery({page, limit});
+  console.log('transaction_history:', data);
   return (
     <Box
       minH={{base: '285px', lg: '599px'}}
@@ -122,50 +130,69 @@ const TransactHistory = () => {
         />
       </Flex>
 
-      {/* Desktop */}
-      <TableContainer
-        mt='.6rem'
-        sx={scrollbarStyle2}
-        display={{base: 'none', lg: 'block'}}
-      >
-        <Table variant='simple'>
-          <Thead>
-            <Tr>
-              {[
-                '',
-                'Description',
-                'Amount',
-                'Transaction Ref.',
-                'Type',
-                'Date',
-                'Status',
-              ].map((each) => (
-                <Th
-                  fontFamily='Inter'
-                  fontSize='14px'
-                  color='#313131'
-                  key={each}
-                  textTransform={'capitalize'}
-                >
-                  {each}
-                </Th>
-              ))}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {[1, 2, 3, 4, 5, 6, 7].map((each) => (
-              <EachTransactionModalDesktop key={each} />
+      {isFetching ? (
+        <Skeleton w='100%' h={{base: '250px', lg: '400px'}}></Skeleton>
+      ) : !data ? (
+        <TransactionEmptyState text='Oops... Something went wrong' />
+      ) : !data?.transactions?.length ? (
+        <TransactionEmptyState
+          text="You haven't made any transactions yet. When you do, they'll
+        appear here"
+        />
+      ) : (
+        <>
+          {/* Desktop */}
+          <TableContainer
+            sx={scrollbarStyle2}
+            mt='.6rem'
+            display={{base: 'none', lg: 'block'}}
+          >
+            <Table variant='simple'>
+              <Thead>
+                <Tr>
+                  {[
+                    '',
+                    'Description',
+                    'Amount',
+                    'Transaction Ref.',
+                    'Type',
+                    'Date',
+                    'Status',
+                  ].map((each) => (
+                    <Th
+                      fontFamily='Inter'
+                      fontSize='14px'
+                      color='#313131'
+                      key={each}
+                      textTransform={'capitalize'}
+                    >
+                      {each}
+                    </Th>
+                  ))}
+                </Tr>
+              </Thead>
+              <Tbody>
+                {data?.transactions?.map((each: TransactionInterface) => (
+                  <EachTransactionModalDesktop
+                    eachTransaction={each}
+                    key={each._id}
+                  />
+                ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
+          {/* Mobile */}
+          <Box px='.7rem' mt='1.2rem' display={{lg: 'none'}}>
+            {data?.transactions?.map((each: TransactionInterface) => (
+              <EachTransactionModalMobile
+                key={each._id}
+                eachTransaction={each}
+              />
             ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+          </Box>
+        </>
+      )}
 
-      {/* Mobile */}
-      <Box px='.7rem' mt='1.2rem' display={{lg: 'none'}}>
-        {[1, 2, 3].map((each) => (
-          <EachTransactionModalMobile key={each} />
-        ))}
-      </Box>
       {/* <Box mt={{base: '3.5rem', lg: '5.5rem'}}>
         <Flex justifyContent={'center'}>
           <Icon
@@ -188,7 +215,15 @@ const TransactHistory = () => {
           appear here
         </Text>
       </Box> */}
-      <Paginate />
+      {data && data?.transactions?.length && (
+        <Paginate
+          page={page}
+          setPage={setPage}
+          limit={limit}
+          setLimit={setLimit}
+          totalPages={data?.totalPages}
+        />
+      )}
     </Box>
   );
 };

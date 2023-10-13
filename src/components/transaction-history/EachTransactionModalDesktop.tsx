@@ -1,6 +1,8 @@
 import React from 'react';
 
 import InflowIcon from '@/assets/InflowIcon';
+import OutflowIcon from '@/assets/OutflowIcon';
+import {TransactionInterface} from '@/constants/interface';
 import {
   Flex,
   Icon,
@@ -15,7 +17,11 @@ import {
 
 import TransactionDetails from './TransactionDetails';
 
-const EachTransactionModalDesktop = () => {
+const EachTransactionModalDesktop = ({
+  eachTransaction,
+}: {
+  eachTransaction: TransactionInterface;
+}) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   return (
     <>
@@ -31,17 +37,21 @@ const EachTransactionModalDesktop = () => {
             alignItems={'center'}
           >
             <Icon
-              as={InflowIcon}
-              //   as={OutflowIcon}
+              as={
+                eachTransaction?.transactionType === 'debit'
+                  ? OutflowIcon
+                  : InflowIcon
+              }
             />
           </Flex>
         </Td>
         {[
-          'Funded wallet',
-          '₦9,900.00',
-          '56287W78E8E8W8W',
-          'Funding',
-          '19th Sep, 2023',
+          eachTransaction?.description,
+          `₦${eachTransaction?.amount}`,
+          eachTransaction?.refNumber,
+          eachTransaction?.billerType[0]?.toUpperCase() +
+            eachTransaction?.billerType.slice(1),
+          new Date(eachTransaction?.createdAt).toString().slice(0, 15),
         ].map((each) => (
           <Td fontFamily='Inter' fontSize='14px' color='#929292' key={each}>
             {each}
@@ -51,19 +61,28 @@ const EachTransactionModalDesktop = () => {
           <Text
             width='70px'
             height='27px'
-            background='#F4FCF7'
-            //   background='#C20B0B'
-            //   background='#E6CBB3'
+            background={
+              eachTransaction?.status === 'success'
+                ? '#F4FCF7'
+                : eachTransaction?.status === 'failed'
+                ? '#C20B0B'
+                : '#E6CBB3'
+            }
             borderRadius='1000px'
             fontFamily='Inter'
             fontSize='14px'
-            color='#417657'
-            //   color='#FFFFFF'
+            color={
+              eachTransaction?.status === 'success' ? '#417657' : '#FFFFFF'
+            }
             display={'flex'}
             justifyContent={'center'}
             alignItems={'center'}
           >
-            Success
+            {eachTransaction?.status === 'success'
+              ? 'Success'
+              : eachTransaction?.status === 'failed'
+              ? 'Failed'
+              : 'Pending'}
           </Text>
         </Td>
       </Tr>

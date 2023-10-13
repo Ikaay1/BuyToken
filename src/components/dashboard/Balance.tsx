@@ -3,12 +3,15 @@ import React, {useState} from 'react';
 import HideIcon from '@/assets/HideIcon';
 import ShowIcon from '@/assets/ShowIcon';
 import WalletIcon from '@/assets/WalletIcon';
+import {useGetUserWalletQuery} from '@/redux/services/user.service';
 import {Box, Flex, Icon, Image, Text} from '@chakra-ui/react';
 
 import FundWalletModal from './FundWalletModal';
 
 const Balance = () => {
   const [show, setShow] = useState(false);
+  const {data, isLoading} = useGetUserWalletQuery('');
+  console.log('Wallet', data);
   return (
     <Box
       w={{lg: '48%'}}
