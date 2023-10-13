@@ -165,6 +165,16 @@ export const electricityApi = createApi({
       }),
       invalidatesTags: ['Electricity'],
     }),
+    getTransactions: builder.query<any, any>({
+      query: ({page, limit}: {page: number; limit: number}) => ({
+        url: `transactions/get/all?page=${page}&limit=${limit}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['Electricity'],
+    }),
   }),
 });
 
@@ -183,4 +193,5 @@ export const {
   useBuyCableMutation,
   useCheckMeterEligibilityMutation,
   useBorrowPowerMutation,
+  useGetTransactionsQuery,
 } = electricityApi;

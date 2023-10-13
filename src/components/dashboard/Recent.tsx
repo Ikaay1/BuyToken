@@ -1,8 +1,6 @@
 import React from 'react';
 
-import EmptyTransactionIcon from '@/assets/EmptyTransactionIcon';
 import InflowIcon from '@/assets/InflowIcon';
-import OutflowIcon from '@/assets/OutflowIcon';
 import RightVector from '@/assets/RightVector';
 import {scrollbarStyle, scrollbarStyle2} from '@/constants/utils';
 import {
@@ -19,6 +17,8 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
+
+import TransactionEmptyState from './TransactionEmptyState';
 
 const Recent = () => {
   return (
@@ -235,28 +235,10 @@ const Recent = () => {
           </Box>
         ))}
       </Box>
-      {/* <Box mt={{base: '3.5rem', lg: '5.5rem'}}>
-        <Flex justifyContent={'center'}>
-          <Icon
-            as={EmptyTransactionIcon}
-            w={{base: '37px', lg: '67px'}}
-            h={{base: '37px', lg: '67px'}}
-          />
-        </Flex>
-        <Text
-          width='260px'
-          fontFamily="'Inter'"
-          fontSize={{base: '13px', lg: '14px'}}
-          lineHeight='20px'
-          textAlign='center'
-          color='#929292'
-          mx='auto'
-          mt='.85rem'
-        >
-          You haven&apos;t made any transactions yet. When you do, they&apos;ll
-          appear here
-        </Text>
-      </Box> */}
+      {/* <TransactionEmptyState
+        text="You haven't made any transactions yet. When you do, they'll
+        appear here"
+      /> */}
     </Box>
   );
 };
