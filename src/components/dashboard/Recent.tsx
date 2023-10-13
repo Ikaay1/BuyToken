@@ -4,7 +4,7 @@ import InflowIcon from '@/assets/InflowIcon';
 import RightVector from '@/assets/RightVector';
 import {TransactionInterface} from '@/constants/interface';
 import {scrollbarStyle, scrollbarStyle2} from '@/constants/utils';
-import {useGetTransactionsQuery} from '@/redux/services/electricity.service';
+import {useGetTransactionsQuery} from '@/redux/services/transactions.service';
 import {
   Box,
   Divider,

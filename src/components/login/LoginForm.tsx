@@ -34,7 +34,7 @@ const LoginForm = () => {
         onSubmit={async ({email, password}) => {
           const res: any = await login({username: email, password});
           console.log('resLogin', res);
-          if (res?.data?.data) {
+          if (res?.data?.data && !res?.data?.message) {
             dispatch(
               setCredentials({
                 payload: {

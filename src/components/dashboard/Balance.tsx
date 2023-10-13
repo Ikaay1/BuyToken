@@ -4,13 +4,13 @@ import HideIcon from '@/assets/HideIcon';
 import ShowIcon from '@/assets/ShowIcon';
 import WalletIcon from '@/assets/WalletIcon';
 import {useGetUserWalletQuery} from '@/redux/services/user.service';
-import {Box, Flex, Icon, Image, Text} from '@chakra-ui/react';
+import {Box, Flex, Icon, Image, Skeleton, Text} from '@chakra-ui/react';
 
 import FundWalletModal from './FundWalletModal';
 
 const Balance = () => {
   const [show, setShow] = useState(false);
-  const {data, isLoading} = useGetUserWalletQuery('');
+  const {data, isFetching} = useGetUserWalletQuery('');
   console.log('Wallet', data);
   return (
     <Box
@@ -89,19 +89,22 @@ const Balance = () => {
             >
               Balance
             </Text>
-            <Text
-              fontFamily='Raleway'
-              fontWeight='700'
-              fontSize={{
-                base: show ? '24px' : '50px',
-                lg: show ? '32px' : '50px',
-              }}
-              color='#313131'
-              lineHeight={'48px'}
-              mt={show ? '0' : '.88rem'}
-            >
-              {show ? '₦5,000.00' : '*********'}
-            </Text>
+            {isFetching && <Skeleton h='20px' w='140px' mt='1rem'></Skeleton>}
+            {data?.data?.balance && (
+              <Text
+                fontFamily='Raleway'
+                fontWeight='700'
+                fontSize={{
+                  base: show ? '24px' : '50px',
+                  lg: show ? '32px' : '50px',
+                }}
+                color='#313131'
+                lineHeight={'48px'}
+                mt={show ? '0' : '.88rem'}
+              >
+                {!show ? '*********' : data?.data?.balance}
+              </Text>
+            )}
           </Box>
         </Flex>
         <FundWalletModal />

@@ -7,7 +7,7 @@ import HouseIcon from '@/assets/HouseIcon';
 import LogoutIcon from '@/assets/LogoutIcon';
 import PencilIcon from '@/assets/PencilIcon';
 import TransactionIcon from '@/assets/TransactionIcon';
-import {useAppDispatch} from '@/redux/app/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
 import {logout} from '@/redux/slices/authSlice';
 import {Box, Divider, Flex, Icon, Image, Text} from '@chakra-ui/react';
 import {googleLogout} from '@react-oauth/google';
@@ -15,6 +15,10 @@ import {googleLogout} from '@react-oauth/google';
 const Sidebar = ({onClose}: {onClose?: () => void}) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const name = useAppSelector((state) => state?.app?.user?.userProfile?.name);
+  const phone = useAppSelector(
+    (state) => state?.app?.user?.userProfile?.mobileNumber,
+  );
 
   const handleLogout = () => {
     dispatch(logout());
@@ -70,7 +74,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                     lineHeight='26px'
                     color='#1E1E1F'
                   >
-                    Moses
+                    {name?.split(' ')[0]}
                   </Text>
                   <Text
                     fontFamily='Raleway'
@@ -80,7 +84,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                     lineHeight='26px'
                     color='#1E1E1F'
                   >
-                    +2347010000000
+                    {phone}
                   </Text>
                 </Box>
                 <Icon ml='.65rem' as={PencilIcon} />

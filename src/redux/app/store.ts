@@ -21,6 +21,7 @@ import {setupListeners} from '@reduxjs/toolkit/dist/query';
 
 import {authApi} from '../services/auth.service';
 import {electricityApi} from '../services/electricity.service';
+import {transactionsApi} from '../services/transactions.service';
 import {userApi} from '../services/user.service';
 
 const persistConfig = {
@@ -37,6 +38,7 @@ export const store: any = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [electricityApi.reducerPath]: electricityApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [transactionsApi.reducerPath]: transactionsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -47,6 +49,7 @@ export const store: any = configureStore({
       authApi.middleware,
       electricityApi.middleware,
       userApi.middleware,
+      transactionsApi.middleware,
     ]),
 });
 
