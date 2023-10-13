@@ -21,6 +21,7 @@ import {setupListeners} from '@reduxjs/toolkit/dist/query';
 
 import {authApi} from '../services/auth.service';
 import {electricityApi} from '../services/electricity.service';
+import {userApi} from '../services/user.service';
 
 const persistConfig = {
   key: 'root',
@@ -35,13 +36,18 @@ export const store: any = configureStore({
     app: persistedReducer,
     [authApi.reducerPath]: authApi.reducer,
     [electricityApi.reducerPath]: electricityApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat([authApi.middleware, electricityApi.middleware]),
+    }).concat([
+      authApi.middleware,
+      electricityApi.middleware,
+      userApi.middleware,
+    ]),
 });
 
 setupListeners(store.dispatch);
