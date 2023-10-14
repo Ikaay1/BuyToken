@@ -93,7 +93,7 @@ const MobileOtpInputForm = () => {
               });
               const res: any = await login({username: mobileNumber, password});
               console.log('resLogin', res);
-              if (res?.data?.data) {
+              if (res?.data?.data?.access_token) {
                 dispatch(
                   setCredentials({
                     payload: {

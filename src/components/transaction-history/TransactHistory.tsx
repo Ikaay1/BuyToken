@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import InflowIcon from '@/assets/InflowIcon';
 import {TransactionInterface} from '@/constants/interface';
 import {scrollbarStyle, scrollbarStyle2} from '@/constants/utils';
-import {useGetTransactionsQuery} from '@/redux/services/electricity.service';
+import {useGetTransactionsQuery} from '@/redux/services/transactions.service';
 import {
   Box,
   Divider,
@@ -30,7 +30,16 @@ import Paginate from './Paginate';
 const TransactHistory = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(8);
-  const {data, isFetching} = useGetTransactionsQuery({page, limit});
+  const [status, setStatus] = useState('');
+  const [type, setType] = useState('');
+  const [date, setDate] = useState('');
+  const {data, isFetching} = useGetTransactionsQuery({
+    page,
+    limit,
+    status,
+    type,
+    date,
+  });
   console.log('transaction_history:', data);
   return (
     <Box
@@ -67,7 +76,7 @@ const TransactHistory = () => {
           alignItems={'center'}
           px='.6rem'
         >
-          19 transactions
+          {data?.totalContent || '--'} transactions
         </Text>
       </Flex>
 
@@ -90,9 +99,13 @@ const TransactHistory = () => {
           color='#575757'
           placeholder='Status'
           mr='.65rem'
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
         >
           {['Success', 'Pending', 'Failed'].map((each) => (
-            <option key={each}>{each}</option>
+            <option key={each} value={each.toLowerCase()}>
+              {each}
+            </option>
           ))}
         </Select>
         <Select
@@ -106,10 +119,14 @@ const TransactHistory = () => {
           color='#575757'
           placeholder='Type'
           mr='.65rem'
+          value={type}
+          onChange={(e) => setType(e.target.value)}
         >
           {['Funding', 'Electricity', 'Data', 'Airtime', 'Borrow'].map(
             (each) => (
-              <option key={each}>{each}</option>
+              <option key={each} value={each.toLowerCase()}>
+                {each}
+              </option>
             ),
           )}
         </Select>
@@ -126,7 +143,8 @@ const TransactHistory = () => {
           fontFamily='Lato'
           fontSize='14px'
           color='#575757'
-          onChange={(e) => console.log(e.target.value)}
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
         />
       </Flex>
 

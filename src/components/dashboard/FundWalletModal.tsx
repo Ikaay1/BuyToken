@@ -3,6 +3,7 @@ import React from 'react';
 import CloseIcon from '@/assets/CloseIcon';
 import FundWalletIcon from '@/assets/FundWalletIcon';
 import InfoIcon from '@/assets/InfoIcon';
+import {useAppSelector} from '@/redux/app/hooks';
 import {
   Box,
   Divider,
@@ -17,6 +18,15 @@ import {
 
 const FundWalletModal = () => {
   const {isOpen, onOpen, onClose} = useDisclosure();
+  const accountName = useAppSelector(
+    (state) => state?.app?.user?.userProfile?.accountName,
+  );
+  const accountNumber = useAppSelector(
+    (state) => state?.app?.user?.userProfile?.accountNumber,
+  );
+  const bankName = useAppSelector(
+    (state) => state?.app?.user?.userProfile?.bankName,
+  );
   return (
     <>
       <Flex
@@ -68,9 +78,9 @@ const FundWalletModal = () => {
             </Text>
             <Box px='1.2rem' mt='2rem'>
               {[
-                {name: 'Account Number:', value: '0128770011'},
-                {name: 'Account Name:', value: 'Benjamin John'},
-                {name: 'Bank Name:', value: 'Wema Bank'},
+                {name: 'Account Number:', value: accountNumber},
+                {name: 'Account Name:', value: accountName},
+                {name: 'Bank Name:', value: bankName},
               ].map(({name, value}) => (
                 <>
                   <Flex justifyContent={'space-between'} mt='1rem'>

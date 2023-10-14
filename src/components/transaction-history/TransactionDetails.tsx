@@ -1,9 +1,16 @@
 import React from 'react';
 
 import CloseIcon from '@/assets/CloseIcon';
+import {TransactionInterface} from '@/constants/interface';
 import {Box, Flex, Icon, Text} from '@chakra-ui/react';
 
-const TransactionDetails = ({onClose}: {onClose: () => void}) => {
+const TransactionDetails = ({
+  onClose,
+  eachTransaction,
+}: {
+  onClose: () => void;
+  eachTransaction: TransactionInterface;
+}) => {
   return (
     <Box
       width={{base: '100%', lg: '441px'}}
@@ -37,14 +44,18 @@ const TransactionDetails = ({onClose}: {onClose: () => void}) => {
             {
               header1: 'Reference No.',
               header2: 'Date',
-              value1: 'AI10D84JJY5',
-              value2: '22nd August, 2023',
+              value1: eachTransaction?.refNumber,
+              value2: new Date(eachTransaction?.createdAt)
+                .toString()
+                .slice(0, 15),
             },
             {
               header1: 'Amount',
               header2: 'Type',
-              value1: '₦20,000',
-              value2: 'Data',
+              value1: `₦${eachTransaction?.amount}`,
+              value2:
+                eachTransaction?.billerType[0]?.toUpperCase() +
+                eachTransaction?.billerType.slice(1),
             },
           ].map(({header1, header2, value1, value2}) => (
             <Box key={header1} mt='.9rem'>
@@ -106,7 +117,7 @@ const TransactionDetails = ({onClose}: {onClose: () => void}) => {
               color='#313131'
               lineHeight={'20px'}
             >
-              Internet data recharge for mobile number 123-456-7890
+              {eachTransaction?.description}
             </Text>
           </Box>
         </Box>
