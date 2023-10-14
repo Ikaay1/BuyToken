@@ -4,7 +4,7 @@ import InflowIcon from '@/assets/InflowIcon';
 import RightVector from '@/assets/RightVector';
 import {TransactionInterface} from '@/constants/interface';
 import {scrollbarStyle, scrollbarStyle2} from '@/constants/utils';
-import {useGetTransactionsQuery} from '@/redux/services/transactions.service';
+import {useGetRecentTransactionsQuery} from '@/redux/services/transactions.service';
 import {
   Box,
   Divider,
@@ -26,7 +26,7 @@ import EachTransactionModalMobile from '../transaction-history/EachTransactionMo
 import TransactionEmptyState from './TransactionEmptyState';
 
 const Recent = () => {
-  const {data, isFetching} = useGetTransactionsQuery({page: 1, limit: 8});
+  const {data, isFetching} = useGetRecentTransactionsQuery('');
   return (
     <Box
       minH={{base: '285px', lg: '599px'}}

@@ -6,8 +6,12 @@ import * as Yup from 'yup';
 import MessageIcon from '@/assets/MessageIcon';
 import SeePasswordIcon from '@/assets/SeePasswordIcon';
 import {useAppDispatch} from '@/redux/app/hooks';
-import {useLoginMutation} from '@/redux/services/auth.service';
-import {setCredentials} from '@/redux/slices/authSlice';
+import {
+  useLoginMutation,
+  useSendOTPToEmailMutation,
+  useSendOTPToMobileMutation,
+} from '@/redux/services/auth.service';
+import {setCredentials, setData} from '@/redux/slices/authSlice';
 import {Box, Button, Checkbox, Flex, Text, useToast} from '@chakra-ui/react';
 
 import AuthInput from './AuthInput';
@@ -19,6 +23,8 @@ const LoginForm = () => {
   const dispatch = useAppDispatch();
   const toast = useToast();
   const [loading, setLoading] = useState(false);
+  const [sendOTPToEmail, sendOTPToEmailStatus] = useSendOTPToEmailMutation();
+  const [sendOTPToMobile, sendOTPToMobileStatus] = useSendOTPToMobileMutation();
   return (
     <Box mt='1.2rem' width={{lg: '570px'}}>
       <Formik
@@ -34,7 +40,7 @@ const LoginForm = () => {
         onSubmit={async ({email, password}) => {
           const res: any = await login({username: email, password});
           console.log('resLogin', res);
-          if (res?.data?.data && !res?.data?.message) {
+          if (res?.data?.data?.access_token) {
             dispatch(
               setCredentials({
                 payload: {
@@ -53,6 +59,88 @@ const LoginForm = () => {
             // });
             router.push('/dashboard');
           } else {
+            if (res?.data?.data) {
+              if (!res?.data?.data?.emailVerified) {
+                const response: any = await sendOTPToEmail({
+                  email: res?.data?.data?.email,
+                });
+                console.log('resSendOtpEmail', response);
+                if (response?.data?.data) {
+                  dispatch(
+                    setData({
+                      payload: {
+                        email: res?.data?.data?.email,
+                        mobileNumber: res?.data?.data?.mobileNumber,
+                        password,
+                        otp_hash: response?.data?.data.otp_hash,
+                      },
+                    }),
+                  );
+                  toast({
+                    title: 'OTP sent to Email',
+                    description:
+                      'Your email has not been verified. An OTP has been sent to your Email for verification',
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                    position: 'top-right',
+                  });
+                  router.push('/emailOtp');
+                } else {
+                  toast({
+                    title: 'Error',
+                    description:
+                      response?.error?.data?.message ||
+                      response?.data?.message ||
+                      'Something went wrong',
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true,
+                    position: 'top-right',
+                  });
+                }
+                return;
+              }
+              if (!res?.data?.data?.mobileVerified) {
+                const response: any = await sendOTPToMobile({
+                  mobileNumber: res?.data?.data?.mobileNumber,
+                });
+                if (response?.data?.data) {
+                  dispatch(
+                    setData({
+                      payload: {
+                        email: res?.data?.data?.email,
+                        mobileNumber: res?.data?.data?.mobileNumber,
+                        password,
+                      },
+                    }),
+                  );
+                  toast({
+                    title: 'OTP sent to Phone Number',
+                    description:
+                      'Your Mobile Number has not been verified. An OTP has been sent to your Mobile Number for verification',
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                    position: 'top-right',
+                  });
+                  router.push('/mobileOtp');
+                } else {
+                  toast({
+                    title: 'Error',
+                    description:
+                      response?.error?.data?.message ||
+                      response?.data?.message ||
+                      'Something went wrong',
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true,
+                    position: 'top-right',
+                  });
+                }
+                return;
+              }
+            }
             toast({
               title: 'Login failed',
               description:

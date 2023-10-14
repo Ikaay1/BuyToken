@@ -1,14 +1,14 @@
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import {useRouter} from 'next/router';
+import React, {useState} from 'react';
 import OTPInput from 'react-otp-input';
 
-import { useAppDispatch, useAppSelector } from '@/redux/app/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
 import {
-	useLoginMutation,
-	useValidateMobileOtpMutation,
+  useLoginMutation,
+  useValidateMobileOtpMutation,
 } from '@/redux/services/auth.service';
-import { clearData, setCredentials } from '@/redux/slices/authSlice';
-import { Box, Button, useToast } from '@chakra-ui/react';
+import {clearData, setCredentials} from '@/redux/slices/authSlice';
+import {Box, Button, useToast} from '@chakra-ui/react';
 
 const MobileOtpInputForm = () => {
   const [otp, setOtp] = useState('');
@@ -93,7 +93,7 @@ const MobileOtpInputForm = () => {
               });
               const res: any = await login({username: mobileNumber, password});
               console.log('resLogin', res);
-              if (res?.data?.data && !res?.data?.message) {
+              if (res?.data?.data?.access_token) {
                 dispatch(
                   setCredentials({
                     payload: {

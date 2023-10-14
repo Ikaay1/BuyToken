@@ -109,7 +109,10 @@ const EachTransactionModalMobile = ({
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay bg='token.modalOverlay' />
         <ModalContent justifyContent={'center'} alignItems={'center'}>
-          <TransactionDetails onClose={onClose} />
+          <TransactionDetails
+            onClose={onClose}
+            eachTransaction={eachTransaction}
+          />
         </ModalContent>
       </Modal>
     </>

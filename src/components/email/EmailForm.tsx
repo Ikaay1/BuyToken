@@ -1,13 +1,13 @@
-import { Form, Formik } from 'formik';
-import { useRouter } from 'next/router';
+import {Form, Formik} from 'formik';
+import {useRouter} from 'next/router';
 import React from 'react';
 import * as Yup from 'yup';
 
 import MessageIcon from '@/assets/MessageIcon';
-import { useAppDispatch } from '@/redux/app/hooks';
-import { useSendOTPToEmailMutation } from '@/redux/services/auth.service';
-import { setData } from '@/redux/slices/authSlice';
-import { Box, Button, Text, useToast } from '@chakra-ui/react';
+import {useAppDispatch} from '@/redux/app/hooks';
+import {useSendOTPToEmailMutation} from '@/redux/services/auth.service';
+import {setData} from '@/redux/slices/authSlice';
+import {Box, Button, Text, useToast} from '@chakra-ui/react';
 
 import AuthInput from '../login/AuthInput';
 
@@ -43,7 +43,7 @@ const EmailForm = () => {
               setData({
                 payload: {
                   userName: email,
-                  otp_hash_reset: response?.data?.data.otp_hash,
+                  otp_hash_reset: response?.data?.data?.otp_hash,
                 },
               }),
             );
