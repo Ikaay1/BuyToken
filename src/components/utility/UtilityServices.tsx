@@ -1,21 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import BackArrowIcon from '@/assets/BackArrowIcon';
-import IdCardIcon from '@/assets/IdCardIcon';
-import PersonIcon from '@/assets/PersonIcon';
-import WhiteArrowRight from '@/assets/WhiteArrowRight';
-import {
-  Box,
-  Button,
-  Checkbox,
-  Flex,
-  Icon,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-  Text,
-} from '@chakra-ui/react';
+import {useAppSelector} from '@/redux/app/hooks';
+import {Box, Flex, Icon, Text} from '@chakra-ui/react';
 
 import Service from './Service';
 import UtilityBorrowForm from './UtilityBorrowForm';
@@ -78,6 +65,20 @@ const UtilityServices = () => {
     meterType: '',
     amount: '',
   });
+  const utility = useAppSelector((state) => state?.utility?.utility);
+  console.log('utility', utility);
+
+  useEffect(() => {
+    if (utility) {
+      setState('Provider');
+      if (utility !== 'Data') {
+        setProvider(utility);
+      } else {
+        setProvider('Internet');
+      }
+    }
+  }, [utility]);
+
   return (
     <Box
       borderRadius='16px'
