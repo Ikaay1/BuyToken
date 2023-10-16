@@ -9,7 +9,7 @@ import EditIcon from '@/assets/EditIcon';
 import ElectricityIcon from '@/assets/ElectricityIcon';
 import RightVector from '@/assets/RightVector';
 import {useAppDispatch} from '@/redux/app/hooks';
-import {setUtilities} from '@/redux/slices/utilitySlice';
+import {updateUtilities} from '@/redux/slices/utilitySlice';
 import {
   Box,
   Flex,
@@ -21,12 +21,19 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-const EditUtilities = () => {
+const UpdateUtilities = ({utility}: {utility: string}) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const dispatch = useAppDispatch();
   return (
     <>
-      <Icon as={AddIcon} onClick={onOpen} cursor={'pointer'} />
+      <Icon
+        as={AddIcon}
+        onClick={onOpen}
+        cursor={'pointer'}
+        position='absolute'
+        bottom='-4px'
+        right='-4px'
+      />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay bg='token.modalOverlay' />
         <ModalContent justifyContent={'center'} alignItems={'center'}>
@@ -73,8 +80,8 @@ const EditUtilities = () => {
                   key={name}
                   onClick={() => {
                     dispatch(
-                      setUtilities({
-                        payload: {name},
+                      updateUtilities({
+                        payload: {modal: name, frequently: utility},
                       }),
                     );
                     onClose();
@@ -97,4 +104,4 @@ const EditUtilities = () => {
   );
 };
 
-export default EditUtilities;
+export default UpdateUtilities;

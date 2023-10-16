@@ -67,7 +67,7 @@ const UtilityForm = ({
           accountType: isCheckedPrepaid ? '1' : '2',
         });
         console.log('customerDetails', res);
-        if (res?.data?.data) {
+        if (res?.data?.data?.respCode === '00') {
           setCustomerDetails({
             ...res?.data?.data,
             meterNumber,
@@ -88,7 +88,12 @@ const UtilityForm = ({
       }
     };
     checkCustomer();
-  }, [isCheckedPrepaid, isCheckedPostPaid, meterNumber]);
+  }, [
+    isCheckedPrepaid,
+    isCheckedPostPaid,
+    meterNumber,
+    electricityDetails?.merchantId,
+  ]);
 
   useEffect(() => {
     if (meterNumber) {

@@ -1,28 +1,28 @@
-import {Field, Form, Formik} from 'formik';
-import {useRouter} from 'next/router';
-import React, {useEffect, useState} from 'react';
+import { Field, Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 
 import IdCardIcon from '@/assets/IdCardIcon';
-import {ElectricityDetailsInterface} from '@/constants/interface';
-import {useAppSelector} from '@/redux/app/hooks';
+import { ElectricityDetailsInterface } from '@/constants/interface';
+import { useAppSelector } from '@/redux/app/hooks';
 import {
-  useBuyDataMutation,
-  usePriceListMutation,
+	useBuyDataMutation,
+	usePriceListMutation,
 } from '@/redux/services/electricity.service';
 import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  Icon,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Select,
-  Text,
-  useToast,
+	Box,
+	Button,
+	Flex,
+	FormControl,
+	FormErrorMessage,
+	Icon,
+	Input,
+	InputGroup,
+	InputRightElement,
+	Select,
+	Text,
+	useToast,
 } from '@chakra-ui/react';
 
 const UtilityPaymentInternet = ({
@@ -49,7 +49,7 @@ const UtilityPaymentInternet = ({
         MerchantFK: internetDetails?.merchantId,
       });
       console.log('dataList: ', res);
-      if (res?.data?.data?.BundleList) {
+      if (res?.data?.data?.respCode === '00') {
         setDataList(res?.data?.data?.BundleList);
       } else {
         toast({
@@ -116,6 +116,7 @@ const UtilityPaymentInternet = ({
               bundleTypeCode: bundleCode?.split('$')[0],
               CustomerPhone: phone,
               amount: bundleCode?.split('$')[2],
+              MerchantFK: Number(internetDetails?.merchantId),
             });
             console.log('buyResp', res);
             if (res?.data?.data) {

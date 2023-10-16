@@ -49,7 +49,8 @@ const UtilityPaymentCable = ({
         beneficiary: '000',
         MerchantFk: cableDetails?.merchantId,
       });
-      if (response?.data?.data?.plans) {
+      console.log('priceList', response);
+      if (response?.data?.data?.respCode == '00') {
         setCableList(response?.data?.data?.plans);
       } else {
         toast({
@@ -113,8 +114,8 @@ const UtilityPaymentCable = ({
                 MerchantFK: cableDetails?.merchantId,
               });
               console.log('customerDetails', res);
-              if (res?.data?.CustomerName) {
-                setCustomerDetails(res?.data);
+              if (res?.data?.data?.respCode == '00') {
+                setCustomerDetails(res?.data?.data);
               } else {
                 toast({
                   title: 'Verification failed',

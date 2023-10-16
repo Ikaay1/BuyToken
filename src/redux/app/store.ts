@@ -11,6 +11,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import userReducer from '@/redux/slices/authSlice';
+import utilityReducer from '@/redux/slices/utilitySlice';
 import {
   Action,
   combineReducers,
@@ -29,7 +30,10 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({user: userReducer});
+const rootReducer = combineReducers({
+  user: userReducer,
+  utility: utilityReducer,
+});
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store: any = configureStore({
