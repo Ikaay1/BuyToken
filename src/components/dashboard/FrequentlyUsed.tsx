@@ -1,13 +1,14 @@
+import {useRouter} from 'next/router';
 import React, {useState} from 'react';
 
-import AddIcon from '@/assets/AddIcon';
 import BulbIcon from '@/assets/BulbIcon';
 import CancelIcon from '@/assets/CancelIcon';
 import ComputerIcon from '@/assets/ComputerIcon';
 import EditIcon from '@/assets/EditIcon';
 import InternetIcon from '@/assets/InternetIcon';
 import PhoneIcon from '@/assets/PhoneIcon';
-import {useAppSelector} from '@/redux/app/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
+import {setUtility} from '@/redux/slices/serviceSlice';
 import {Box, Flex, Icon, Text} from '@chakra-ui/react';
 
 import EditUtilities from './EditUtilities';
@@ -16,6 +17,8 @@ import UpdateUtilities from './UpdateUtilities';
 const FrequentlyUsed = () => {
   const utilities = useAppSelector((state) => state?.app?.utility?.utilities);
   const [edit, setEdit] = useState(false);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   return (
     <Box
       width={{lg: '48%'}}
@@ -84,6 +87,10 @@ const FrequentlyUsed = () => {
                 alignItems={'center'}
                 cursor='pointer'
                 position={'relative'}
+                onClick={() => {
+                  dispatch(setUtility({payload: {name: each?.name}}));
+                  router.push('/utility');
+                }}
               >
                 <Icon
                   as={

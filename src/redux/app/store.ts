@@ -11,6 +11,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import userReducer from '@/redux/slices/authSlice';
+import serviceReducer from '@/redux/slices/serviceSlice';
 import utilityReducer from '@/redux/slices/utilitySlice';
 import {
   Action,
@@ -39,6 +40,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store: any = configureStore({
   reducer: {
     app: persistedReducer,
+    utility: serviceReducer,
     [authApi.reducerPath]: authApi.reducer,
     [electricityApi.reducerPath]: electricityApi.reducer,
     [userApi.reducerPath]: userApi.reducer,

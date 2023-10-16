@@ -69,7 +69,11 @@ const Recent = () => {
       </Flex>
 
       {isFetching ? (
-        <Skeleton w='100%' h={{base: '250px', lg: '400px'}}></Skeleton>
+        <Skeleton
+          mt={{base: '1.2rem', lg: '.6rem'}}
+          w='100%'
+          h={{base: '250px', lg: '400px'}}
+        ></Skeleton>
       ) : !data ? (
         <TransactionEmptyState text='Oops... Something went wrong' />
       ) : !data?.transactions?.length ? (
