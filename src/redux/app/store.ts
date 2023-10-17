@@ -23,6 +23,7 @@ import {setupListeners} from '@reduxjs/toolkit/dist/query';
 
 import {authApi} from '../services/auth.service';
 import {electricityApi} from '../services/electricity.service';
+import {notificationsApi} from '../services/notifications.service';
 import {transactionsApi} from '../services/transactions.service';
 import {userApi} from '../services/user.service';
 
@@ -45,6 +46,7 @@ export const store: any = configureStore({
     [electricityApi.reducerPath]: electricityApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [transactionsApi.reducerPath]: transactionsApi.reducer,
+    [notificationsApi.reducerPath]: notificationsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -56,6 +58,7 @@ export const store: any = configureStore({
       electricityApi.middleware,
       userApi.middleware,
       transactionsApi.middleware,
+      notificationsApi.middleware,
     ]),
 });
 
