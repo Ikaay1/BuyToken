@@ -18,7 +18,6 @@ import {
   Icon,
   Modal,
   ModalContent,
-  ModalOverlay,
   Skeleton,
   Text,
   useDisclosure,
@@ -121,24 +120,36 @@ const NotificationModal = () => {
                   <Skeleton key={each} mt='.65rem' w='100%' h='22px'></Skeleton>
                 ))
               ) : !data ? (
-                <Box
-                  fontFamily={'Poppins'}
-                  fontSize={'11px'}
-                  fontWeight={'500'}
-                  textAlign={'center'}
-                  mt='1rem'
-                >
-                  Something went wrong
+                <Box mt='2rem'>
+                  <Flex justifyContent={'center'}>
+                    <Icon as={NoNoticationsIcon} w='30px' h='30px' />
+                  </Flex>
+                  <Text
+                    fontFamily='Inter'
+                    fontSize='10px'
+                    lineHeight='20px'
+                    textAlign='center'
+                    color='#929292'
+                    mt='1.1rem'
+                  >
+                    Something went wrong
+                  </Text>
                 </Box>
               ) : !data?.data?.length ? (
-                <Box
-                  fontFamily={'Poppins'}
-                  fontSize={'11px'}
-                  fontWeight={'500'}
-                  textAlign={'center'}
-                  mt='1rem'
-                >
-                  No Notifications yet
+                <Box mt='2rem'>
+                  <Flex justifyContent={'center'}>
+                    <Icon as={NoNoticationsIcon} w='30px' h='30px' />
+                  </Flex>
+                  <Text
+                    fontFamily='Inter'
+                    fontSize='10px'
+                    lineHeight='20px'
+                    textAlign='center'
+                    color='#929292'
+                    mt='1.1rem'
+                  >
+                    You do not have any notifications yet.
+                  </Text>
                 </Box>
               ) : (
                 data?.data.map(
@@ -200,21 +211,6 @@ const NotificationModal = () => {
                 )
               )}
             </Box>
-            {/* <Box mt='2rem'>
-              <Flex justifyContent={'center'}>
-                <Icon as={NoNoticationsIcon} w='30px' h='30px' />
-              </Flex>
-              <Text
-                fontFamily='Inter'
-                fontSize='10px'
-                lineHeight='20px'
-                textAlign='center'
-                color='#929292'
-                mt='1.1rem'
-              >
-                You do not have any notifications yet.
-              </Text>
-            </Box> */}
           </Box>
         </ModalContent>
       </Modal>
