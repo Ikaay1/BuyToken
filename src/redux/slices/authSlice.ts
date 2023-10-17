@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 import type {PayloadAction} from '@reduxjs/toolkit';
 
@@ -25,6 +25,12 @@ export const userSlice = createSlice({
       state.token = payload.token;
       state.userProfile = payload.data;
     },
+    setUserProfile: (
+      state,
+      {payload: {payload}}: PayloadAction<{payload: any}>,
+    ) => {
+      state.userProfile = payload.data;
+    },
     setData: (state, {payload: {payload}}: PayloadAction<{payload: any}>) => {
       state.data = payload;
     },
@@ -37,6 +43,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const {setCredentials, setData, logout, clearData} = userSlice.actions;
+export const {setCredentials, setData, logout, clearData, setUserProfile} =
+  userSlice.actions;
 
 export default userSlice.reducer;

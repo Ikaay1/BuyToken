@@ -102,7 +102,7 @@ const Balance = () => {
                 lineHeight={'48px'}
                 mt={show ? '0' : '.88rem'}
               >
-                {!show ? '*********' : data?.data?.balance}
+                {!show ? '*********' : `₦${data?.data?.balance}`}
               </Text>
             )}
           </Box>

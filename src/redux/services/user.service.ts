@@ -25,7 +25,17 @@ export const userApi = createApi({
       }),
       providesTags: ['User'],
     }),
+    uploadProfilePicture: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `users/update/profile/pics`,
+        method: 'POST',
+        body: body,
+        formData: true,
+        headers: {},
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
-export const {useGetUserWalletQuery} = userApi;
+export const {useGetUserWalletQuery, useUploadProfilePictureMutation} = userApi;

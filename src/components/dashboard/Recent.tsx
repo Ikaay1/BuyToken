@@ -1,3 +1,4 @@
+import {useRouter} from 'next/router';
 import React from 'react';
 
 import InflowIcon from '@/assets/InflowIcon';
@@ -26,6 +27,7 @@ import EachTransactionModalMobile from '../transaction-history/EachTransactionMo
 import TransactionEmptyState from './TransactionEmptyState';
 
 const Recent = () => {
+  const router = useRouter();
   const {data, isFetching} = useGetRecentTransactionsQuery('');
   return (
     <Box
@@ -61,6 +63,8 @@ const Recent = () => {
             fontSize='14px'
             color='#929292'
             mr='.5rem'
+            cursor='pointer'
+            onClick={() => router.push('transaction-history')}
           >
             View all
           </Text>

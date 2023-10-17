@@ -76,7 +76,7 @@ const TransactHistory = () => {
           alignItems={'center'}
           px='.6rem'
         >
-          {data?.totalContent || '--'} transactions
+          {!data ? '--' : data?.totalContent} transactions
         </Text>
       </Flex>
 
