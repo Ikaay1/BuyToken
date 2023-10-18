@@ -29,6 +29,7 @@ import TransactionEmptyState from './TransactionEmptyState';
 const Recent = () => {
   const router = useRouter();
   const {data, isFetching} = useGetRecentTransactionsQuery('');
+  console.log('Transactions', data);
   return (
     <Box
       minH={{base: '285px', lg: '599px'}}

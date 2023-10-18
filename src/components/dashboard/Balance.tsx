@@ -9,7 +9,7 @@ import {Box, Flex, Icon, Image, Skeleton, Text} from '@chakra-ui/react';
 import FundWalletModal from './FundWalletModal';
 
 const Balance = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const {data, isFetching} = useGetUserWalletQuery('');
   console.log('Wallet', data);
   return (
@@ -79,7 +79,7 @@ const Balance = () => {
           >
             <Icon as={WalletIcon} width='36.42px' height='33.48px' />
           </Box>
-          <Box>
+          <Box minW='185px'>
             <Text
               textAlign={'center'}
               fontFamily='Inter'
@@ -89,7 +89,9 @@ const Balance = () => {
             >
               Balance
             </Text>
-            {isFetching && <Skeleton h='20px' w='140px' mt='1rem'></Skeleton>}
+            {isFetching && (
+              <Skeleton h='20px' w='150px' mt='1rem' mx='auto'></Skeleton>
+            )}
             {data?.data?.balance && (
               <Text
                 fontFamily='Raleway'
@@ -101,8 +103,9 @@ const Balance = () => {
                 color='#313131'
                 lineHeight={'48px'}
                 mt={show ? '0' : '.88rem'}
+                textAlign={'center'}
               >
-                {!show ? '*********' : `₦${data?.data?.balance}`}
+                {!show ? '*********' : `₦${data?.data?.balance}.00`}
               </Text>
             )}
           </Box>
