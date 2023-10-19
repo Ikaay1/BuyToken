@@ -15,7 +15,9 @@ import EditUtilities from './EditUtilities';
 import UpdateUtilities from './UpdateUtilities';
 
 const FrequentlyUsed = () => {
-  const utilities = useAppSelector((state) => state?.app?.utility?.utilities);
+  const utilities =
+    useAppSelector((state) => state?.app?.user?.userProfile?.favBillers) || [];
+  console.log('utilities', utilities);
   const [edit, setEdit] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -39,7 +41,7 @@ const FrequentlyUsed = () => {
         >
           Frequently used
         </Text>
-        {utilities?.length === 4 && !edit && (
+        {utilities?.length > 0 && !edit && (
           <Icon
             as={EditIcon}
             onClick={() => setEdit(true)}
@@ -77,7 +79,7 @@ const FrequentlyUsed = () => {
               <EditUtilities />
             </Flex>
           ) : (
-            <Box key={each?.name} w={{base: '20%', lg: 'auto'}}>
+            <Box key={each} w={{base: '20%', lg: 'auto'}}>
               <Flex
                 width={{base: '100%', lg: '82.23px'}}
                 height={{base: '68.35px', lg: '83.69px'}}
@@ -88,24 +90,24 @@ const FrequentlyUsed = () => {
                 cursor='pointer'
                 position={'relative'}
                 onClick={() => {
-                  dispatch(setUtility({payload: {name: each?.name}}));
+                  dispatch(setUtility({payload: {name: each}}));
                   router.push('/utility');
                 }}
               >
                 <Icon
                   as={
-                    each?.name === 'Electricity'
+                    each === 'Electricity'
                       ? BulbIcon
-                      : each?.name === 'Airtime'
+                      : each === 'Airtime'
                       ? PhoneIcon
-                      : each?.name === 'Data'
+                      : each === 'Data'
                       ? InternetIcon
                       : ComputerIcon
                   }
                   w={{base: '14.17px', lg: '28.78px'}}
                   h={{base: '20px', lg: '41.84px'}}
                 />
-                {edit && <UpdateUtilities utility={each?.name} />}
+                {edit && <UpdateUtilities utility={each} />}
               </Flex>
               <Text
                 fontFamily='Poppins'
@@ -114,7 +116,7 @@ const FrequentlyUsed = () => {
                 color='#313131'
                 mt='.5rem'
               >
-                {each?.name}
+                {each}
               </Text>
             </Box>
           ),

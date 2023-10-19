@@ -82,7 +82,7 @@ const FundWalletModal = () => {
                 {name: 'Account Name:', value: accountName},
                 {name: 'Bank Name:', value: bankName},
               ].map(({name, value}) => (
-                <>
+                <React.Fragment key={name}>
                   <Flex justifyContent={'space-between'} mt='1rem'>
                     <Text fontFamily='Inter' fontSize='14px' color='#929292'>
                       {name}
@@ -98,7 +98,7 @@ const FundWalletModal = () => {
                       border='1px solid #929292'
                     />
                   )}
-                </>
+                </React.Fragment>
               ))}
               <Flex mt='3rem'>
                 <Icon as={InfoIcon} width='24px' height='24px' />
