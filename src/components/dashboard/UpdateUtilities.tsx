@@ -9,6 +9,8 @@ import EditIcon from '@/assets/EditIcon';
 import ElectricityIcon from '@/assets/ElectricityIcon';
 import RightVector from '@/assets/RightVector';
 import {useAppDispatch} from '@/redux/app/hooks';
+import {useUpdateFavoriteUtilitiesMutation} from '@/redux/services/utilities.service';
+import {setUserProfile} from '@/redux/slices/authSlice';
 import {updateUtilities} from '@/redux/slices/utilitySlice';
 import {
   Box,
@@ -19,16 +21,23 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 
 const UpdateUtilities = ({utility}: {utility: string}) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const dispatch = useAppDispatch();
+  const [updateFavoriteUtilities, updateFavoriteUtilitiesStatus] =
+    useUpdateFavoriteUtilitiesMutation();
+  const toast = useToast();
   return (
     <>
       <Icon
         as={AddIcon}
-        onClick={onOpen}
+        onClick={(e) => {
+          e.stopPropagation();
+          onOpen();
+        }}
         cursor={'pointer'}
         position='absolute'
         bottom='-4px'
@@ -79,10 +88,31 @@ const UpdateUtilities = ({utility}: {utility: string}) => {
                   cursor='pointer'
                   key={name}
                   onClick={() => {
-                    dispatch(
-                      updateUtilities({
-                        payload: {modal: name, frequently: utility},
-                      }),
+                    console.log('updateUtil', {new: name, old: utility});
+                    updateFavoriteUtilities({new: name, old: utility}).then(
+                      (res: any) => {
+                        console.log('updateUtilities', res);
+                        if (res?.data?.data) {
+                          dispatch(
+                            setUserProfile({
+                              payload: {
+                                data: res?.data?.data,
+                              },
+                            }),
+                          );
+                        } else {
+                          toast({
+                            title: 'Updating failed',
+                            description:
+                              res?.error?.data?.message ||
+                              'Something went wrong',
+                            status: 'error',
+                            duration: 3000,
+                            isClosable: true,
+                            position: 'top-right',
+                          });
+                        }
+                      },
                     );
                     onClose();
                   }}

@@ -26,6 +26,7 @@ import {electricityApi} from '../services/electricity.service';
 import {notificationsApi} from '../services/notifications.service';
 import {transactionsApi} from '../services/transactions.service';
 import {userApi} from '../services/user.service';
+import {utilitiesApi} from '../services/utilities.service';
 
 const persistConfig = {
   key: 'root',
@@ -47,6 +48,7 @@ export const store: any = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [transactionsApi.reducerPath]: transactionsApi.reducer,
     [notificationsApi.reducerPath]: notificationsApi.reducer,
+    [utilitiesApi.reducerPath]: utilitiesApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -59,6 +61,7 @@ export const store: any = configureStore({
       userApi.middleware,
       transactionsApi.middleware,
       notificationsApi.middleware,
+      utilitiesApi.middleware,
     ]),
 });
 

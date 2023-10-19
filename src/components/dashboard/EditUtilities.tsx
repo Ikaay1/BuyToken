@@ -9,6 +9,8 @@ import EditIcon from '@/assets/EditIcon';
 import ElectricityIcon from '@/assets/ElectricityIcon';
 import RightVector from '@/assets/RightVector';
 import {useAppDispatch} from '@/redux/app/hooks';
+import {useAddFavoriteUtilitiesMutation} from '@/redux/services/utilities.service';
+import {setUserProfile} from '@/redux/slices/authSlice';
 import {setUtilities} from '@/redux/slices/utilitySlice';
 import {
   Box,
@@ -19,11 +21,15 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 
 const EditUtilities = () => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const dispatch = useAppDispatch();
+  const [addFavoriteUtilities, addFavoriteUtilitiesStatus] =
+    useAddFavoriteUtilitiesMutation();
+  const toast = useToast();
   return (
     <>
       <Icon as={AddIcon} onClick={onOpen} cursor={'pointer'} />
@@ -72,11 +78,28 @@ const EditUtilities = () => {
                   cursor='pointer'
                   key={name}
                   onClick={() => {
-                    dispatch(
-                      setUtilities({
-                        payload: {name},
-                      }),
-                    );
+                    addFavoriteUtilities({name}).then((res: any) => {
+                      console.log('favUtilities', res);
+                      if (res?.data?.data) {
+                        dispatch(
+                          setUserProfile({
+                            payload: {
+                              data: res?.data?.data,
+                            },
+                          }),
+                        );
+                      } else {
+                        toast({
+                          title: 'Addition failed',
+                          description:
+                            res?.error?.data?.message || 'Something went wrong',
+                          status: 'error',
+                          duration: 3000,
+                          isClosable: true,
+                          position: 'top-right',
+                        });
+                      }
+                    });
                     onClose();
                   }}
                 >
