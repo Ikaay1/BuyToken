@@ -24,7 +24,13 @@ import {
   useToast,
 } from '@chakra-ui/react';
 
-const UpdateUtilities = ({utility}: {utility: string}) => {
+const UpdateUtilities = ({
+  utility,
+  setLoading,
+}: {
+  utility: string;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const dispatch = useAppDispatch();
   const [updateFavoriteUtilities, updateFavoriteUtilitiesStatus] =
@@ -89,6 +95,7 @@ const UpdateUtilities = ({utility}: {utility: string}) => {
                   key={name}
                   onClick={() => {
                     console.log('updateUtil', {new: name, old: utility});
+                    setLoading(true);
                     updateFavoriteUtilities({new: name, old: utility}).then(
                       (res: any) => {
                         console.log('updateUtilities', res);
@@ -100,6 +107,7 @@ const UpdateUtilities = ({utility}: {utility: string}) => {
                               },
                             }),
                           );
+                          setLoading(false);
                         } else {
                           toast({
                             title: 'Updating failed',
@@ -111,6 +119,7 @@ const UpdateUtilities = ({utility}: {utility: string}) => {
                             isClosable: true,
                             position: 'top-right',
                           });
+                          setLoading(false);
                         }
                       },
                     );
