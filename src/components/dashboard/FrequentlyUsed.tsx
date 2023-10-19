@@ -9,7 +9,7 @@ import InternetIcon from '@/assets/InternetIcon';
 import PhoneIcon from '@/assets/PhoneIcon';
 import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
 import {setUtility} from '@/redux/slices/serviceSlice';
-import {Box, Flex, Icon, Text} from '@chakra-ui/react';
+import {Box, Flex, Icon, Skeleton, Text} from '@chakra-ui/react';
 
 import EditUtilities from './EditUtilities';
 import UpdateUtilities from './UpdateUtilities';
@@ -19,6 +19,7 @@ const FrequentlyUsed = () => {
     useAppSelector((state) => state?.app?.user?.userProfile?.favBillers) || [];
   console.log('utilities', utilities);
   const [edit, setEdit] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
   return (
@@ -64,63 +65,74 @@ const FrequentlyUsed = () => {
         )}
       </Flex>
       <Flex mt='1.6rem' justifyContent={'space-between'}>
-        {[...utilities, ...Array(4 - utilities.length).keys()].map((each) =>
-          typeof each === 'number' ? (
-            <Flex
-              w={{base: '21%', lg: '23%'}}
-              maxWidth='82.23px'
-              height={{base: '75px', md: '83.69px'}}
-              background='#F5F5F5'
-              borderRadius='4.70398px'
-              justifyContent={'center'}
-              alignItems={'center'}
-              key={each}
-            >
-              <EditUtilities />
-            </Flex>
-          ) : (
-            <Box key={each} w={{base: '20%', lg: 'auto'}}>
-              <Flex
-                width={{base: '100%', lg: '82.23px'}}
-                height={{base: '68.35px', lg: '83.69px'}}
-                background='#DBEFE3'
-                borderRadius='4.70398px'
-                justifyContent={'center'}
-                alignItems={'center'}
-                cursor='pointer'
-                position={'relative'}
-                onClick={() => {
-                  dispatch(setUtility({payload: {name: each}}));
-                  router.push('/utility');
-                }}
-              >
-                <Icon
-                  as={
-                    each === 'Electricity'
-                      ? BulbIcon
-                      : each === 'Airtime'
-                      ? PhoneIcon
-                      : each === 'Data'
-                      ? InternetIcon
-                      : ComputerIcon
-                  }
-                  w={{base: '14.17px', lg: '28.78px'}}
-                  h={{base: '20px', lg: '41.84px'}}
-                />
-                {edit && <UpdateUtilities utility={each} />}
-              </Flex>
-              <Text
-                fontFamily='Poppins'
-                fontSize={{base: '12px', lg: '13px'}}
-                textAlign='center'
-                color='#313131'
-                mt='.5rem'
-              >
-                {each}
-              </Text>
-            </Box>
-          ),
-        )}
+        {loading
+          ? [1, 2, 3, 4].map((each) => (
+              <Skeleton
+                key={each}
+                w={{base: '21%', lg: '23%'}}
+                maxWidth='82.23px'
+                height={{base: '75px', md: '83.69px'}}
+              ></Skeleton>
+            ))
+          : [...utilities, ...Array(4 - utilities.length).keys()].map((each) =>
+              typeof each === 'number' ? (
+                <Flex
+                  w={{base: '21%', lg: '23%'}}
+                  maxWidth='82.23px'
+                  height={{base: '75px', md: '83.69px'}}
+                  background='#F5F5F5'
+                  borderRadius='4.70398px'
+                  justifyContent={'center'}
+                  alignItems={'center'}
+                  key={each}
+                >
+                  <EditUtilities setLoading={setLoading} />
+                </Flex>
+              ) : (
+                <Box key={each} w={{base: '20%', lg: 'auto'}}>
+                  <Flex
+                    width={{base: '100%', lg: '82.23px'}}
+                    height={{base: '68.35px', lg: '83.69px'}}
+                    background='#DBEFE3'
+                    borderRadius='4.70398px'
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    cursor='pointer'
+                    position={'relative'}
+                    onClick={() => {
+                      dispatch(setUtility({payload: {name: each}}));
+                      router.push('/utility');
+                    }}
+                  >
+                    <Icon
+                      as={
+                        each === 'Electricity'
+                          ? BulbIcon
+                          : each === 'Airtime'
+                          ? PhoneIcon
+                          : each === 'Data'
+                          ? InternetIcon
+                          : ComputerIcon
+                      }
+                      w={{base: '14.17px', lg: '28.78px'}}
+                      h={{base: '20px', lg: '41.84px'}}
+                    />
+                    {edit && (
+                      <UpdateUtilities utility={each} setLoading={setLoading} />
+                    )}
+                  </Flex>
+                  <Text
+                    fontFamily='Poppins'
+                    fontSize={{base: '12px', lg: '13px'}}
+                    textAlign='center'
+                    color='#313131'
+                    mt='.5rem'
+                  >
+                    {each}
+                  </Text>
+                </Box>
+              ),
+            )}
       </Flex>
       {!utilities?.length && (
         <Text

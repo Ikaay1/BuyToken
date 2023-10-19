@@ -24,7 +24,11 @@ import {
   useToast,
 } from '@chakra-ui/react';
 
-const EditUtilities = () => {
+const EditUtilities = ({
+  setLoading,
+}: {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const dispatch = useAppDispatch();
   const [addFavoriteUtilities, addFavoriteUtilitiesStatus] =
@@ -78,6 +82,7 @@ const EditUtilities = () => {
                   cursor='pointer'
                   key={name}
                   onClick={() => {
+                    setLoading(true);
                     addFavoriteUtilities({name}).then((res: any) => {
                       console.log('favUtilities', res);
                       if (res?.data?.data) {
@@ -88,6 +93,7 @@ const EditUtilities = () => {
                             },
                           }),
                         );
+                        setLoading(false);
                       } else {
                         toast({
                           title: 'Addition failed',
@@ -98,6 +104,7 @@ const EditUtilities = () => {
                           isClosable: true,
                           position: 'top-right',
                         });
+                        setLoading(false);
                       }
                     });
                     onClose();
