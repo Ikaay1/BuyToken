@@ -76,18 +76,7 @@ const FrequentlyUsed = () => {
             ))
           : [...utilities, ...Array(4 - utilities.length).keys()].map((each) =>
               typeof each === 'number' ? (
-                <Flex
-                  w={{base: '21%', lg: '23%'}}
-                  maxWidth='82.23px'
-                  height={{base: '75px', md: '83.69px'}}
-                  background='#F5F5F5'
-                  borderRadius='4.70398px'
-                  justifyContent={'center'}
-                  alignItems={'center'}
-                  key={each}
-                >
-                  <EditUtilities setLoading={setLoading} />
-                </Flex>
+                <EditUtilities key={each} setLoading={setLoading} />
               ) : (
                 <Box key={each} w={{base: '20%', lg: 'auto'}}>
                   <Flex

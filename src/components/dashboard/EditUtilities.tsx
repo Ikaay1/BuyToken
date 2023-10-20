@@ -36,7 +36,19 @@ const EditUtilities = ({
   const toast = useToast();
   return (
     <>
-      <Icon as={AddIcon} onClick={onOpen} cursor={'pointer'} />
+      <Flex
+        w={{base: '21%', lg: '23%'}}
+        maxWidth='82.23px'
+        height={{base: '75px', md: '83.69px'}}
+        background='#F5F5F5'
+        borderRadius='4.70398px'
+        justifyContent={'center'}
+        alignItems={'center'}
+        onClick={onOpen}
+        cursor={'pointer'}
+      >
+        <Icon as={AddIcon} />
+      </Flex>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay bg='token.modalOverlay' />
         <ModalContent justifyContent={'center'} alignItems={'center'}>
