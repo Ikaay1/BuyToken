@@ -35,7 +35,21 @@ export const userApi = createApi({
       }),
       invalidatesTags: ['User'],
     }),
+    getUser: builder.query<any, any>({
+      query: () => ({
+        url: `users`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      providesTags: ['User'],
+    }),
   }),
 });
 
-export const {useGetUserWalletQuery, useUploadProfilePictureMutation} = userApi;
+export const {
+  useGetUserWalletQuery,
+  useUploadProfilePictureMutation,
+  useGetUserQuery,
+} = userApi;
