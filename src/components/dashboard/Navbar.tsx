@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import NavbarSearchIcon from '@/assets/NavbarSearchIcon';
+import {useAppDispatch} from '@/redux/app/hooks';
+import {useGetUserQuery} from '@/redux/services/user.service';
+import {setUserProfile} from '@/redux/slices/authSlice';
 import {
   Flex,
   Icon,
@@ -14,6 +17,21 @@ import NotificationModal from './NotificationModal';
 import SidebarHamburgerMenu from './SidebarHamburgerMenu';
 
 const Navbar = () => {
+  const {data} = useGetUserQuery('');
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(
+        setUserProfile({
+          payload: {
+            data,
+          },
+        }),
+      );
+    }
+  }, [data]);
+
   return (
     <Flex
       alignItems={'center'}
