@@ -74,7 +74,7 @@ const Social = ({
                     description:
                       res?.error?.data?.message || 'Something went wrong',
                     status: 'error',
-                    duration: 3000,
+                    duration: 8000,
                     isClosable: true,
                     position: 'top-right',
                   });
@@ -86,7 +86,7 @@ const Social = ({
                   description:
                     res?.error?.data?.message || 'Something went wrong',
                   status: 'error',
-                  duration: 3000,
+                  duration: 8000,
                   isClosable: true,
                   position: 'top-right',
                 });
@@ -116,7 +116,7 @@ const Social = ({
                     res?.data?.message ||
                     'Something went wrong',
                   status: 'error',
-                  duration: 3000,
+                  duration: 8000,
                   isClosable: true,
                   position: 'top-right',
                 });
@@ -166,7 +166,7 @@ const Social = ({
                   description:
                     res?.error?.data?.message || 'Something went wrong',
                   status: 'error',
-                  duration: 3000,
+                  duration: 8000,
                   isClosable: true,
                   position: 'top-right',
                 });
@@ -178,7 +178,7 @@ const Social = ({
                 description:
                   res?.error?.data?.message || 'Something went wrong',
                 status: 'error',
-                duration: 3000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });
@@ -192,7 +192,7 @@ const Social = ({
               description:
                 'No email registered to this facebook account. Please use a facebook account that has an email registered to it to signup',
               status: 'error',
-              duration: 7000,
+              duration: 8000,
               position: 'top-right',
               isClosable: true,
             });
@@ -223,7 +223,7 @@ const Social = ({
                   res?.data?.message ||
                   'Something went wrong',
                 status: 'error',
-                duration: 3000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });
@@ -238,7 +238,7 @@ const Social = ({
               description:
                 'No email registered to this facebook account. Please use a facebook account that has an email registered to it and one you have signed up with to login',
               status: 'error',
-              duration: 7000,
+              duration: 8000,
               position: 'top-right',
               isClosable: true,
             });

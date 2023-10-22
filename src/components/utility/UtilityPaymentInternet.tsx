@@ -1,28 +1,28 @@
-import { Field, Form, Formik } from 'formik';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import {Field, Form, Formik} from 'formik';
+import {useRouter} from 'next/router';
+import React, {useEffect, useState} from 'react';
 import * as Yup from 'yup';
 
 import IdCardIcon from '@/assets/IdCardIcon';
-import { ElectricityDetailsInterface } from '@/constants/interface';
-import { useAppSelector } from '@/redux/app/hooks';
+import {ElectricityDetailsInterface} from '@/constants/interface';
+import {useAppSelector} from '@/redux/app/hooks';
 import {
-	useBuyDataMutation,
-	usePriceListMutation,
+  useBuyDataMutation,
+  usePriceListMutation,
 } from '@/redux/services/electricity.service';
 import {
-	Box,
-	Button,
-	Flex,
-	FormControl,
-	FormErrorMessage,
-	Icon,
-	Input,
-	InputGroup,
-	InputRightElement,
-	Select,
-	Text,
-	useToast,
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  Icon,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Select,
+  Text,
+  useToast,
 } from '@chakra-ui/react';
 
 const UtilityPaymentInternet = ({
@@ -58,7 +58,7 @@ const UtilityPaymentInternet = ({
             res?.error?.data?.message ||
             "Couldn't fetch data data list. Something went wrong",
           status: 'error',
-          duration: 3000,
+          duration: 8000,
           isClosable: true,
           position: 'top-right',
         });
@@ -86,7 +86,7 @@ const UtilityPaymentInternet = ({
               title: 'Invalid phone number',
               description: 'Please enter a valid phone number',
               status: 'error',
-              duration: 3000,
+              duration: 8000,
               isClosable: true,
               position: 'top-right',
             });
@@ -98,7 +98,7 @@ const UtilityPaymentInternet = ({
               description:
                 'Phone number must be in the format of the placeholder',
               status: 'error',
-              duration: 3000,
+              duration: 8000,
               isClosable: true,
               position: 'top-right',
             });
@@ -124,7 +124,7 @@ const UtilityPaymentInternet = ({
                 title: 'Purchase successful',
                 description: 'Your purchase has been successful',
                 status: 'success',
-                duration: 5000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });
@@ -137,7 +137,7 @@ const UtilityPaymentInternet = ({
                   res?.data?.message ||
                   "Couldn't make the purchase. Something went wrong",
                 status: 'error',
-                duration: 3000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });

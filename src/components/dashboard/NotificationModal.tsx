@@ -158,6 +158,7 @@ const NotificationModal = () => {
                     message: string;
                     readStatus: boolean;
                     _id: string;
+                    createdAt: string;
                   }) => (
                     <Box key={each._id} mt='.34rem'>
                       <Flex
@@ -201,6 +202,14 @@ const NotificationModal = () => {
                           {each?.message}
                         </Text>
                       </Flex>
+                      <Text
+                        fontFamily='Inter'
+                        fontSize='10px'
+                        color='#929292'
+                        mt='.28rem'
+                      >
+                        {new Date(each?.createdAt).toUTCString().slice(0, 16)}
+                      </Text>
                       <Divider
                         mt='.34rem'
                         width='100%'

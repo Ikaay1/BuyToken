@@ -59,7 +59,7 @@ const UtilityPaymentCable = ({
             response?.error?.data?.message ||
             "Couldn't fetch price list. Something went wrong",
           status: 'error',
-          duration: 3000,
+          duration: 8000,
           isClosable: true,
           position: 'top-right',
         });
@@ -122,7 +122,7 @@ const UtilityPaymentCable = ({
                   description:
                     res?.error?.data?.message || "Couldn't verify customer",
                   status: 'error',
-                  duration: 3000,
+                  duration: 8000,
                   isClosable: true,
                   position: 'top-right',
                 });
@@ -262,7 +262,7 @@ const UtilityPaymentCable = ({
                 title: 'Wrong Meter Details',
                 description: 'Please give a correct Meter Details',
                 status: 'error',
-                duration: 3000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });
@@ -287,7 +287,7 @@ const UtilityPaymentCable = ({
                   title: 'Purchase successful',
                   description: 'Your purchase has been successful',
                   status: 'success',
-                  duration: 5000,
+                  duration: 8000,
                   isClosable: true,
                   position: 'top-right',
                 });
@@ -300,7 +300,7 @@ const UtilityPaymentCable = ({
                     res?.data?.message ||
                     "Couldn't make the purchase. Something went wrong",
                   status: 'error',
-                  duration: 3000,
+                  duration: 8000,
                   isClosable: true,
                   position: 'top-right',
                 });

@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
 import BackArrowIcon from '@/assets/BackArrowIcon';
-import {useAppSelector} from '@/redux/app/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
+import {clearUtility} from '@/redux/slices/serviceSlice';
 import {Box, Flex, Icon, Text} from '@chakra-ui/react';
 
 import Service from './Service';
@@ -67,6 +68,7 @@ const UtilityServices = () => {
   });
   const utility = useAppSelector((state) => state?.utility?.utility);
   console.log('utility', utility);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (utility) {
@@ -76,6 +78,7 @@ const UtilityServices = () => {
       } else {
         setProvider('Internet');
       }
+      dispatch(clearUtility({payload: {}}));
     }
   }, [utility]);
 

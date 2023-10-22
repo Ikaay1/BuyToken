@@ -53,7 +53,7 @@ const LoginForm = () => {
             //   title: 'Login Successful',
             //   description: 'You have successfully logged in',
             //   status: 'success',
-            //   duration: 5000,
+            //   duration: 8000,
             //   isClosable: true,
             //   position: 'top-right',
             // });
@@ -81,7 +81,7 @@ const LoginForm = () => {
                     description:
                       'Your email has not been verified. An OTP has been sent to your Email for verification',
                     status: 'success',
-                    duration: 5000,
+                    duration: 8000,
                     isClosable: true,
                     position: 'top-right',
                   });
@@ -94,7 +94,7 @@ const LoginForm = () => {
                       response?.data?.message ||
                       'Something went wrong',
                     status: 'error',
-                    duration: 3000,
+                    duration: 8000,
                     isClosable: true,
                     position: 'top-right',
                   });
@@ -120,7 +120,7 @@ const LoginForm = () => {
                     description:
                       'Your Mobile Number has not been verified. An OTP has been sent to your Mobile Number for verification',
                     status: 'success',
-                    duration: 5000,
+                    duration: 8000,
                     isClosable: true,
                     position: 'top-right',
                   });
@@ -133,7 +133,7 @@ const LoginForm = () => {
                       response?.data?.message ||
                       'Something went wrong',
                     status: 'error',
-                    duration: 3000,
+                    duration: 8000,
                     isClosable: true,
                     position: 'top-right',
                   });
@@ -148,7 +148,7 @@ const LoginForm = () => {
                 res?.data?.message ||
                 'Something went wrong',
               status: 'error',
-              duration: 3000,
+              duration: 8000,
               isClosable: true,
               position: 'top-right',
             });

@@ -63,7 +63,12 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
             justifyContent={'space-between'}
             alignItems={'center'}
           >
-            <Image src='/assets/bt_logo.png' w='47px' h='46px' alt='Bt logo' />
+            <Image
+              src='/assets/bt_logo.png'
+              w={{base: '47px', lg: '86px'}}
+              h={{base: '46px', lg: '84px'}}
+              alt='Bt logo'
+            />
             <Icon
               onClick={onClose}
               as={CloseIcon}
@@ -72,7 +77,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
               display={{lg: 'none'}}
             />
           </Flex>
-          <Box ml='1.7rem' mt='4.5rem'>
+          <Box ml='1.7rem' mt='4rem'>
             <Flex alignItems={'center'} pr='.6rem'>
               <Box position={'relative'} mr='.7rem'>
                 <Image
@@ -131,7 +136,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                             description:
                               'Your profile picture has been successfully updated',
                             status: 'success',
-                            duration: 5000,
+                            duration: 8000,
                             isClosable: true,
                             position: 'top-right',
                           });
@@ -149,7 +154,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                               res?.error?.data?.message ||
                               'Something went wrong',
                             status: 'error',
-                            duration: 3000,
+                            duration: 8000,
                             isClosable: true,
                             position: 'top-right',
                           });
@@ -161,7 +166,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                         title: 'Image type error',
                         description: 'Please choose a jpeg or png image type',
                         status: 'error',
-                        duration: 3000,
+                        duration: 8000,
                         isClosable: true,
                         position: 'top-right',
                       });

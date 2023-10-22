@@ -115,7 +115,7 @@ const UpdateUtilities = ({
                               res?.error?.data?.message ||
                               'Something went wrong',
                             status: 'error',
-                            duration: 3000,
+                            duration: 8000,
                             isClosable: true,
                             position: 'top-right',
                           });

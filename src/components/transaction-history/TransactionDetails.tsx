@@ -2,7 +2,7 @@ import React from 'react';
 
 import CloseIcon from '@/assets/CloseIcon';
 import {TransactionInterface} from '@/constants/interface';
-import {Box, Flex, Icon, Text} from '@chakra-ui/react';
+import {Box, Button, Flex, Icon, Text} from '@chakra-ui/react';
 
 const TransactionDetails = ({
   onClose,
@@ -11,13 +11,24 @@ const TransactionDetails = ({
   onClose: () => void;
   eachTransaction: TransactionInterface;
 }) => {
+  function formatAMPM(date: any) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+
   return (
     <Box
       width={{base: '100%', lg: '441px'}}
       background='#FFFFFF'
       borderRadius='10px'
       pt='1.3rem'
-      pb='3rem'
+      pb='.9rem'
     >
       <Flex justifyContent={'flex-end'} pr='1.3rem'>
         <Icon
@@ -45,14 +56,16 @@ const TransactionDetails = ({
               header1: 'Reference No.',
               header2: 'Date',
               value1: eachTransaction?.refNumber,
-              value2: new Date(eachTransaction?.createdAt)
+              value2: `${formatAMPM(
+                new Date(eachTransaction?.createdAt),
+              )}, ${new Date(eachTransaction?.createdAt)
                 .toString()
-                .slice(0, 15),
+                .slice(0, 15)}`,
             },
             {
               header1: 'Amount',
               header2: 'Type',
-              value1: `₦${eachTransaction?.amount}`,
+              value1: `₦${eachTransaction?.amount?.toLocaleString()}`,
               value2:
                 eachTransaction?.billerType[0]?.toUpperCase() +
                 eachTransaction?.billerType.slice(1),
@@ -120,6 +133,22 @@ const TransactionDetails = ({
               {eachTransaction?.description}
             </Text>
           </Box>
+          <Flex justifyContent={'center'}>
+            <Button
+              width='132px'
+              height='33px'
+              background='#417657'
+              boxShadow='0px 24.2056px 48.4112px 7.26168px rgba(0, 0, 0, 0.1)'
+              borderRadius='5px'
+              fontFamily='Raleway'
+              fontWeight='500'
+              fontSize='13px'
+              color='#FFFFFF'
+              mt='2.5rem'
+            >
+              Generate Receipt
+            </Button>
+          </Flex>
         </Box>
       </Box>
     </Box>

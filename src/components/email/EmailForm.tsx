@@ -35,7 +35,7 @@ const EmailForm = () => {
               title: 'OTP sent to Email',
               description: 'An OTP has been sent to your Email',
               status: 'success',
-              duration: 5000,
+              duration: 8000,
               isClosable: true,
               position: 'top-right',
             });
@@ -56,7 +56,7 @@ const EmailForm = () => {
                 response?.data?.message ||
                 'Something went wrong',
               status: 'error',
-              duration: 3000,
+              duration: 8000,
               isClosable: true,
               position: 'top-right',
             });

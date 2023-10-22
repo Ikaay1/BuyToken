@@ -1,13 +1,13 @@
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import {useRouter} from 'next/router';
+import React, {useState} from 'react';
 import OTPInput from 'react-otp-input';
 
-import { useAppSelector } from '@/redux/app/hooks';
+import {useAppSelector} from '@/redux/app/hooks';
 import {
-	useSendOTPToMobileMutation,
-	useValidateEmailOtpMutation,
+  useSendOTPToMobileMutation,
+  useValidateEmailOtpMutation,
 } from '@/redux/services/auth.service';
-import { Box, Button, useToast } from '@chakra-ui/react';
+import {Box, Button, useToast} from '@chakra-ui/react';
 
 const EmailOtpInputForm = () => {
   const [otp, setOtp] = useState('');
@@ -89,7 +89,7 @@ const EmailOtpInputForm = () => {
                 title: 'Email verified successfully',
                 description: 'Your email has successfully been verified',
                 status: 'success',
-                duration: 5000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });
@@ -101,7 +101,7 @@ const EmailOtpInputForm = () => {
                   title: 'OTP sent to Phone Number',
                   description: 'An OTP has been sent to your Mobile Number',
                   status: 'success',
-                  duration: 5000,
+                  duration: 8000,
                   isClosable: true,
                   position: 'top-right',
                 });
@@ -114,7 +114,7 @@ const EmailOtpInputForm = () => {
                     response?.data?.message ||
                     'Something went wrong',
                   status: 'error',
-                  duration: 3000,
+                  duration: 8000,
                   isClosable: true,
                   position: 'top-right',
                 });
@@ -127,7 +127,7 @@ const EmailOtpInputForm = () => {
                   res?.data?.message ||
                   'Something went wrong',
                 status: 'error',
-                duration: 3000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });

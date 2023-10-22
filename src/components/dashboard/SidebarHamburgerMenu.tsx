@@ -34,6 +34,7 @@ const SidebarHamburgerMenu = () => {
         onClick={onOpen}
         w='22.5px'
         h='18.2px'
+        ml={'1rem'}
       />
       <Modal
         isCentered
@@ -53,7 +54,7 @@ const SidebarHamburgerMenu = () => {
           position={'absolute'}
           left={0}
           background='#FAF9F6'
-          pt='6rem'
+          pt='5rem'
         >
           <Sidebar onClose={onClose} />
         </ModalContent>

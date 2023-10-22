@@ -7,6 +7,7 @@ import ComputerIcon from '@/assets/ComputerIcon';
 import EditIcon from '@/assets/EditIcon';
 import InternetIcon from '@/assets/InternetIcon';
 import PhoneIcon from '@/assets/PhoneIcon';
+import RemoveIcon from '@/assets/RemoveIcon';
 import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
 import {setUtility} from '@/redux/slices/serviceSlice';
 import {Box, Flex, Icon, Skeleton, Text} from '@chakra-ui/react';
@@ -93,6 +94,18 @@ const FrequentlyUsed = () => {
                       router.push('/utility');
                     }}
                   >
+                    {edit && (
+                      <Icon
+                        position='absolute'
+                        top='-4px'
+                        right='-4px'
+                        as={RemoveIcon}
+                        cursor={'pointer'}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      />
+                    )}
                     <Icon
                       as={
                         each === 'Electricity'

@@ -29,7 +29,7 @@ const ProtectedRoute = ({children}: {children: any}) => {
             title: 'Session expired ',
             position: 'top-right',
             status: 'error',
-            duration: 5000,
+            duration: 8000,
             isClosable: true,
           });
           dispatch(logout());

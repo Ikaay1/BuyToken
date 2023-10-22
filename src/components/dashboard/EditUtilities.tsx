@@ -8,20 +8,20 @@ import DataIcon from '@/assets/DataIcon';
 import EditIcon from '@/assets/EditIcon';
 import ElectricityIcon from '@/assets/ElectricityIcon';
 import RightVector from '@/assets/RightVector';
-import {useAppDispatch} from '@/redux/app/hooks';
-import {useAddFavoriteUtilitiesMutation} from '@/redux/services/utilities.service';
-import {setUserProfile} from '@/redux/slices/authSlice';
-import {setUtilities} from '@/redux/slices/utilitySlice';
+import { useAppDispatch } from '@/redux/app/hooks';
+import { useAddFavoriteUtilitiesMutation } from '@/redux/services/utilities.service';
+import { setUserProfile } from '@/redux/slices/authSlice';
+import { setUtilities } from '@/redux/slices/utilitySlice';
 import {
-  Box,
-  Flex,
-  Icon,
-  Modal,
-  ModalContent,
-  ModalOverlay,
-  Text,
-  useDisclosure,
-  useToast,
+	Box,
+	Flex,
+	Icon,
+	Modal,
+	ModalContent,
+	ModalOverlay,
+	Text,
+	useDisclosure,
+	useToast,
 } from '@chakra-ui/react';
 
 const EditUtilities = ({
@@ -112,7 +112,7 @@ const EditUtilities = ({
                           description:
                             res?.error?.data?.message || 'Something went wrong',
                           status: 'error',
-                          duration: 3000,
+                          duration: 8000,
                           isClosable: true,
                           position: 'top-right',
                         });

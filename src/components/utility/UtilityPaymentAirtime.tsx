@@ -48,7 +48,7 @@ const UtilityPaymentAirtime = ({
               title: 'Invalid phone number',
               description: 'Please enter a valid phone number',
               status: 'error',
-              duration: 3000,
+              duration: 8000,
               isClosable: true,
               position: 'top-right',
             });
@@ -66,7 +66,7 @@ const UtilityPaymentAirtime = ({
                 title: 'Purchase successful',
                 description: 'Your purchase has been successful',
                 status: 'success',
-                duration: 5000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });
@@ -79,7 +79,7 @@ const UtilityPaymentAirtime = ({
                   res?.data?.message ||
                   "Couldn't make the purchase. Something went wrong",
                 status: 'error',
-                duration: 3000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });
@@ -161,7 +161,7 @@ const UtilityPaymentAirtime = ({
                 type='submit'
                 isLoading={buyAirtimeStatus.isLoading}
               >
-                Pay {props.values.amount ? 'N' + props.values.amount : ''}
+                Pay {props.values.amount ? '₦' + props.values.amount : ''}
               </Button>
             </Flex>
           </Form>

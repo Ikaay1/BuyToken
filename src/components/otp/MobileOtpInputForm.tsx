@@ -87,7 +87,7 @@ const MobileOtpInputForm = () => {
                 title: 'Phone Number verified successfully',
                 description: 'Your phone number has successfully been verified',
                 status: 'success',
-                duration: 5000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });
@@ -106,7 +106,7 @@ const MobileOtpInputForm = () => {
                 //   title: 'Sign up Successful',
                 //   description: 'You have successfully signed up',
                 //   status: 'success',
-                //   duration: 5000,
+                //   duration: 8000,
                 //   isClosable: true,
                 //   position: 'top-right',
                 // });
@@ -120,7 +120,7 @@ const MobileOtpInputForm = () => {
                     res?.data?.message ||
                     'Something went wrong',
                   status: 'error',
-                  duration: 3000,
+                  duration: 8000,
                   isClosable: true,
                   position: 'top-right',
                 });
@@ -133,7 +133,7 @@ const MobileOtpInputForm = () => {
                   res?.data?.message ||
                   'Something went wrong',
                 status: 'error',
-                duration: 3000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });

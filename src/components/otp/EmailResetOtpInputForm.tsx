@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import {useRouter} from 'next/router';
+import React, {useState} from 'react';
 import OTPInput from 'react-otp-input';
 
-import { useAppDispatch, useAppSelector } from '@/redux/app/hooks';
-import { useValidateEmailOtpMutation } from '@/redux/services/auth.service';
-import { Box, Button, useToast } from '@chakra-ui/react';
+import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
+import {useValidateEmailOtpMutation} from '@/redux/services/auth.service';
+import {Box, Button, useToast} from '@chakra-ui/react';
 
 const EmailResetOtpInputForm = () => {
   const [otp, setOtp] = useState('');
@@ -83,7 +83,7 @@ const EmailResetOtpInputForm = () => {
                 title: 'Email verified successfully',
                 description: 'Your email has successfully been verified',
                 status: 'success',
-                duration: 5000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });
@@ -96,7 +96,7 @@ const EmailResetOtpInputForm = () => {
                   res?.data?.message ||
                   'Something went wrong',
                 status: 'error',
-                duration: 3000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });
