@@ -53,7 +53,7 @@ const SignupForm = () => {
               title: 'Invalid phone number',
               description: 'Phone number must start with +234',
               status: 'error',
-              duration: 3000,
+              duration: 8000,
               isClosable: true,
               position: 'top-right',
             });
@@ -81,7 +81,7 @@ const SignupForm = () => {
               title: 'OTP sent to Email',
               description: 'An OTP has been sent to your Email',
               status: 'success',
-              duration: 5000,
+              duration: 8000,
               isClosable: true,
               position: 'top-right',
             });
@@ -94,7 +94,7 @@ const SignupForm = () => {
                 res?.data?.message ||
                 'Something went wrong',
               status: 'error',
-              duration: 3000,
+              duration: 8000,
               isClosable: true,
               position: 'top-right',
             });

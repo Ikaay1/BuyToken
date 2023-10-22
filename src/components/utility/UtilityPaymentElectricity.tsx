@@ -114,7 +114,7 @@ const UtilityPaymentElectricity = ({
                   title: 'Purchase successful',
                   description: 'Your purchase has been successful',
                   status: 'success',
-                  duration: 5000,
+                  duration: 8000,
                   isClosable: true,
                   position: 'top-right',
                 });
@@ -127,7 +127,7 @@ const UtilityPaymentElectricity = ({
                     res?.data?.message ||
                     "Couldn't make the purchase. Something went wrong",
                   status: 'error',
-                  duration: 3000,
+                  duration: 8000,
                   isClosable: true,
                   position: 'top-right',
                 });

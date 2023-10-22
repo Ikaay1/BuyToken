@@ -85,7 +85,7 @@ const UtilityBorrowForm = ({
               res?.error?.data?.message ||
               "Couldn't verify customer. Something went wrong",
             status: 'error',
-            duration: 3000,
+            duration: 8000,
             isClosable: true,
             position: 'top-right',
           });
@@ -279,7 +279,7 @@ const UtilityBorrowForm = ({
                 title: 'Wrong Meter Details',
                 description: 'Please give a correct Meter Details',
                 status: 'error',
-                duration: 3000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });

@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import {useRouter} from 'next/router';
+import React, {useState} from 'react';
 import OTPInput from 'react-otp-input';
 
-import { useAppDispatch, useAppSelector } from '@/redux/app/hooks';
-import { useValidateMobileOtpMutation } from '@/redux/services/auth.service';
-import { clearData } from '@/redux/slices/authSlice';
-import { Box, Button, useToast } from '@chakra-ui/react';
+import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
+import {useValidateMobileOtpMutation} from '@/redux/services/auth.service';
+import {clearData} from '@/redux/slices/authSlice';
+import {Box, Button, useToast} from '@chakra-ui/react';
 
 const MobileResetOtpInputForm = () => {
   const [otp, setOtp] = useState('');
@@ -80,7 +80,7 @@ const MobileResetOtpInputForm = () => {
                 title: 'Phone Number verified successfully',
                 description: 'Your phone number has successfully been verified',
                 status: 'success',
-                duration: 5000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });
@@ -93,7 +93,7 @@ const MobileResetOtpInputForm = () => {
                   res?.data?.message ||
                   'Something went wrong',
                 status: 'error',
-                duration: 3000,
+                duration: 8000,
                 isClosable: true,
                 position: 'top-right',
               });

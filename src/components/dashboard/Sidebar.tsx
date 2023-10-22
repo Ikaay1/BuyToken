@@ -136,7 +136,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                             description:
                               'Your profile picture has been successfully updated',
                             status: 'success',
-                            duration: 5000,
+                            duration: 8000,
                             isClosable: true,
                             position: 'top-right',
                           });
@@ -154,7 +154,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                               res?.error?.data?.message ||
                               'Something went wrong',
                             status: 'error',
-                            duration: 3000,
+                            duration: 8000,
                             isClosable: true,
                             position: 'top-right',
                           });
@@ -166,7 +166,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                         title: 'Image type error',
                         description: 'Please choose a jpeg or png image type',
                         status: 'error',
-                        duration: 3000,
+                        duration: 8000,
                         isClosable: true,
                         position: 'top-right',
                       });

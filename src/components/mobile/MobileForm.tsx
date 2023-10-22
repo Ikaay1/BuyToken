@@ -1,13 +1,13 @@
-import { Form, Formik } from 'formik';
-import { useRouter } from 'next/router';
+import {Form, Formik} from 'formik';
+import {useRouter} from 'next/router';
 import React from 'react';
 import * as Yup from 'yup';
 
 import MessageIcon from '@/assets/MessageIcon';
-import { useAppDispatch } from '@/redux/app/hooks';
-import { useSendOTPToMobileMutation } from '@/redux/services/auth.service';
-import { setData } from '@/redux/slices/authSlice';
-import { Box, Button, Text, useToast } from '@chakra-ui/react';
+import {useAppDispatch} from '@/redux/app/hooks';
+import {useSendOTPToMobileMutation} from '@/redux/services/auth.service';
+import {setData} from '@/redux/slices/authSlice';
+import {Box, Button, Text, useToast} from '@chakra-ui/react';
 
 import AuthInput from '../login/AuthInput';
 
@@ -35,7 +35,7 @@ const MobileForm = () => {
               title: 'OTP sent to Phone Number',
               description: 'An OTP has been sent to your Mobile Number',
               status: 'success',
-              duration: 5000,
+              duration: 8000,
               isClosable: true,
               position: 'top-right',
             });
@@ -53,7 +53,7 @@ const MobileForm = () => {
                 response?.data?.message ||
                 'Something went wrong',
               status: 'error',
-              duration: 3000,
+              duration: 8000,
               isClosable: true,
               position: 'top-right',
             });
