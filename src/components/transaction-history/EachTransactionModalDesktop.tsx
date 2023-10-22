@@ -26,7 +26,7 @@ const EachTransactionModalDesktop = ({
   return (
     <>
       <Tr onClick={onOpen} cursor='pointer'>
-        <Td>
+        <Td px='.5rem'>
           <Flex
             width='30.71px'
             height='30px'
@@ -52,12 +52,18 @@ const EachTransactionModalDesktop = ({
           eachTransaction?.billerType[0]?.toUpperCase() +
             eachTransaction?.billerType.slice(1),
           new Date(eachTransaction?.createdAt).toString().slice(0, 15),
-        ].map((each) => (
-          <Td fontFamily='Inter' fontSize='14px' color='#929292' key={each}>
+        ].map((each, i) => (
+          <Td
+            fontFamily='Inter'
+            fontSize='14px'
+            color='#929292'
+            key={each}
+            px='.5rem'
+          >
             {each}
           </Td>
         ))}
-        <Td>
+        <Td px='.5rem'>
           <Text
             width='70px'
             height='27px'

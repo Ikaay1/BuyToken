@@ -112,6 +112,7 @@ const Recent = () => {
                       color='#313131'
                       key={each}
                       textTransform={'capitalize'}
+                      px='.5rem'
                     >
                       {each}
                     </Th>
