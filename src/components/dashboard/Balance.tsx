@@ -105,7 +105,9 @@ const Balance = () => {
                 mt={show ? '0' : '.88rem'}
                 textAlign={'center'}
               >
-                {!show ? '*********' : `₦${data?.data?.balance}.00`}
+                {!show
+                  ? '*********'
+                  : `₦${data?.data?.balance?.toLocaleString()}.00`}
               </Text>
             )}
           </Box>

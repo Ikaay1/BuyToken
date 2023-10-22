@@ -34,6 +34,7 @@ const SidebarHamburgerMenu = () => {
         onClick={onOpen}
         w='22.5px'
         h='18.2px'
+        ml={'1rem'}
       />
       <Modal
         isCentered

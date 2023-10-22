@@ -1,12 +1,17 @@
+import {useRouter} from 'next/router';
 import React from 'react';
 
 import DummyIcon from '@/assets/DummyIcon';
+import {useAppDispatch} from '@/redux/app/hooks';
+import {setUtility} from '@/redux/slices/serviceSlice';
 import {Box, Button, Flex, Icon, Image, Text} from '@chakra-ui/react';
 
 import Balance from './Balance';
 import FrequentlyUsed from './FrequentlyUsed';
 
 const Wallet = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   return (
     <Box mt='2rem'>
       <Flex
@@ -62,6 +67,10 @@ const Wallet = () => {
               fontWeight='500'
               fontSize='18px'
               color='#417657'
+              onClick={() => {
+                dispatch(setUtility({payload: {name: 'Borrow'}}));
+                router.push('/utility');
+              }}
             >
               Get Started!
             </Button>

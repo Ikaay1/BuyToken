@@ -47,7 +47,7 @@ const EachTransactionModalDesktop = ({
         </Td>
         {[
           eachTransaction?.description,
-          `₦${eachTransaction?.amount}`,
+          `₦${eachTransaction?.amount?.toLocaleString()}`,
           eachTransaction?.refNumber,
           eachTransaction?.billerType[0]?.toUpperCase() +
             eachTransaction?.billerType.slice(1),

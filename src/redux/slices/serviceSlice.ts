@@ -20,9 +20,15 @@ export const serviceSlice = createSlice({
     ) => {
       state.utility = payload?.name;
     },
+    clearUtility: (
+      state,
+      {payload: {payload}}: PayloadAction<{payload: any}>,
+    ) => {
+      return initialState;
+    },
   },
 });
 
-export const {setUtility} = serviceSlice.actions;
+export const {setUtility, clearUtility} = serviceSlice.actions;
 
 export default serviceSlice.reducer;
