@@ -136,7 +136,7 @@ const UtilityPaymentBorrowElectricity = ({
           }}
           isLoading={buyPowerStatus.isLoading}
         >
-          Pay N{customerDetails?.amount}
+          Pay ₦{customerDetails?.amount}
         </Button>
       </Flex>
     </Box>

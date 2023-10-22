@@ -2,7 +2,7 @@ import React from 'react';
 
 import CloseIcon from '@/assets/CloseIcon';
 import {TransactionInterface} from '@/constants/interface';
-import {Box, Flex, Icon, Text} from '@chakra-ui/react';
+import {Box, Button, Flex, Icon, Text} from '@chakra-ui/react';
 
 const TransactionDetails = ({
   onClose,
@@ -28,7 +28,7 @@ const TransactionDetails = ({
       background='#FFFFFF'
       borderRadius='10px'
       pt='1.3rem'
-      pb='3rem'
+      pb='.9rem'
     >
       <Flex justifyContent={'flex-end'} pr='1.3rem'>
         <Icon
@@ -133,6 +133,22 @@ const TransactionDetails = ({
               {eachTransaction?.description}
             </Text>
           </Box>
+          <Flex justifyContent={'center'}>
+            <Button
+              width='132px'
+              height='33px'
+              background='#417657'
+              boxShadow='0px 24.2056px 48.4112px 7.26168px rgba(0, 0, 0, 0.1)'
+              borderRadius='5px'
+              fontFamily='Raleway'
+              fontWeight='500'
+              fontSize='13px'
+              color='#FFFFFF'
+              mt='2.5rem'
+            >
+              Generate Receipt
+            </Button>
+          </Flex>
         </Box>
       </Box>
     </Box>

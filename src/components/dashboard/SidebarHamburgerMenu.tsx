@@ -54,7 +54,7 @@ const SidebarHamburgerMenu = () => {
           position={'absolute'}
           left={0}
           background='#FAF9F6'
-          pt='6rem'
+          pt='5rem'
         >
           <Sidebar onClose={onClose} />
         </ModalContent>
