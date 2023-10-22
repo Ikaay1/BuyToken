@@ -70,10 +70,11 @@ const NotificationModal = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent justifyContent={'center'} alignItems={'center'}>
           <Box
-            width='271px'
+            width='306px'
             background='#FFFFFF'
             borderRadius='6px'
-            py='1.4rem'
+            pt='.65rem'
+            pb='.3rem'
             px='.89rem'
             right={{base: '50px', lg: '-320px', mlg: '-380px'}}
             pos='absolute'
@@ -86,7 +87,7 @@ const NotificationModal = () => {
           >
             <Flex justifyContent={'flex-end'} alignItems={'center'}>
               <Text
-                mr='2.5rem'
+                mr='3.3rem'
                 fontFamily='Inter'
                 fontWeight='500'
                 fontSize='14px'
@@ -114,7 +115,7 @@ const NotificationModal = () => {
                 clear all
               </Text>
             </Flex>
-            <Box mt='.85rem'>
+            <Box mt='1rem'>
               {isFetching ? (
                 [1, 2].map((each) => (
                   <Skeleton key={each} mt='.65rem' w='100%' h='22px'></Skeleton>
@@ -153,13 +154,16 @@ const NotificationModal = () => {
                 </Box>
               ) : (
                 data?.data.map(
-                  (each: {
-                    type: string;
-                    message: string;
-                    readStatus: boolean;
-                    _id: string;
-                    createdAt: string;
-                  }) => (
+                  (
+                    each: {
+                      type: string;
+                      message: string;
+                      readStatus: boolean;
+                      _id: string;
+                      createdAt: string;
+                    },
+                    i: any,
+                  ) => (
                     <Box key={each._id} mt='.34rem'>
                       <Flex
                         justifyContent={'space-between'}
@@ -189,14 +193,14 @@ const NotificationModal = () => {
                           }
                           w='16px'
                           h='16px'
-                          mr='.6rem'
+                          mr='.45rem'
                         />
                         <Text
-                          w='219px'
+                          w='263px'
                           fontFamily='Inter'
-                          fontSize='10px'
+                          fontSize='12px'
                           lineHeight='20px'
-                          color='#929292'
+                          color='#313131'
                           fontWeight={!each?.readStatus ? '700' : '400'}
                         >
                           {each?.message}
@@ -210,11 +214,13 @@ const NotificationModal = () => {
                       >
                         {new Date(each?.createdAt).toUTCString().slice(0, 16)}
                       </Text>
-                      <Divider
-                        mt='.34rem'
-                        width='100%'
-                        border='1px solid #F5F5F5'
-                      />
+                      {i !== data?.data?.length - 1 && (
+                        <Divider
+                          mt='.34rem'
+                          width='100%'
+                          border='1px solid #F5F5F5'
+                        />
+                      )}
                     </Box>
                   ),
                 )
