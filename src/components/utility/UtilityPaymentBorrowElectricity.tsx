@@ -52,7 +52,7 @@ const UtilityPaymentBorrowElectricity = ({
             name: 'Address:',
             value: customerDetails?.CustomerAddress,
           },
-          {name: 'Amount:', value: `N${customerDetails?.amount}`},
+          {name: 'Amount:', value: `₦${customerDetails?.amount}`},
         ].map(({name, value}) => (
           <Flex
             alignItems={'center'}
