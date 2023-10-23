@@ -16,11 +16,13 @@ const UpdateProfileInput = ({
   icon,
   value,
   type,
+  readOnly,
 }: {
   placeholder: string;
   icon: (props: any) => React.JSX.Element;
   value: string;
   type?: string;
+  readOnly?: boolean;
 }) => {
   return (
     <Field name={value}>
@@ -44,6 +46,7 @@ const UpdateProfileInput = ({
               fontSize={{base: '12px', lg: '16px'}}
               placeholder={placeholder}
               type={type ? type : undefined}
+              readOnly={readOnly ? readOnly : undefined}
               {...field}
             />
             <InputRightElement pointerEvents='none' h='100%'>

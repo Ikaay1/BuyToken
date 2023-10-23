@@ -6,6 +6,7 @@ import IdCardIcon from '@/assets/IdCardIcon';
 import InfoBadge from '@/assets/InfoBadge';
 import MessageIcon from '@/assets/MessageIcon';
 import PersonIcon from '@/assets/PersonIcon';
+import {useAppSelector} from '@/redux/app/hooks';
 import {
   Box,
   Button,
@@ -21,14 +22,19 @@ import {
 import UpdateProfileInput from './UpdateProfileInput';
 
 const UpdateProfile = () => {
+  const name = useAppSelector((state) => state?.app?.user?.userProfile?.name);
+  const email = useAppSelector((state) => state?.app?.user?.userProfile?.email);
+  const phone = useAppSelector(
+    (state) => state?.app?.user?.userProfile?.mobileNumber,
+  );
   const toast = useToast();
   return (
     <Box>
       <Formik
         initialValues={{
-          name: '',
-          phone: '',
-          email: '',
+          name,
+          phone,
+          email,
         }}
         enableReinitialize
         validationSchema={Yup.object({
@@ -70,6 +76,7 @@ const UpdateProfile = () => {
               type='email'
               icon={MessageIcon}
               value='email'
+              readOnly={true}
             />
             <Flex width={{base: '100%', lg: '480px', mlg: '570px'}} mt='.27rem'>
               <Icon as={InfoBadge} mr='.44rem' />
