@@ -34,7 +34,7 @@ const UpdateProfileInput = ({
             borderRadius={'6px'}
             background={'#F5F5F5'}
             width={{base: '100%', lg: '480px', mlg: '570px'}}
-            mt='1.55rem'
+            mt={{base: '1.4rem', lg: '1.55rem'}}
           >
             <Input
               height='50px'

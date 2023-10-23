@@ -11,16 +11,16 @@ const UserProfile = () => {
       borderRadius='16px'
       bg='#FFFFFF'
       pt='1.4rem'
-      pb='1.1rem'
+      pb={{base: '3.2rem', lg: '1.1rem'}}
       mt='1.25rem'
       mx={{base: '.5rem', lg: 0}}
-      px={{lg: '2.9rem'}}
+      px={{base: '1rem', lg: '2.9rem'}}
     >
       <Box>
         <Text
           fontFamily='Raleway'
           fontWeight='700'
-          fontSize='20px'
+          fontSize={{lg: '20px'}}
           color='#313131'
         >
           Update Profile
@@ -31,7 +31,7 @@ const UserProfile = () => {
         <Text
           fontFamily='Raleway'
           fontWeight='700'
-          fontSize='20px'
+          fontSize={{lg: '20px'}}
           color='#313131'
         >
           Change Password

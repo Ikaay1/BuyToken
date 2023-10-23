@@ -82,7 +82,7 @@ const UpdateProfile = () => {
               <Icon as={InfoBadge} mr='.44rem' />
               <Text
                 fontFamily='Poppins'
-                fontSize='12px'
+                fontSize={{base: '10px', lg: '12px'}}
                 lineHeight='18px'
                 color='#4CAD73'
               >
@@ -92,18 +92,18 @@ const UpdateProfile = () => {
             </Flex>
             <Flex
               width={{base: '100%', lg: '480px', mlg: '570px'}}
-              justifyContent={'flex-end'}
-              mt='2.55rem'
+              justifyContent={{base: 'center', lg: 'flex-end'}}
+              mt={{base: '2rem', lg: '2.55rem'}}
             >
               <Button
-                width='132px'
-                height='33px'
+                width={{base: '317px', lg: '132px'}}
+                height={{base: '47px', lg: '33px'}}
                 background='#417657'
                 boxShadow='0px 24.2056px 48.4112px 7.26168px rgba(0, 0, 0, 0.1)'
                 borderRadius='5px'
                 fontFamily='Raleway'
                 fontWeight='600'
-                fontSize='14px'
+                fontSize={{base: '16px', lg: '14px'}}
                 color='#FFFFFF'
                 type='submit'
               >
