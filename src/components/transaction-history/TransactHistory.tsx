@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 
+import DateIcon from '@/assets/DateIcon';
 import InflowIcon from '@/assets/InflowIcon';
 import {TransactionInterface} from '@/constants/interface';
 import {scrollbarStyle, scrollbarStyle2} from '@/constants/utils';
@@ -10,6 +11,8 @@ import {
   Flex,
   Icon,
   Input,
+  InputGroup,
+  InputRightElement,
   Select,
   Skeleton,
   Table,
@@ -32,13 +35,14 @@ const TransactHistory = () => {
   const [limit, setLimit] = useState(8);
   const [status, setStatus] = useState('');
   const [type, setType] = useState('');
-  const [date, setDate] = useState('mm/dd/yyyy');
+  const [date, setDate] = useState('');
+  const [dateType, setDateType] = useState('text');
   const {data, isFetching} = useGetTransactionsQuery({
     page,
     limit,
     status,
     type,
-    date: date === 'mm/dd/yyyy' ? '' : date,
+    date,
   });
   console.log('transaction_history:', data);
   return (
@@ -130,25 +134,40 @@ const TransactHistory = () => {
             ),
           )}
         </Select>
-        <Input
-          variant='filled'
-          placeholder={`Date`}
-          max={new Date().toISOString().slice(0, 10)}
-          type={'Date'}
-          width={{base: '125px', lg: '135px'}}
-          height='36px'
-          background='#FFFFFF'
-          border='1px solid #D9D9D9'
-          borderRadius='5px'
-          fontFamily='Lato'
-          fontSize='14px'
-          color='#575757'
-          _placeholder={{
-            color: '#575757',
-          }}
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
+        <InputGroup width={{base: '125px', lg: '135px'}} height='36px'>
+          <Input
+            variant='filled'
+            placeholder={`Date`}
+            max={new Date().toISOString().slice(0, 10)}
+            width={{base: '125px', lg: '135px'}}
+            height='36px'
+            background='#FFFFFF'
+            border='1px solid #D9D9D9'
+            borderRadius='5px'
+            fontFamily='Lato'
+            fontSize='14px'
+            color='#575757'
+            _placeholder={{
+              color: '#575757',
+            }}
+            type='text'
+            onFocus={(e) => {
+              e.target.type = 'date';
+              setDateType('date');
+            }}
+            onBlur={(e) => {
+              e.target.type = 'text';
+              setDateType('text');
+            }}
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+          {dateType === 'text' && (
+            <InputRightElement pointerEvents='none' h='100%'>
+              <Icon as={DateIcon} w='13.5px' h='15px' />
+            </InputRightElement>
+          )}
+        </InputGroup>
       </Flex>
 
       {isFetching ? (
