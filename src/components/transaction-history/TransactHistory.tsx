@@ -32,13 +32,13 @@ const TransactHistory = () => {
   const [limit, setLimit] = useState(8);
   const [status, setStatus] = useState('');
   const [type, setType] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState('mm/dd/yyyy');
   const {data, isFetching} = useGetTransactionsQuery({
     page,
     limit,
     status,
     type,
-    date,
+    date: date === 'mm/dd/yyyy' ? '' : date,
   });
   console.log('transaction_history:', data);
   return (
