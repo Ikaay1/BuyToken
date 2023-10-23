@@ -143,6 +143,9 @@ const TransactHistory = () => {
           fontFamily='Lato'
           fontSize='14px'
           color='#575757'
+          _placeholder={{
+            color: '#575757',
+          }}
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
