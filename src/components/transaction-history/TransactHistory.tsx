@@ -135,7 +135,7 @@ const TransactHistory = () => {
           placeholder={`Date`}
           max={new Date().toISOString().slice(0, 10)}
           type={'Date'}
-          width='135px'
+          width={{base: '125px', lg: '135px'}}
           height='36px'
           background='#FFFFFF'
           border='1px solid #D9D9D9'

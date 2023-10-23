@@ -201,7 +201,12 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                     {phone}
                   </Text>
                 </Box>
-                <Icon ml='.65rem' as={PencilIcon} />
+                <Icon
+                  ml='.65rem'
+                  as={PencilIcon}
+                  onClick={() => router.push('/profile')}
+                  cursor={'pointer'}
+                />
               </Flex>
             </Flex>
           </Box>
