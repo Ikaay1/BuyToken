@@ -9,8 +9,10 @@ import InternetIcon from '@/assets/InternetIcon';
 import PhoneIcon from '@/assets/PhoneIcon';
 import RemoveIcon from '@/assets/RemoveIcon';
 import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
+import {useRemoveFavoriteUtilitiesMutation} from '@/redux/services/utilities.service';
+import {setUserProfile} from '@/redux/slices/authSlice';
 import {setUtility} from '@/redux/slices/serviceSlice';
-import {Box, Flex, Icon, Skeleton, Text} from '@chakra-ui/react';
+import {Box, Flex, Icon, Skeleton, Text, useToast} from '@chakra-ui/react';
 
 import EditUtilities from './EditUtilities';
 import UpdateUtilities from './UpdateUtilities';
@@ -23,6 +25,9 @@ const FrequentlyUsed = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const toast = useToast();
+  const [removeFavoriteUtilities, removeFavoriteUtilitiesStatus] =
+    useRemoveFavoriteUtilitiesMutation();
   return (
     <Box
       width={{lg: '48%'}}
@@ -103,6 +108,33 @@ const FrequentlyUsed = () => {
                         cursor={'pointer'}
                         onClick={(e) => {
                           e.stopPropagation();
+                          removeFavoriteUtilities({name: each}).then(
+                            (res: any) => {
+                              console.log('deleteUtilities', res);
+                              if (res?.data?.data) {
+                                dispatch(
+                                  setUserProfile({
+                                    payload: {
+                                      data: res?.data?.data,
+                                    },
+                                  }),
+                                );
+                                setLoading(false);
+                              } else {
+                                toast({
+                                  title: 'Addition failed',
+                                  description:
+                                    res?.error?.data?.message ||
+                                    'Something went wrong',
+                                  status: 'error',
+                                  duration: 8000,
+                                  isClosable: true,
+                                  position: 'top-right',
+                                });
+                                setLoading(false);
+                              }
+                            },
+                          );
                         }}
                       />
                     )}
