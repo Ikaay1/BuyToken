@@ -7,6 +7,7 @@ import InfoBadge from '@/assets/InfoBadge';
 import MessageIcon from '@/assets/MessageIcon';
 import PersonIcon from '@/assets/PersonIcon';
 import SeePasswordIcon from '@/assets/SeePasswordIcon';
+import {useUpdatePasswordMutation} from '@/redux/services/user.service';
 import {
   Box,
   Button,
@@ -23,6 +24,7 @@ import UpdateProfileInput from './UpdateProfileInput';
 
 const ChangePassword = () => {
   const toast = useToast();
+  const [updatePassword, updatePasswordStatus] = useUpdatePasswordMutation();
   return (
     <Box>
       <Formik
@@ -33,7 +35,7 @@ const ChangePassword = () => {
         }}
         enableReinitialize
         validationSchema={Yup.object({
-          name: Yup.string().min(5).required('Old Password is Required'),
+          oldPassword: Yup.string().min(5).required('Old Password is Required'),
           password: Yup.string().min(5).required('Password is Required'),
           confirmPassword: Yup.string()
             .min(5)
@@ -42,7 +44,33 @@ const ChangePassword = () => {
               return this.parent.password === value;
             }),
         })}
-        onSubmit={async ({password, oldPassword}) => {}}
+        onSubmit={async ({password, oldPassword}, {resetForm}) => {
+          const res: any = await updatePassword({
+            old: oldPassword,
+            password,
+          });
+          console.log('resChangePass', res);
+          if (res?.data?.data) {
+            toast({
+              title: 'Password successfully changed',
+              description: 'Your password has been successfully changed',
+              status: 'success',
+              duration: 8000,
+              isClosable: true,
+              position: 'top-right',
+            });
+            resetForm();
+          } else {
+            toast({
+              title: 'Password change failed',
+              description: res?.error?.data?.message || 'Something went wrong',
+              status: 'error',
+              duration: 8000,
+              isClosable: true,
+              position: 'top-right',
+            });
+          }
+        }}
       >
         {(props) => (
           <Form>
@@ -50,19 +78,19 @@ const ChangePassword = () => {
               placeholder='Old Password'
               type='password'
               icon={SeePasswordIcon}
-              value='name'
+              value='oldPassword'
             />
             <UpdateProfileInput
               placeholder='New Password'
               type='password'
               icon={SeePasswordIcon}
-              value='phone'
+              value='password'
             />
             <UpdateProfileInput
               placeholder='New Password Confirmation'
               type='password'
               icon={SeePasswordIcon}
-              value='email'
+              value='confirmPassword'
             />
             <Flex
               width={{base: '100%', lg: '480px', mlg: '570px'}}
@@ -80,6 +108,7 @@ const ChangePassword = () => {
                 fontSize={{base: '16px', lg: '14px'}}
                 color='#FFFFFF'
                 type='submit'
+                isLoading={updatePasswordStatus.isLoading}
               >
                 Change
               </Button>

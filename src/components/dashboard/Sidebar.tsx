@@ -67,6 +67,8 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
               src='/assets/bt_logo.png'
               w={{base: '47px', lg: '86px'}}
               h={{base: '46px', lg: '84px'}}
+              cursor='pointer'
+              onClick={() => router.push('/dashboard')}
               alt='Bt logo'
             />
             <Icon

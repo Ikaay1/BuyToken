@@ -1,3 +1,4 @@
+import {useRouter} from 'next/router';
 import React, {useEffect} from 'react';
 
 import NavbarSearchIcon from '@/assets/NavbarSearchIcon';
@@ -21,6 +22,7 @@ import SidebarHamburgerMenu from './SidebarHamburgerMenu';
 const Navbar = () => {
   const {data} = useGetUserQuery('');
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     if (data) {
@@ -49,6 +51,8 @@ const Navbar = () => {
           h='46px'
           display={{lg: 'none'}}
           mr={'.5rem'}
+          cursor='pointer'
+          onClick={() => router.push('/dashboard')}
           alt='Bt logo'
         />
         <Text
