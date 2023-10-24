@@ -133,28 +133,25 @@ const TransactHistory = () => {
             ),
           )}
         </Select>
-        <div className='date-picker' tabIndex={0}>
-          <Input
-            variant='filled'
-            placeholder={`Date`}
-            max={new Date().toISOString().slice(0, 10)}
-            width={{base: '125px', lg: '135px'}}
-            height='36px'
-            background='#FFFFFF'
-            border='1px solid #D9D9D9'
-            borderRadius='5px'
-            fontFamily='Lato'
-            fontSize='14px'
-            color='#575757'
-            _placeholder={{
-              color: '#575757',
-            }}
-            type='date'
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-          <div className='placeholder'></div>
-        </div>
+        <Input
+          variant='filled'
+          placeholder={`Date`}
+          max={new Date().toISOString().slice(0, 10)}
+          width={{base: '125px', lg: '135px'}}
+          height='36px'
+          background='#FFFFFF'
+          border='1px solid #D9D9D9'
+          borderRadius='5px'
+          fontFamily='Lato'
+          fontSize='14px'
+          color='#575757'
+          _placeholder={{
+            color: '#575757',
+          }}
+          type='date'
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
       </Flex>
 
       {isFetching ? (
