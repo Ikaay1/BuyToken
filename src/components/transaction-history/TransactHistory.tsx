@@ -133,7 +133,7 @@ const TransactHistory = () => {
             ),
           )}
         </Select>
-        <InputGroup width={{base: '125px', lg: '135px'}} height='36px'>
+        <div className='date-picker' tabIndex={0}>
           <Input
             variant='filled'
             placeholder={`Date`}
@@ -153,7 +153,8 @@ const TransactHistory = () => {
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
-        </InputGroup>
+          <div className='placeholder'></div>
+        </div>
       </Flex>
 
       {isFetching ? (
