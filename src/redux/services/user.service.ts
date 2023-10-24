@@ -45,6 +45,17 @@ export const userApi = createApi({
       }),
       providesTags: ['User'],
     }),
+    updateProfileName: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `users/update/profile/name`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
@@ -52,4 +63,5 @@ export const {
   useGetUserWalletQuery,
   useUploadProfilePictureMutation,
   useGetUserQuery,
+  useUpdateProfileNameMutation,
 } = userApi;

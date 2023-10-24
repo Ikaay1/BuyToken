@@ -37,10 +37,22 @@ export const utilitiesApi = createApi({
       }),
       invalidatesTags: ['Utilities'],
     }),
+    removeFavoriteUtilities: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `users/delete/favorite/billers`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      }),
+      invalidatesTags: ['Utilities'],
+    }),
   }),
 });
 
 export const {
   useAddFavoriteUtilitiesMutation,
   useUpdateFavoriteUtilitiesMutation,
+  useRemoveFavoriteUtilitiesMutation,
 } = utilitiesApi;

@@ -6,7 +6,9 @@ import IdCardIcon from '@/assets/IdCardIcon';
 import InfoBadge from '@/assets/InfoBadge';
 import MessageIcon from '@/assets/MessageIcon';
 import PersonIcon from '@/assets/PersonIcon';
-import {useAppSelector} from '@/redux/app/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
+import {useUpdateProfileNameMutation} from '@/redux/services/user.service';
+import {setUserProfile} from '@/redux/slices/authSlice';
 import {
   Box,
   Button,
@@ -28,6 +30,9 @@ const UpdateProfile = () => {
     (state) => state?.app?.user?.userProfile?.mobileNumber,
   );
   const toast = useToast();
+  const [updateProfileName, updateProfileNameStatus] =
+    useUpdateProfileNameMutation();
+  const dispatch = useAppDispatch();
   return (
     <Box>
       <Formik
@@ -57,6 +62,34 @@ const UpdateProfile = () => {
             });
             return;
           }
+          const res: any = await updateProfileName({name});
+          console.log('updateProfileName', res);
+          if (res?.data?.data) {
+            dispatch(
+              setUserProfile({
+                payload: {
+                  data: res?.data?.data,
+                },
+              }),
+            );
+            toast({
+              title: 'Profile name successfully updated',
+              description: 'Your profile name has been successfully updated',
+              status: 'success',
+              duration: 8000,
+              isClosable: true,
+              position: 'top-right',
+            });
+          } else {
+            toast({
+              title: 'Addition failed',
+              description: res?.error?.data?.message || 'Something went wrong',
+              status: 'error',
+              duration: 8000,
+              isClosable: true,
+              position: 'top-right',
+            });
+          }
         }}
       >
         {(props) => (
@@ -70,6 +103,7 @@ const UpdateProfile = () => {
               placeholder='Phone Number (should start with +234)'
               icon={IdCardIcon}
               value='phone'
+              readOnly={true}
             />
             <UpdateProfileInput
               placeholder='Email'
@@ -86,8 +120,9 @@ const UpdateProfile = () => {
                 lineHeight='18px'
                 color='#4CAD73'
               >
-                Email cannot be updated. Reach out through any of our support
-                channels if there is a need to update your email
+                Email and Phone number cannot be updated. Reach out through any
+                of our support channels if there is a need to update your email
+                or phone number
               </Text>
             </Flex>
             <Flex
@@ -105,6 +140,8 @@ const UpdateProfile = () => {
                 fontWeight='600'
                 fontSize={{base: '16px', lg: '14px'}}
                 color='#FFFFFF'
+                isDisabled={props.values.name === name}
+                isLoading={updateProfileNameStatus.isLoading}
                 type='submit'
               >
                 Update

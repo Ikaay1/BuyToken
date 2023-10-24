@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 
 import DateIcon from '@/assets/DateIcon';
 import InflowIcon from '@/assets/InflowIcon';
@@ -36,7 +36,6 @@ const TransactHistory = () => {
   const [status, setStatus] = useState('');
   const [type, setType] = useState('');
   const [date, setDate] = useState('');
-  const [dateType, setDateType] = useState('text');
   const {data, isFetching} = useGetTransactionsQuery({
     page,
     limit,
@@ -150,23 +149,10 @@ const TransactHistory = () => {
             _placeholder={{
               color: '#575757',
             }}
-            type='text'
-            onFocus={(e) => {
-              e.target.type = 'date';
-              setDateType('date');
-            }}
-            onBlur={(e) => {
-              e.target.type = 'text';
-              setDateType('text');
-            }}
+            type='date'
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
-          {dateType === 'text' && (
-            <InputRightElement pointerEvents='none' h='100%'>
-              <Icon as={DateIcon} w='13.5px' h='15px' />
-            </InputRightElement>
-          )}
         </InputGroup>
       </Flex>
 
