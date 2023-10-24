@@ -86,7 +86,7 @@ const UtilityServices = () => {
     <Box
       borderRadius='16px'
       bg='#FFFFFF'
-      pt='1.1rem'
+      pt={state === 'Service' ? '1.9rem' : '1.1rem'}
       pb='8.5rem'
       mt='1.25rem'
       mx={{base: '.5rem', lg: 0}}
@@ -96,46 +96,48 @@ const UtilityServices = () => {
         pl={{base: '0', lg: '3.3rem', mlg: '4.3rem'}}
         position='relative'
       >
-        <Flex
-          alignItems={'center'}
-          cursor='pointer'
-          onClick={() => {
-            if (provider === 'Electricity' || provider === 'Borrow') {
-              if (state === 'Provider') {
-                setState('Service');
-                setProvider('');
+        {state !== 'Service' && (
+          <Flex
+            alignItems={'center'}
+            cursor='pointer'
+            onClick={() => {
+              if (provider === 'Electricity' || provider === 'Borrow') {
+                if (state === 'Provider') {
+                  setState('Service');
+                  setProvider('');
+                }
+                if (state === 'Form') {
+                  setState('Provider');
+                }
+                if (state === 'payment') {
+                  setState('Form');
+                }
+              } else {
+                if (state === 'Provider') {
+                  setState('Service');
+                  setProvider('');
+                }
+                if (state === 'payment') {
+                  setState('Provider');
+                }
               }
-              if (state === 'Form') {
-                setState('Provider');
-              }
-              if (state === 'payment') {
-                setState('Form');
-              }
-            } else {
-              if (state === 'Provider') {
-                setState('Service');
-                setProvider('');
-              }
-              if (state === 'payment') {
-                setState('Provider');
-              }
-            }
-          }}
-        >
-          <Icon
-            mr={{base: '.3rem', lg: '.55rem'}}
-            w={{base: '16px', lg: '24px'}}
-            h={{base: '16px', lg: '24px'}}
-            as={BackArrowIcon}
-          />
-          <Text
-            fontFamily='Inter'
-            fontSize={{base: '12px', lg: '14px'}}
-            color='#000000'
+            }}
           >
-            Back
-          </Text>
-        </Flex>
+            <Icon
+              mr={{base: '.3rem', lg: '.55rem'}}
+              w={{base: '16px', lg: '24px'}}
+              h={{base: '16px', lg: '24px'}}
+              as={BackArrowIcon}
+            />
+            <Text
+              fontFamily='Inter'
+              fontSize={{base: '12px', lg: '14px'}}
+              color='#000000'
+            >
+              Back
+            </Text>
+          </Flex>
+        )}
         <Text
           fontFamily='Raleway'
           fontWeight='700'
