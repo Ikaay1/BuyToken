@@ -76,7 +76,7 @@ const UtilityProviderElectricity = ({
                   mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
                 >
                   <Image
-                    src={`/assets/provider1.png`}
+                    src={each?.image}
                     alt='Provider'
                     w='100%'
                     h={{base: '50px', lg: '70px'}}
@@ -106,7 +106,7 @@ const UtilityProviderElectricity = ({
                   mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
                 >
                   <Image
-                    src={`/assets/provider1.png`}
+                    src={each?.image}
                     alt='Provider'
                     w='100%'
                     h={{base: '50px', lg: '70px'}}

@@ -2,6 +2,7 @@ export interface ElectricityDetailsInterface {
   _id: string;
   merchantId: string;
   name: string;
+  image: string;
 }
 
 export interface CustomerDetailsInterface {

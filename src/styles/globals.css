@@ -13,3 +13,64 @@ a {
 #nprogress .bar {
   background: #4cad73 !important;
 }
+
+.date-picker {
+  display: inline-block;
+  /* background: rgba(40, 40, 250, 0.1); */
+  border: 1px solid #d9d9d9;
+  min-width: 10rem;
+  min-height: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.35rem;
+  position: relative;
+  isolation: isolate;
+}
+
+.date-picker,
+.date-picker > * {
+  cursor: text;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.date-picker:focus > input[type='date'],
+.date-picker:focus-within > input[type='date'] {
+  color: #575757;
+}
+
+.date-picker > .placeholder::after {
+  content: 'Date';
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  top: 46%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+  color: #575757;
+}
+
+.date-picker:focus > .placeholder,
+.date-picker:focus-within > .placeholder,
+.date-picker > input[type='date']:valid + .placeholder {
+  display: none;
+}
+
+.date-picker > input[type='date'] {
+  background: none;
+  border: none;
+  outline: none;
+  color: transparent;
+  font-family: 'Poppins', sans-serif;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+}
+
+.date-picker > input[type='date']:valid {
+  color: #575757 !important;
+}
