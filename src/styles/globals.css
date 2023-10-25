@@ -18,7 +18,7 @@ a {
   display: inline-block;
   /* background: rgba(40, 40, 250, 0.1); */
   border: 1px solid #d9d9d9;
-  min-width: 10rem;
+  width: 110px;
   min-height: 2rem;
   padding: 0.5rem;
   border-radius: 0.35rem;
