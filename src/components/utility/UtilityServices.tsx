@@ -27,26 +27,31 @@ const UtilityServices = () => {
     _id: '',
     merchantId: '',
     name: '',
+    image: '',
   });
   const [electricityBorrowDetails, setElectricityBorrowDetails] = useState({
     _id: '',
     merchantId: '',
     name: '',
+    image: '',
   });
   const [airtimeDetails, setAirtimeDetails] = useState({
     _id: '',
     merchantId: '',
     name: '',
+    image: '',
   });
   const [internetDetails, setInternetDetails] = useState({
     _id: '',
     merchantId: '',
     name: '',
+    image: '',
   });
   const [cableDetails, setCableDetails] = useState({
     _id: '',
     merchantId: '',
     name: '',
+    image: '',
   });
   const [customerDetails, setCustomerDetails] = useState({
     FirstName: '',
