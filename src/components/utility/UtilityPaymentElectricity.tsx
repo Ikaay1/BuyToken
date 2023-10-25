@@ -52,7 +52,10 @@ const UtilityPaymentElectricity = ({
             name: 'Address:',
             value: customerDetails?.CustomerAddress,
           },
-          {name: 'Amount:', value: `₦${customerDetails?.amount}`},
+          {
+            name: 'Amount:',
+            value: `₦${customerDetails?.amount?.toLocaleString()}`,
+          },
         ].map(({name, value}) => (
           <Flex
             alignItems={'center'}
