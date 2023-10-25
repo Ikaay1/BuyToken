@@ -55,7 +55,7 @@ const EachTransactionModalMobile = ({
             </Text>
           </Flex>
           <Text fontFamily='Inter' fontWeight='600' color='#313131'>
-            ₦{eachTransaction?.amount}
+            ₦{eachTransaction?.amount?.toLocaleString()}
           </Text>
         </Flex>
         <Flex alignItems={'center'} justifyContent={'space-between'} mt='.5rem'>
