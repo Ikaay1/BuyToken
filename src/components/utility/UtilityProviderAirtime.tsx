@@ -75,7 +75,7 @@ const UtilityProviderAirtime = ({
                   cursor='pointer'
                 >
                   <Image
-                    src={`/assets/mtn.png`}
+                    src={each?.image}
                     alt='Provider'
                     w='100%'
                     h={{base: '50px', lg: '70px'}}
@@ -106,7 +106,7 @@ const UtilityProviderAirtime = ({
                   cursor='pointer'
                 >
                   <Image
-                    src={`/assets/mtn.png`}
+                    src={each?.image}
                     alt='Provider'
                     w='100%'
                     h={{base: '50px', lg: '70px'}}

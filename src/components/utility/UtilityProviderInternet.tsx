@@ -72,7 +72,7 @@ const UtilityProviderInternet = ({
                   cursor='pointer'
                 >
                   <Image
-                    src={`/assets/glo.png`}
+                    src={each?.image}
                     alt='Provider'
                     w='100%'
                     h={{base: '50px', lg: '70px'}}
@@ -100,7 +100,7 @@ const UtilityProviderInternet = ({
                   cursor='pointer'
                 >
                   <Image
-                    src={`/assets/glo.png`}
+                    src={each?.image}
                     alt='Provider'
                     w='100%'
                     h={{base: '50px', lg: '70px'}}
