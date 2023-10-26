@@ -61,8 +61,8 @@ const Social = ({
                   dispatch(
                     setCredentials({
                       payload: {
-                        data: res?.data?.data?.user,
-                        token: res?.data?.data?.access_token,
+                        data: response?.data?.data?.user,
+                        token: response?.data?.data?.access_token,
                       },
                     }),
                   );
@@ -72,7 +72,7 @@ const Social = ({
                   toast({
                     title: 'Login failed',
                     description:
-                      res?.error?.data?.message || 'Something went wrong',
+                      response?.error?.data?.message || 'Something went wrong',
                     status: 'error',
                     duration: 8000,
                     isClosable: true,
@@ -153,8 +153,8 @@ const Social = ({
                 dispatch(
                   setCredentials({
                     payload: {
-                      data: res?.data?.data?.user,
-                      token: res?.data?.data?.access_token,
+                      data: response?.data?.data?.user,
+                      token: response?.data?.data?.access_token,
                     },
                   }),
                 );
@@ -164,7 +164,7 @@ const Social = ({
                 toast({
                   title: 'Login failed',
                   description:
-                    res?.error?.data?.message || 'Something went wrong',
+                    response?.error?.data?.message || 'Something went wrong',
                   status: 'error',
                   duration: 8000,
                   isClosable: true,
