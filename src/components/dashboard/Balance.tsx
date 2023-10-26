@@ -92,7 +92,7 @@ const Balance = () => {
             {isFetching && (
               <Skeleton h='20px' w='150px' mt='1rem' mx='auto'></Skeleton>
             )}
-            {data?.data?.balance && (
+            {typeof data?.data?.balance === 'number' ? (
               <Text
                 fontFamily='Raleway'
                 fontWeight='700'
@@ -109,7 +109,7 @@ const Balance = () => {
                   ? '*********'
                   : `₦${data?.data?.balance?.toLocaleString()}.00`}
               </Text>
-            )}
+            ) : null}
           </Box>
         </Flex>
         <FundWalletModal />

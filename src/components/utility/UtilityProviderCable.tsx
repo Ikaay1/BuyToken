@@ -2,7 +2,15 @@ import React, {useEffect, useState} from 'react';
 
 import {ElectricityDetailsInterface} from '@/constants/interface';
 import {useGetCableProvidersQuery} from '@/redux/services/electricity.service';
-import {Box, Flex, Image, Input, Skeleton, Text} from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Image,
+  Input,
+  SimpleGrid,
+  Skeleton,
+  Text,
+} from '@chakra-ui/react';
 
 const UtilityProviderCable = ({
   setState,
@@ -43,19 +51,10 @@ const UtilityProviderCable = ({
         onChange={(e) => setFilterText(e.target.value)}
       />
       <Box w={{lg: '480px', mlg: '570px'}} mt='2.7rem'>
-        <Flex
-          // justifyContent={'space-between'}
-          flexWrap={'wrap'}
-          gap={{base: '2.5rem 0', lg: '1.35rem 0'}}
-        >
+        <SimpleGrid columns={3} spacing={10}>
           {isLoading
-            ? [1, 2, 3, 4].map((each) => (
-                <Box
-                  key={each}
-                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
-                  w={{base: '22%', lg: '21%', mlg: '22%'}}
-                  h={{base: '50px', lg: '70px'}}
-                >
+            ? [1, 2, 3].map((each) => (
+                <Box key={each} h={{base: '50px', lg: '70px'}}>
                   <Skeleton w='100%' h='100%'></Skeleton>
                   <Flex justifyContent={'center'} mt='.4rem'>
                     <Skeleton w={'30px'} h={'10px'}></Skeleton>
@@ -66,13 +65,11 @@ const UtilityProviderCable = ({
             ? providers?.map((each: ElectricityDetailsInterface) => (
                 <Box
                   key={each?._id}
-                  w={{base: '22%', lg: '21%', mlg: '22%'}}
                   onClick={() => {
                     setState('payment');
                     setCableDetails(each);
                   }}
                   cursor='pointer'
-                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
                 >
                   <Image
                     src={`/assets/gotv.png`}
@@ -83,8 +80,8 @@ const UtilityProviderCable = ({
                   />
                   <Text
                     fontFamily='Poppins'
-                    fontSize={{base: '8px', lg: '11px'}}
-                    lineHeight={{base: '12px', lg: '16px'}}
+                    fontSize={{base: '12px', lg: '13px'}}
+                    lineHeight='20px'
                     textAlign='center'
                     color='#929292'
                     mt='.2rem'
@@ -96,13 +93,11 @@ const UtilityProviderCable = ({
             : data?.data?.map((each: ElectricityDetailsInterface) => (
                 <Box
                   key={each?._id}
-                  w={{base: '22%', lg: '21%', mlg: '22%'}}
                   onClick={() => {
                     setState('payment');
                     setCableDetails(each);
                   }}
                   cursor='pointer'
-                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
                 >
                   <Image
                     src={`/assets/gotv.png`}
@@ -113,8 +108,8 @@ const UtilityProviderCable = ({
                   />
                   <Text
                     fontFamily='Poppins'
-                    fontSize={{base: '8px', lg: '11px'}}
-                    lineHeight={{base: '12px', lg: '16px'}}
+                    fontSize={{base: '12px', lg: '13px'}}
+                    lineHeight='20px'
                     textAlign='center'
                     color='#929292'
                     mt='.2rem'
@@ -123,7 +118,7 @@ const UtilityProviderCable = ({
                   </Text>
                 </Box>
               ))}
-        </Flex>
+        </SimpleGrid>
       </Box>
     </Box>
   );

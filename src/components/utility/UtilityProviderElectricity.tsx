@@ -1,8 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
-import {ElectricityDetailsInterface} from '@/constants/interface';
-import {useGetPowerProvidersQuery} from '@/redux/services/electricity.service';
-import {Box, Flex, Image, Input, Skeleton, Text} from '@chakra-ui/react';
+import { ElectricityDetailsInterface } from '@/constants/interface';
+import { useGetPowerProvidersQuery } from '@/redux/services/electricity.service';
+import {
+	Box,
+	Flex,
+	Image,
+	Input,
+	SimpleGrid,
+	Skeleton,
+	Text,
+} from '@chakra-ui/react';
 
 const UtilityProviderElectricity = ({
   setState,
@@ -44,36 +52,25 @@ const UtilityProviderElectricity = ({
         onChange={(e) => setFilterText(e.target.value)}
       />
       <Box w={{lg: '480px', mlg: '570px'}} mt={{base: '1.7rem', lg: '2.7rem'}}>
-        <Flex
-          // justifyContent={'space-between'}
-          flexWrap={'wrap'}
-          gap={{base: '2.5rem 0', lg: '1.35rem 0'}}
-        >
+        <SimpleGrid columns={3} spacing={10}>
           {isLoading
-            ? [1, 2, 3, 4].map((each) => (
-                <Box
-                  key={each}
-                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
-                  w={{base: '22%', lg: '21%', mlg: '22%'}}
-                  h={{base: '50px', lg: '70px'}}
-                >
+            ? [1, 2, 3].map((each, i: number) => (
+                <Box key={each} h={{base: '50px', lg: '70px'}}>
                   <Skeleton w='100%' h='100%'></Skeleton>
                   <Flex justifyContent={'center'} mt='.4rem'>
-                    <Skeleton w={'30px'} h={'10px'}></Skeleton>
+                    <Skeleton w={'50px'} h={'10px'}></Skeleton>
                   </Flex>
                 </Box>
               ))
             : filterText
-            ? providers?.map((each: ElectricityDetailsInterface) => (
+            ? providers?.map((each: ElectricityDetailsInterface, i: number) => (
                 <Box
                   key={each?._id}
-                  w={{base: '22%', lg: '21%', mlg: '22%'}}
                   onClick={() => {
                     setState('Form');
                     setElectricityDetails(each);
                   }}
                   cursor='pointer'
-                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
                 >
                   <Image
                     src={each?.image}
@@ -84,8 +81,8 @@ const UtilityProviderElectricity = ({
                   />
                   <Text
                     fontFamily='Poppins'
-                    fontSize={{base: '8px', lg: '11px'}}
-                    lineHeight={{base: '12px', lg: '16px'}}
+                    fontSize={{base: '12px', lg: '13px'}}
+                    lineHeight='20px'
                     textAlign='center'
                     color='#929292'
                     mt='.2rem'
@@ -94,37 +91,37 @@ const UtilityProviderElectricity = ({
                   </Text>
                 </Box>
               ))
-            : data?.data?.map((each: ElectricityDetailsInterface) => (
-                <Box
-                  key={each?._id}
-                  w={{base: '22%', lg: '21%', mlg: '22%'}}
-                  onClick={() => {
-                    setState('Form');
-                    setElectricityDetails(each);
-                  }}
-                  cursor='pointer'
-                  mr={{base: '.55rem', lg: '1.2rem', mlg: '1rem'}}
-                >
-                  <Image
-                    src={each?.image}
-                    alt='Provider'
-                    w='100%'
-                    h={{base: '50px', lg: '70px'}}
-                    objectFit={'cover'}
-                  />
-                  <Text
-                    fontFamily='Poppins'
-                    fontSize={{base: '8px', lg: '11px'}}
-                    lineHeight={{base: '12px', lg: '16px'}}
-                    textAlign='center'
-                    color='#929292'
-                    mt='.2rem'
+            : data?.data?.map(
+                (each: ElectricityDetailsInterface, i: number) => (
+                  <Box
+                    key={each?._id}
+                    onClick={() => {
+                      setState('Form');
+                      setElectricityDetails(each);
+                    }}
+                    cursor='pointer'
                   >
-                    {each?.name}
-                  </Text>
-                </Box>
-              ))}
-        </Flex>
+                    <Image
+                      src={each?.image}
+                      alt='Provider'
+                      w='100%'
+                      h={{base: '50px', lg: '70px'}}
+                      objectFit={'cover'}
+                    />
+                    <Text
+                      fontFamily='Poppins'
+                      fontSize={{base: '12px', lg: '13px'}}
+                      lineHeight='20px'
+                      textAlign='center'
+                      color='#929292'
+                      mt='.2rem'
+                    >
+                      {each?.name}
+                    </Text>
+                  </Box>
+                ),
+              )}
+        </SimpleGrid>
       </Box>
     </Box>
   );
