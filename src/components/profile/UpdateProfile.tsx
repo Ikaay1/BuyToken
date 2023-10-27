@@ -45,13 +45,13 @@ const UpdateProfile = () => {
         validationSchema={Yup.object({
           name: Yup.string().required('Name is Required'),
           phone: Yup.string()
-            .required('Phone Number is Required')
+            // .required('Phone Number is Required')
             .min(14, 'Must be exactly 14 digits')
             .max(14, 'Must be exactly 14 digits'),
           email: Yup.string().email().required('Email is Required'),
         })}
         onSubmit={async ({name, phone}) => {
-          if (!phone.startsWith('+234')) {
+          if (phone && !phone.startsWith('+234')) {
             toast({
               title: 'Invalid phone number',
               description: 'Phone number must start with +234',
