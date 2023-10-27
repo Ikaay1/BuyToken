@@ -24,7 +24,7 @@ export const serviceSlice = createSlice({
       state,
       {payload: {payload}}: PayloadAction<{payload: any}>,
     ) => {
-      return initialState;
+      state.utility = null;
     },
   },
 });

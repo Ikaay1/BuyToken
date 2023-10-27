@@ -75,7 +75,7 @@ const UtilityProviderBorrowElectricity = ({
                   <Image
                     src={each?.image}
                     alt='Provider'
-                    w='100%'
+                    mx='auto'
                     h={{base: '50px', lg: '70px'}}
                     objectFit={'cover'}
                   />
@@ -103,7 +103,7 @@ const UtilityProviderBorrowElectricity = ({
                   <Image
                     src={each?.image}
                     alt='Provider'
-                    w='100%'
+                    mx='auto'
                     h={{base: '50px', lg: '70px'}}
                     objectFit={'cover'}
                   />

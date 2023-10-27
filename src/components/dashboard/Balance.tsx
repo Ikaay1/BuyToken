@@ -3,14 +3,18 @@ import React, {useState} from 'react';
 import HideIcon from '@/assets/HideIcon';
 import ShowIcon from '@/assets/ShowIcon';
 import WalletIcon from '@/assets/WalletIcon';
+import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
 import {useGetUserWalletQuery} from '@/redux/services/user.service';
+import {setVisibility} from '@/redux/slices/utilitySlice';
 import {Box, Flex, Icon, Image, Skeleton, Text} from '@chakra-ui/react';
 
 import FundWalletModal from './FundWalletModal';
 
 const Balance = () => {
-  const [show, setShow] = useState(true);
   const {data, isFetching} = useGetUserWalletQuery('');
+  const dispatch = useAppDispatch();
+  const visibility = useAppSelector((state) => state?.app?.utility?.visibility);
+  const show = visibility === undefined ? true : visibility;
   console.log('Wallet', data);
   return (
     <Box
@@ -48,7 +52,15 @@ const Balance = () => {
           </Text>
           <Flex
             alignItems={'center'}
-            onClick={() => setShow((prevShow) => !prevShow)}
+            onClick={() => {
+              dispatch(
+                setVisibility({
+                  payload: {
+                    visibility: !show,
+                  },
+                }),
+              );
+            }}
             cursor='pointer'
           >
             <Text

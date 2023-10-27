@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
-import { ElectricityDetailsInterface } from '@/constants/interface';
-import { useGetPowerProvidersQuery } from '@/redux/services/electricity.service';
+import {ElectricityDetailsInterface} from '@/constants/interface';
+import {useGetPowerProvidersQuery} from '@/redux/services/electricity.service';
 import {
-	Box,
-	Flex,
-	Image,
-	Input,
-	SimpleGrid,
-	Skeleton,
-	Text,
+  Box,
+  Flex,
+  Image,
+  Input,
+  SimpleGrid,
+  Skeleton,
+  Text,
 } from '@chakra-ui/react';
 
 const UtilityProviderElectricity = ({
@@ -75,7 +75,7 @@ const UtilityProviderElectricity = ({
                   <Image
                     src={each?.image}
                     alt='Provider'
-                    w='100%'
+                    mx='auto'
                     h={{base: '50px', lg: '70px'}}
                     objectFit={'cover'}
                   />
@@ -104,7 +104,7 @@ const UtilityProviderElectricity = ({
                     <Image
                       src={each?.image}
                       alt='Provider'
-                      w='100%'
+                      mx='auto'
                       h={{base: '50px', lg: '70px'}}
                       objectFit={'cover'}
                     />

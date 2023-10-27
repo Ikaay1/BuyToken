@@ -72,9 +72,9 @@ const UtilityProviderCable = ({
                   cursor='pointer'
                 >
                   <Image
-                    src={`/assets/gotv.png`}
+                    src={each?.image}
                     alt='Provider'
-                    w='100%'
+                    mx='auto'
                     h={{base: '50px', lg: '70px'}}
                     objectFit={'cover'}
                   />
@@ -100,9 +100,9 @@ const UtilityProviderCable = ({
                   cursor='pointer'
                 >
                   <Image
-                    src={`/assets/gotv.png`}
+                    src={each?.image}
                     alt='Provider'
-                    w='100%'
+                    mx='auto'
                     h={{base: '50px', lg: '70px'}}
                     objectFit={'cover'}
                   />
