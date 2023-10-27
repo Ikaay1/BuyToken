@@ -4,10 +4,12 @@ import type {PayloadAction} from '@reduxjs/toolkit';
 
 export interface UtilitiesProps {
   utilities: null | any;
+  visibility: null | boolean;
 }
 
 const initialState: UtilitiesProps = {
   utilities: [],
+  visibility: true,
 };
 
 export const utilitySlice = createSlice({
@@ -37,9 +39,16 @@ export const utilitySlice = createSlice({
       state.utilities[index] = {name: payload.modal};
       state.utilities[index2] = {name: payload.frequently};
     },
+    setVisibility: (
+      state,
+      {payload: {payload}}: PayloadAction<{payload: any}>,
+    ) => {
+      state.visibility = payload?.visibility;
+    },
   },
 });
 
-export const {setUtilities, updateUtilities} = utilitySlice.actions;
+export const {setUtilities, updateUtilities, setVisibility} =
+  utilitySlice.actions;
 
 export default utilitySlice.reducer;
