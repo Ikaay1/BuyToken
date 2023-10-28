@@ -37,18 +37,7 @@ export const transactionsApi = createApi({
       }),
       providesTags: ['Transactions'],
     }),
-    getRecentTransactions: builder.query<any, any>({
-      query: () => ({
-        url: `transactions/get/all?page=1&limit=8`,
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }),
-      providesTags: ['Transactions'],
-    }),
   }),
 });
 
-export const {useGetTransactionsQuery, useGetRecentTransactionsQuery} =
-  transactionsApi;
+export const {useGetTransactionsQuery} = transactionsApi;
