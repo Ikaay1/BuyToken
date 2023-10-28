@@ -15,16 +15,6 @@ export const userApi = createApi({
   }),
   tagTypes: ['User'],
   endpoints: (builder) => ({
-    getUserWallet: builder.query<any, any>({
-      query: () => ({
-        url: `users/wallet`,
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }),
-      providesTags: ['User'],
-    }),
     uploadProfilePicture: builder.mutation<any, any>({
       query: (body) => ({
         url: `users/update/profile/pics`,
@@ -71,7 +61,6 @@ export const userApi = createApi({
 });
 
 export const {
-  useGetUserWalletQuery,
   useUploadProfilePictureMutation,
   useGetUserQuery,
   useUpdateProfileNameMutation,

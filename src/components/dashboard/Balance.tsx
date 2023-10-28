@@ -4,7 +4,7 @@ import HideIcon from '@/assets/HideIcon';
 import ShowIcon from '@/assets/ShowIcon';
 import WalletIcon from '@/assets/WalletIcon';
 import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
-import {useGetUserWalletQuery} from '@/redux/services/user.service';
+import {useGetUserWalletQuery} from '@/redux/services/electricity.service';
 import {setVisibility} from '@/redux/slices/utilitySlice';
 import {Box, Flex, Icon, Image, Skeleton, Text} from '@chakra-ui/react';
 
