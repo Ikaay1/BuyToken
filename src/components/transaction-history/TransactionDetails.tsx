@@ -2,7 +2,8 @@ import React from 'react';
 
 import CloseIcon from '@/assets/CloseIcon';
 import {TransactionInterface} from '@/constants/interface';
-import {Box, Button, Flex, Icon, Text} from '@chakra-ui/react';
+import {useGetTransactionReceiptMutation} from '@/redux/services/transactions.service';
+import {Box, Button, Flex, Icon, Text, useToast} from '@chakra-ui/react';
 
 const TransactionDetails = ({
   onClose,
@@ -21,6 +22,10 @@ const TransactionDetails = ({
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
   }
+
+  const [getTransactionReceipt, getTransactionReceiptStatus] =
+    useGetTransactionReceiptMutation();
+  const toast = useToast();
 
   return (
     <Box
@@ -114,7 +119,14 @@ const TransactionDetails = ({
               </Flex>
             </Box>
           ))}
-          <Box mt='.9rem'>
+          <Box
+            mt='.9rem'
+            mb={
+              eachTransaction?.billerType?.toLowerCase() === 'funding'
+                ? '1.2rem'
+                : 0
+            }
+          >
             <Text
               fontFamily='Poppins'
               fontWeight='500'
@@ -145,6 +157,44 @@ const TransactionDetails = ({
               fontSize='13px'
               color='#FFFFFF'
               mt='2.5rem'
+              onClick={async () => {
+                const res: any = await getTransactionReceipt(
+                  eachTransaction?._id,
+                );
+                console.log('generateReceipt', res);
+                if (res?.data?.data) {
+                  const linkSource = `data:application/pdf;base64,${res?.data?.data}`;
+                  const downloadLink = document.createElement('a');
+                  const fileName = 'Receipt.pdf';
+                  downloadLink.href = linkSource;
+                  downloadLink.download = fileName;
+                  downloadLink.click();
+                  toast({
+                    title: 'Download Successful',
+                    description: 'Receipt successfully downloaded',
+                    status: 'success',
+                    duration: 8000,
+                    isClosable: true,
+                    position: 'top-right',
+                  });
+                } else {
+                  toast({
+                    title: 'Download failed',
+                    description:
+                      res?.error?.data?.message || 'Something went wrong',
+                    status: 'error',
+                    duration: 8000,
+                    isClosable: true,
+                    position: 'top-right',
+                  });
+                }
+              }}
+              isLoading={getTransactionReceiptStatus.isLoading}
+              display={
+                eachTransaction?.billerType?.toLowerCase() === 'funding'
+                  ? 'none'
+                  : 'block'
+              }
             >
               Generate Receipt
             </Button>
