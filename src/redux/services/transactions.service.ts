@@ -37,7 +37,14 @@ export const transactionsApi = createApi({
       }),
       providesTags: ['Transactions'],
     }),
+    getTransactionReceipt: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `biller/generate/receipt/${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const {useGetTransactionsQuery} = transactionsApi;
+export const {useGetTransactionsQuery, useGetTransactionReceiptMutation} =
+  transactionsApi;
