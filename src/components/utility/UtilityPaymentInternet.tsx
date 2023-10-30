@@ -260,7 +260,7 @@ const UtilityPaymentInternet = ({
               >
                 Pay{' '}
                 {bundleCode?.split('$')[2]
-                  ? 'N' + bundleCode?.split('$')[2]
+                  ? '₦' + bundleCode?.split('$')[2]
                   : ''}
               </Button>
             </Flex>

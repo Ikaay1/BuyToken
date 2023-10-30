@@ -309,7 +309,7 @@ const UtilityPaymentCable = ({
           }}
         >
           Pay{' '}
-          {productCode?.split('$')[2] ? 'N' + productCode?.split('$')[2] : ''}
+          {productCode?.split('$')[2] ? '₦' + productCode?.split('$')[2] : ''}
         </Button>
       </Flex>
     </Box>
