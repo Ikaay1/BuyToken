@@ -122,7 +122,7 @@ const TransactionDetails = ({
           <Box
             mt='.9rem'
             mb={
-              eachTransaction?.billerType?.toLowerCase() === 'funding'
+              eachTransaction?.billerType?.toLowerCase() !== 'electricity'
                 ? '1.2rem'
                 : 0
             }
@@ -191,7 +191,7 @@ const TransactionDetails = ({
               }}
               isLoading={getTransactionReceiptStatus.isLoading}
               display={
-                eachTransaction?.billerType?.toLowerCase() === 'funding'
+                eachTransaction?.billerType?.toLowerCase() !== 'electricity'
                   ? 'none'
                   : 'block'
               }
