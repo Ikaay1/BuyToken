@@ -305,30 +305,30 @@ const Social = ({
           scope='public_profile,email,user_friends'
           callback={(response) => responseFacebook(response)}
           icon='fa-facebook'
-          render={(renderProps) => (
-            <Button
-              onClick={renderProps.onClick}
-              disabled={renderProps.isDisabled}
-              width='60px'
-              height='60px'
-              boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
-              borderRadius='42px'
-              display={'flex'}
-              justifyContent='center'
-              alignItems={'center'}
-              cursor='pointer'
-              border='none'
-              p='0'
-            >
-              {/* <Image
-                src={`/assets/facebook.png`}
-                alt={`facebook icon`}
-                width={'37px'}
-                height={'37px'}
-              /> */}
-              FB
-            </Button>
-          )}
+          render={(renderProps) =>
+            // <Button
+            //   onClick={renderProps.onClick}
+            //   disabled={renderProps.isDisabled}
+            //   width='60px'
+            //   height='60px'
+            //   boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
+            //   borderRadius='42px'
+            //   display={'flex'}
+            //   justifyContent='center'
+            //   alignItems={'center'}
+            //   cursor='pointer'
+            //   border='none'
+            //   p='0'
+            // >
+            //   <Image
+            //     src={`/assets/facebook.png`}
+            //     alt={`facebook icon`}
+            //     width={'37px'}
+            //     height={'37px'}
+            //   />
+            // </Button>
+            'FB'
+          }
         />
       </Box>
     </Box>
