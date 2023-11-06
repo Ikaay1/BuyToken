@@ -281,7 +281,6 @@ const Social = ({
           onClick={() => loginGoogle()}
           width='60px'
           height='60px'
-          background='clique.secondaryGrey4'
           boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
           borderRadius='42px'
           display={'flex'}
@@ -303,7 +302,7 @@ const Social = ({
           appId={process.env.NEXT_PUBLIC_FACEBOOK_APPID!}
           autoLoad={false}
           fields='name,email,picture'
-          // scope='public_profile,email,user_friends'
+          scope='public_profile,email,user_friends'
           callback={(response) => responseFacebook(response)}
           icon='fa-facebook'
           render={(renderProps) => (
@@ -312,7 +311,6 @@ const Social = ({
               disabled={renderProps.isDisabled}
               width='60px'
               height='60px'
-              background='clique.secondaryGrey4'
               boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
               borderRadius='42px'
               display={'flex'}
