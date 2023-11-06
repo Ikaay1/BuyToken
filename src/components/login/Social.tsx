@@ -299,7 +299,7 @@ const Social = ({
           />
         </Button>
         <FacebookLogin
-          appId="" //{process.env.NEXT_PUBLIC_FACEBOOK_APPID!}
+          appId="331469632694986" //{process.env.NEXT_PUBLIC_FACEBOOK_APPID!}
           autoLoad={false}
           fields="name,email,picture"
           scope="public_profile,email,user_friends"
