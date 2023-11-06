@@ -98,3 +98,4 @@ const ResetPassword = () => {
 };
 
 export default ResetPassword;
+export {getServerSideProps} from '../components/widgets/Chakra';

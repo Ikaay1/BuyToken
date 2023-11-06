@@ -21,3 +21,4 @@ const Home = () => {
 };
 
 export default Home;
+export {getServerSideProps} from '../components/widgets/Chakra';

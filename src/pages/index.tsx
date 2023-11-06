@@ -12,3 +12,4 @@ export default function Home() {
     </Box>
   );
 }
+export {getServerSideProps} from '../components/widgets/Chakra';
