@@ -1,14 +1,14 @@
-import axios from 'axios';
-import {useRouter} from 'next/router';
-import React from 'react';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import axios from "axios";
+import { useRouter } from "next/router";
+import React from "react";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
-import {useAppDispatch} from '@/redux/app/hooks';
+import { useAppDispatch } from "@/redux/app/hooks";
 import {
   useSocialLoginMutation,
   useSocialSignupMutation,
-} from '@/redux/services/auth.service';
-import {setCredentials} from '@/redux/slices/authSlice';
+} from "@/redux/services/auth.service";
+import { setCredentials } from "@/redux/slices/authSlice";
 import {
   Box,
   Button,
@@ -17,8 +17,8 @@ import {
   Image,
   Text,
   useToast,
-} from '@chakra-ui/react';
-import {useGoogleLogin} from '@react-oauth/google';
+} from "@chakra-ui/react";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const Social = ({
   setLoading,
@@ -32,10 +32,10 @@ const Social = ({
   const [signup] = useSocialSignupMutation();
   const loginGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      console.log('entered login');
+      console.log("entered login");
       setLoading(true);
       axios
-        .get('https://www.googleapis.com/oauth2/v3/userinfo', {
+        .get("https://www.googleapis.com/oauth2/v3/userinfo", {
           headers: {
             Authorization: `Bearer ${tokenResponse?.access_token}`,
           },
@@ -43,52 +43,52 @@ const Social = ({
         .then(async (userInfo) => {
           console.log(userInfo);
           if (userInfo?.data?.email) {
-            const {name, email} = userInfo.data;
-            console.log('userInfo', userInfo);
-            if (router.asPath === '/signup') {
+            const { name, email } = userInfo.data;
+            console.log("userInfo", userInfo);
+            if (router.asPath === "/signup") {
               const res: any = await signup({
                 name,
                 email,
-                password: 'aa',
+                password: "aa",
               });
-              console.log('resSignupGoogle', res);
-              if ('data' in res) {
+              console.log("resSignupGoogle", res);
+              if ("data" in res) {
                 const response: any = await login({
                   username: email,
                 });
-                console.log('resLoginGoogle', response);
-                if ('data' in response) {
+                console.log("resLoginGoogle", response);
+                if ("data" in response) {
                   dispatch(
                     setCredentials({
                       payload: {
                         data: response?.data?.data?.user,
                         token: response?.data?.data?.access_token,
                       },
-                    }),
+                    })
                   );
-                  router.push('/dashboard');
+                  router.push("/dashboard");
                   setLoading(false);
                 } else {
                   toast({
-                    title: 'Login failed',
+                    title: "Login failed",
                     description:
-                      response?.error?.data?.message || 'Something went wrong',
-                    status: 'error',
+                      response?.error?.data?.message || "Something went wrong",
+                    status: "error",
                     duration: 8000,
                     isClosable: true,
-                    position: 'top-right',
+                    position: "top-right",
                   });
                   setLoading(false);
                 }
               } else {
                 toast({
-                  title: 'Register failed',
+                  title: "Register failed",
                   description:
-                    res?.error?.data?.message || 'Something went wrong',
-                  status: 'error',
+                    res?.error?.data?.message || "Something went wrong",
+                  status: "error",
                   duration: 8000,
                   isClosable: true,
-                  position: 'top-right',
+                  position: "top-right",
                 });
                 setLoading(false);
               }
@@ -96,7 +96,7 @@ const Social = ({
               const res: any = await login({
                 username: email,
               });
-              console.log('resLoginGoogle', res);
+              console.log("resLoginGoogle", res);
               if (res?.data?.data) {
                 dispatch(
                   setCredentials({
@@ -104,23 +104,23 @@ const Social = ({
                       data: res?.data?.data?.user,
                       token: res?.data?.data?.access_token,
                     },
-                  }),
+                  })
                 );
-                router.push('/dashboard');
+                router.push("/dashboard");
                 setLoading(false);
               } else {
                 toast({
-                  title: 'Login failed',
+                  title: "Login failed",
                   description:
                     res?.error?.data?.message ||
                     res?.data?.message ||
-                    'Something went wrong',
-                  status: 'error',
+                    "Something went wrong",
+                  status: "error",
                   duration: 8000,
                   isClosable: true,
-                  position: 'top-right',
+                  position: "top-right",
                 });
-                console.log('res', res);
+                console.log("res", res);
                 setLoading(false);
               }
             }
@@ -133,54 +133,54 @@ const Social = ({
   });
 
   const responseFacebook = async (response: any) => {
-    console.log('response', response);
+    console.log("response", response);
     if (response?.accessToken) {
-      const {name, email} = response;
-      if (router.asPath.includes('/signup')) {
+      const { name, email } = response;
+      if (router.asPath.includes("/signup")) {
         if (email) {
           setLoading(true);
           signup({
             name,
             email,
-            password: 'aa',
+            password: "aa",
           }).then(async (res: any) => {
-            if ('data' in res) {
+            if ("data" in res) {
               const response: any = await login({
                 username: email,
               });
-              console.log('resSignupGoogle', response);
-              if ('data' in response) {
+              console.log("resSignupGoogle", response);
+              if ("data" in response) {
                 dispatch(
                   setCredentials({
                     payload: {
                       data: response?.data?.data?.user,
                       token: response?.data?.data?.access_token,
                     },
-                  }),
+                  })
                 );
-                router.push('/dashboard');
+                router.push("/dashboard");
                 setLoading(false);
               } else {
                 toast({
-                  title: 'Login failed',
+                  title: "Login failed",
                   description:
-                    response?.error?.data?.message || 'Something went wrong',
-                  status: 'error',
+                    response?.error?.data?.message || "Something went wrong",
+                  status: "error",
                   duration: 8000,
                   isClosable: true,
-                  position: 'top-right',
+                  position: "top-right",
                 });
                 setLoading(false);
               }
             } else {
               toast({
-                title: 'Register failed',
+                title: "Register failed",
                 description:
-                  res?.error?.data?.message || 'Something went wrong',
-                status: 'error',
+                  res?.error?.data?.message || "Something went wrong",
+                status: "error",
                 duration: 8000,
                 isClosable: true,
-                position: 'top-right',
+                position: "top-right",
               });
               setLoading(false);
             }
@@ -188,12 +188,12 @@ const Social = ({
         } else {
           if (name) {
             toast({
-              title: 'Error',
+              title: "Error",
               description:
-                'No email registered to this facebook account. Please use a facebook account that has an email registered to it to signup',
-              status: 'error',
+                "No email registered to this facebook account. Please use a facebook account that has an email registered to it to signup",
+              status: "error",
               duration: 8000,
-              position: 'top-right',
+              position: "top-right",
               isClosable: true,
             });
           }
@@ -211,35 +211,35 @@ const Social = ({
                     data: res?.data?.data?.user,
                     token: res?.data?.data?.access_token,
                   },
-                }),
+                })
               );
-              router.push('/dashboard');
+              router.push("/dashboard");
               setLoading(false);
             } else {
               toast({
-                title: 'Login failed',
+                title: "Login failed",
                 description:
                   res?.error?.data?.message ||
                   res?.data?.message ||
-                  'Something went wrong',
-                status: 'error',
+                  "Something went wrong",
+                status: "error",
                 duration: 8000,
                 isClosable: true,
-                position: 'top-right',
+                position: "top-right",
               });
-              console.log('res', res);
+              console.log("res", res);
               setLoading(false);
             }
           });
         } else {
           if (name) {
             toast({
-              title: 'Error',
+              title: "Error",
               description:
-                'No email registered to this facebook account. Please use a facebook account that has an email registered to it and one you have signed up with to login',
-              status: 'error',
+                "No email registered to this facebook account. Please use a facebook account that has an email registered to it and one you have signed up with to login",
+              status: "error",
               duration: 8000,
-              position: 'top-right',
+              position: "top-right",
               isClosable: true,
             });
           }
@@ -248,83 +248,83 @@ const Social = ({
     }
   };
   return (
-    <Box mt='1.5rem'>
-      <Flex justifyContent={'space-between'} alignItems={'flex-end'} mt='.2rem'>
+    <Box mt="1.5rem">
+      <Flex justifyContent={"space-between"} alignItems={"flex-end"} mt=".2rem">
         <Divider
-          w='47.5%'
-          borderWidth={'1.3px'}
-          borderColor={'#CCCCCC'}
+          w="47.5%"
+          borderWidth={"1.3px"}
+          borderColor={"#CCCCCC"}
         ></Divider>
         <Text
-          fontFamily='Poppins'
-          fontWeight='600'
-          fontSize='14px'
-          lineHeight='21px'
-          color='#737373'
-          alignSelf={'center'}
+          fontFamily="Poppins"
+          fontWeight="600"
+          fontSize="14px"
+          lineHeight="21px"
+          color="#737373"
+          alignSelf={"center"}
         >
           Or
         </Text>
         <Divider
-          w='47.5%'
-          borderWidth={'1.3px'}
-          borderColor={'#CCCCCC'}
+          w="47.5%"
+          borderWidth={"1.3px"}
+          borderColor={"#CCCCCC"}
         ></Divider>
       </Flex>
       <Box
-        marginTop={'20px'}
-        display={'flex'}
-        justifyContent={'center'}
-        alignItems={'center'}
+        marginTop={"20px"}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
       >
         <Button
           onClick={() => loginGoogle()}
-          width='60px'
-          height='60px'
-          boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
-          borderRadius='42px'
-          display={'flex'}
-          justifyContent='center'
-          alignItems={'center'}
-          cursor='pointer'
-          border='none'
-          mr='30px'
-          p='0'
+          width="60px"
+          height="60px"
+          boxShadow="0px 2.8px 14px rgba(0, 0, 0, 0.25)"
+          borderRadius="42px"
+          display={"flex"}
+          justifyContent="center"
+          alignItems={"center"}
+          cursor="pointer"
+          border="none"
+          mr="30px"
+          p="0"
         >
           <Image
             src={`/assets/google.png`}
             alt={`google icon`}
-            width={'27px'}
-            height={'27px'}
+            width={"27px"}
+            height={"27px"}
           />
         </Button>
         <FacebookLogin
-          appId={process.env.NEXT_PUBLIC_FACEBOOK_APPID!}
+          appId="" //{process.env.NEXT_PUBLIC_FACEBOOK_APPID!}
           autoLoad={false}
-          fields='name,email,picture'
-          scope='public_profile,email,user_friends'
+          fields="name,email,picture"
+          scope="public_profile,email,user_friends"
           callback={(response) => responseFacebook(response)}
-          icon='fa-facebook'
+          icon="fa-facebook"
           render={(renderProps) => (
             <Button
               onClick={renderProps.onClick}
               disabled={renderProps.isDisabled}
-              width='60px'
-              height='60px'
-              boxShadow='0px 2.8px 14px rgba(0, 0, 0, 0.25)'
-              borderRadius='42px'
-              display={'flex'}
-              justifyContent='center'
-              alignItems={'center'}
-              cursor='pointer'
-              border='none'
-              p='0'
+              width="60px"
+              height="60px"
+              boxShadow="0px 2.8px 14px rgba(0, 0, 0, 0.25)"
+              borderRadius="42px"
+              display={"flex"}
+              justifyContent="center"
+              alignItems={"center"}
+              cursor="pointer"
+              border="none"
+              p="0"
             >
               <Image
                 src={`/assets/facebook.png`}
                 alt={`facebook icon`}
-                width={'37px'}
-                height={'37px'}
+                width={"37px"}
+                height={"37px"}
               />
             </Button>
           )}
