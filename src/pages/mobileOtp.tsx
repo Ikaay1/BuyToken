@@ -1,11 +1,13 @@
-import {useRouter} from 'next/router';
-import React, {useEffect, useState} from 'react';
+'use client';
+
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 import BackArrow from '@/assets/BackArrow';
 import MobileOtpInputForm from '@/components/otp/MobileOtpInputForm';
 import AuthRoute from '@/layouts/AuthRoute';
-import {useAppSelector} from '@/redux/app/hooks';
-import {Box, Flex, Icon, Image, Text} from '@chakra-ui/react';
+import { useAppSelector } from '@/redux/app/hooks';
+import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 
 const Otp = () => {
   const router = useRouter();
