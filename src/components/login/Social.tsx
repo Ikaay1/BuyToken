@@ -320,12 +320,13 @@ const Social = ({
               border='none'
               p='0'
             >
-              <Image
+              {/* <Image
                 src={`/assets/facebook.png`}
                 alt={`facebook icon`}
                 width={'37px'}
                 height={'37px'}
-              />
+              /> */}
+              FB
             </Button>
           )}
         />
