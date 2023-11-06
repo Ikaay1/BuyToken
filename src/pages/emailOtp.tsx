@@ -101,3 +101,4 @@ const Otp = () => {
 };
 
 export default Otp;
+export {getServerSideProps} from '../components/widgets/Chakra';
