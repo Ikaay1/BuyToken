@@ -58,7 +58,7 @@ const UtilityPaymentAirtime = ({
             const res: any = await buyAirtime({
               phoneNumber: phone,
               serviceType: airtimeDetails?.merchantId,
-              amount: Number(amount),
+              amount: Number(amount) * 0.99,
             });
             console.log('buyResp', res);
             if (res?.data?.data) {
@@ -161,7 +161,10 @@ const UtilityPaymentAirtime = ({
                 type='submit'
                 isLoading={buyAirtimeStatus.isLoading}
               >
-                Pay {props.values.amount ? '₦' + props.values.amount : ''}
+                Pay{' '}
+                {props.values.amount
+                  ? '₦' + (Number(props.values.amount) * 0.99).toString()
+                  : ''}
               </Button>
             </Flex>
           </Form>
