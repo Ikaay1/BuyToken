@@ -15,7 +15,7 @@ const Layout = ({children}: {children: any}) => {
           crossOrigin='anonymous'
           referrerPolicy='no-referrer'
         />
-        <link rel='icon' href='/favicon.ico' type='image/svg+xml' />
+        <link rel='icon' href='/favicon.png' type='image/svg+xml' />
       </Head>
       <Box>{children}</Box>
     </Box>
