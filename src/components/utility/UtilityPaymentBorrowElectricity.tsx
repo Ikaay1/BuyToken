@@ -106,7 +106,7 @@ const UtilityPaymentBorrowElectricity = ({
                 MerchantFK: electricityDetails?.merchantId,
                 accountType: customerDetails?.meterType,
                 customerName: customerDetails?.CustomerName,
-                amount: customerDetails?.amount,
+                amount: (Number(customerDetails?.amount) + 100).toString(),
               });
               console.log('buyResp', res);
               if (res?.data?.data) {
@@ -136,7 +136,7 @@ const UtilityPaymentBorrowElectricity = ({
           }}
           isLoading={buyPowerStatus.isLoading}
         >
-          Pay ₦{customerDetails?.amount}
+          Pay ₦{(Number(customerDetails?.amount) + 100).toString()}
         </Button>
       </Flex>
     </Box>

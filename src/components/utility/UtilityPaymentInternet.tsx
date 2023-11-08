@@ -115,7 +115,7 @@ const UtilityPaymentInternet = ({
               bundleType: bundleCode?.split('$')[1],
               bundleTypeCode: bundleCode?.split('$')[0],
               CustomerPhone: phone,
-              amount: bundleCode?.split('$')[2],
+              amount: (Number(bundleCode?.split('$')[2]) * 0.99).toString(),
               MerchantFK: Number(internetDetails?.merchantId),
             });
             console.log('buyResp', res);
@@ -260,7 +260,7 @@ const UtilityPaymentInternet = ({
               >
                 Pay{' '}
                 {bundleCode?.split('$')[2]
-                  ? '₦' + bundleCode?.split('$')[2]
+                  ? '₦' + (Number(bundleCode?.split('$')[2]) * 0.99).toString()
                   : ''}
               </Button>
             </Flex>

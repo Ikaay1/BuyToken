@@ -119,6 +119,8 @@ const Balance = () => {
               >
                 {!show
                   ? '*********'
+                  : data?.data?.balance?.toString().includes('.')
+                  ? `₦${data?.data?.balance?.toLocaleString()}`
                   : `₦${data?.data?.balance?.toLocaleString()}.00`}
               </Text>
             ) : null}
