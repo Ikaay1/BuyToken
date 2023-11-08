@@ -36,3 +36,5 @@ export const scrollbarStyle2 = {
     borderTop: '10px solid transparent',
   },
 };
+
+export const payPercentage = 0.987

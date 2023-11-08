@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import IdCardIcon from '@/assets/IdCardIcon';
 import {ElectricityDetailsInterface} from '@/constants/interface';
+import {payPercentage} from '@/constants/utils';
 import {useAppSelector} from '@/redux/app/hooks';
 import {
   useBuyDataMutation,
@@ -115,7 +116,9 @@ const UtilityPaymentInternet = ({
               bundleType: bundleCode?.split('$')[1],
               bundleTypeCode: bundleCode?.split('$')[0],
               CustomerPhone: phone,
-              amount: (Number(bundleCode?.split('$')[2]) * 0.99).toString(),
+              amount: (
+                Number(bundleCode?.split('$')[2]) * payPercentage
+              ).toString(),
               MerchantFK: Number(internetDetails?.merchantId),
             });
             console.log('buyResp', res);
@@ -260,7 +263,10 @@ const UtilityPaymentInternet = ({
               >
                 Pay{' '}
                 {bundleCode?.split('$')[2]
-                  ? '₦' + (Number(bundleCode?.split('$')[2]) * 0.99).toString()
+                  ? '₦' +
+                    (
+                      Number(bundleCode?.split('$')[2]) * payPercentage
+                    )?.toLocaleString()
                   : ''}
               </Button>
             </Flex>
