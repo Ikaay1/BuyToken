@@ -46,59 +46,57 @@ const UtilityForm = ({
   const [amountError, setAmountError] = useState('');
   const [amount, setAmount] = useState('');
 
-  useEffect(() => {
-    const checkCustomer = async () => {
-      setCustomerDetails({
-        FirstName: '',
-        LastName: '',
-        CustomerName: '',
-        CustomerAddress: '',
-        meterNumber: '',
-        meterType: '',
-        amount: '',
+  const checkCustomer = async () => {
+    setCustomerDetails({
+      FirstName: '',
+      LastName: '',
+      CustomerName: '',
+      CustomerAddress: '',
+      meterNumber: '',
+      meterType: '',
+      amount: '',
+    });
+    if ((isCheckedPostPaid || isCheckedPrepaid) && meterNumber.length > 9) {
+      const res: any = await validateCustomer({
+        customerId: meterNumber,
+        MerchantFK: electricityDetails?.merchantId,
+        accountType: isCheckedPrepaid ? '1' : '2',
       });
-      if (
-        (isCheckedPostPaid || isCheckedPrepaid) &&
-        meterNumber.length === 11
-      ) {
-        const res: any = await validateCustomer({
-          customerId: meterNumber,
-          MerchantFK: electricityDetails?.merchantId,
-          accountType: isCheckedPrepaid ? '1' : '2',
+      console.log('customerDetails', res);
+      if (res?.data?.data?.respCode === '00') {
+        setCustomerDetails({
+          ...res?.data?.data,
+          meterNumber,
+          meterType: isCheckedPrepaid ? '1' : '2',
         });
-        console.log('customerDetails', res);
-        if (res?.data?.data?.respCode === '00') {
-          setCustomerDetails({
-            ...res?.data?.data,
-            meterNumber,
-            meterType: isCheckedPrepaid ? '1' : '2',
-          });
-        } else {
-          toast({
-            title: 'Verification failed',
-            description:
-              res?.error?.data?.message ||
-              "Couldn't verify customer. Something went wrong",
-            status: 'error',
-            duration: 8000,
-            isClosable: true,
-            position: 'top-right',
-          });
-        }
+      } else {
+        toast({
+          title: 'Verification failed',
+          description:
+            res?.error?.data?.message ||
+            "Couldn't verify customer. Something went wrong",
+          status: 'error',
+          duration: 8000,
+          isClosable: true,
+          position: 'top-right',
+        });
       }
-    };
+    }
+  };
+
+  useEffect(() => {
     checkCustomer();
   }, [
     isCheckedPrepaid,
     isCheckedPostPaid,
-    meterNumber,
+    // meterNumber,
     electricityDetails?.merchantId,
   ]);
 
   useEffect(() => {
     if (meterNumber) {
-      if (meterNumber.length !== 11) {
-        setMeterError('Meter Number must be 11 digits');
+      if (meterNumber.length < 10) {
+        setMeterError('Meter Number cannot be less than 10 digits');
       } else {
         setMeterError('');
       }
@@ -128,7 +126,8 @@ const UtilityForm = ({
           focusBorderColor='white'
           fontSize={{base: '12px', lg: '16px'}}
           required={true}
-          maxLength={11}
+          minLength={10}
+          onBlur={checkCustomer}
           value={meterNumber}
           onChange={(e) => setMeterNumber(e.target.value)}
         />
@@ -266,8 +265,8 @@ const UtilityForm = ({
               setMeterError('Meter Number is required');
               return;
             }
-            if (meterNumber.length !== 11) {
-              setMeterError('Meter Number must be 11 digits');
+            if (meterNumber.length < 10) {
+              setMeterError('Meter Number cannot be less than 10 digits');
               return;
             }
             if (!isCheckedPrepaid && !isCheckedPostPaid) {

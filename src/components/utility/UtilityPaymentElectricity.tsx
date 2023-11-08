@@ -54,7 +54,9 @@ const UtilityPaymentElectricity = ({
           },
           {
             name: 'Amount:',
-            value: `₦${customerDetails?.amount?.toLocaleString()}`,
+            value: `₦${Number(
+              customerDetails?.amount,
+            )?.toLocaleString()} + ₦100 (Convenience fee)`,
           },
         ].map(({name, value}) => (
           <Flex
@@ -139,7 +141,7 @@ const UtilityPaymentElectricity = ({
           }}
           isLoading={buyPowerStatus.isLoading}
         >
-          Pay ₦{(Number(customerDetails?.amount) + 100).toString()}
+          Pay ₦{(Number(customerDetails?.amount) + 100)?.toLocaleString()}
         </Button>
       </Flex>
     </Box>

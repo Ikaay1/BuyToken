@@ -38,6 +38,17 @@ const LoginForm = () => {
           password: Yup.string().min(5).required('Password is Required'),
         })}
         onSubmit={async ({email, password}) => {
+          if (!email.includes('@') && !email.startsWith('+234')) {
+            toast({
+              title: 'Invalid phone number',
+              description: 'Phone number must start with +234',
+              status: 'error',
+              duration: 8000,
+              isClosable: true,
+              position: 'top-right',
+            });
+            return;
+          }
           const res: any = await login({username: email, password});
           console.log('resLogin', res);
           if (res?.data?.data?.access_token) {

@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import IdCardIcon from '@/assets/IdCardIcon';
 import {ElectricityDetailsInterface} from '@/constants/interface';
+import {payPercentage} from '@/constants/utils';
 import {useBuyAirtimeMutation} from '@/redux/services/electricity.service';
 import {
   Box,
@@ -58,7 +59,7 @@ const UtilityPaymentAirtime = ({
             const res: any = await buyAirtime({
               phoneNumber: phone,
               serviceType: airtimeDetails?.merchantId,
-              amount: Number(amount) * 0.99,
+              amount: Number(amount) * payPercentage,
             });
             console.log('buyResp', res);
             if (res?.data?.data) {
@@ -163,7 +164,10 @@ const UtilityPaymentAirtime = ({
               >
                 Pay{' '}
                 {props.values.amount
-                  ? '₦' + (Number(props.values.amount) * 0.99).toString()
+                  ? '₦' +
+                    (
+                      Number(props.values.amount) * payPercentage
+                    )?.toLocaleString()
                   : ''}
               </Button>
             </Flex>
