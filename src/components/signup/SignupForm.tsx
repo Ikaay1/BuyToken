@@ -37,8 +37,8 @@ const SignupForm = () => {
           name: Yup.string().required('Name is Required'),
           phone: Yup.string()
             .required('Phone Number is Required')
-            .min(13, 'Must be exactly 14 digits')
-            .max(13, 'Must be exactly 14 digits'),
+            .min(13, 'Must be exactly 13 digits and start with 234')
+            .max(13, 'Must be exactly 13 digits and start with 234'),
           password: Yup.string().min(5).required('Password is Required'),
           confirmPassword: Yup.string()
             .min(5)

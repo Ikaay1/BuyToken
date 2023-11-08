@@ -46,8 +46,8 @@ const UpdateProfile = () => {
           name: Yup.string().required('Name is Required'),
           phone: Yup.string()
             // .required('Phone Number is Required')
-            .min(13, 'Must be exactly 14 digits')
-            .max(13, 'Must be exactly 14 digits'),
+            .min(13, 'Must be exactly 13 digits and start with 234')
+            .max(13, 'Must be exactly 13 digits and start with 234'),
           email: Yup.string().email().required('Email is Required'),
         })}
         onSubmit={async ({name, phone}) => {
