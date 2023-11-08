@@ -37,8 +37,8 @@ const SignupForm = () => {
           name: Yup.string().required('Name is Required'),
           phone: Yup.string()
             .required('Phone Number is Required')
-            .min(14, 'Must be exactly 14 digits')
-            .max(14, 'Must be exactly 14 digits'),
+            .min(13, 'Must be exactly 14 digits')
+            .max(13, 'Must be exactly 14 digits'),
           password: Yup.string().min(5).required('Password is Required'),
           confirmPassword: Yup.string()
             .min(5)
@@ -48,10 +48,10 @@ const SignupForm = () => {
             }),
         })}
         onSubmit={async ({email, password, phone, name}) => {
-          if (!phone.startsWith('+234')) {
+          if (!phone.startsWith('234')) {
             toast({
               title: 'Invalid phone number',
-              description: 'Phone number must start with +234',
+              description: 'Phone number must start with 234',
               status: 'error',
               duration: 8000,
               isClosable: true,
@@ -111,7 +111,7 @@ const SignupForm = () => {
             />
             <Box mt='.8rem'>
               <AuthInput
-                placeholder='Phone Number (should start with +234)'
+                placeholder='Phone Number (should start with 234)'
                 type='tel'
                 icon={IdCardIcon}
                 value='phone'
