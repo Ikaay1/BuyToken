@@ -38,7 +38,7 @@ const UpdateProfile = () => {
       <Formik
         initialValues={{
           name,
-          phone,
+          phone: '+' + phone,
           email,
         }}
         enableReinitialize
@@ -100,7 +100,7 @@ const UpdateProfile = () => {
               value='name'
             />
             <UpdateProfileInput
-              placeholder='Phone Number (should start with 234)'
+              placeholder='Phone Number (should start with +234)'
               icon={IdCardIcon}
               value='phone'
               readOnly={true}

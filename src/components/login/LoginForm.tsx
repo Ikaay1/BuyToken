@@ -49,7 +49,10 @@ const LoginForm = () => {
             });
             return;
           }
-          const res: any = await login({username: email, password});
+          const res: any = await login({
+            username: email.startsWith('+234') ? email.slice(1) : email,
+            password,
+          });
           console.log('resLogin', res);
           if (res?.data?.data?.access_token) {
             dispatch(
@@ -123,6 +126,7 @@ const LoginForm = () => {
                         email: res?.data?.data?.email,
                         mobileNumber: res?.data?.data?.mobileNumber,
                         password,
+                        mobile_hash: response?.data?.data?.otp_hash,
                       },
                     }),
                   );

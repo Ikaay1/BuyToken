@@ -2,11 +2,12 @@ import {useRouter} from 'next/router';
 import React, {useState} from 'react';
 import OTPInput from 'react-otp-input';
 
-import {useAppSelector} from '@/redux/app/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
 import {
   useSendOTPToMobileMutation,
   useValidateEmailOtpMutation,
 } from '@/redux/services/auth.service';
+import {setData} from '@/redux/slices/authSlice';
 import {Box, Button, useToast} from '@chakra-ui/react';
 
 const EmailOtpInputForm = () => {
@@ -16,12 +17,14 @@ const EmailOtpInputForm = () => {
   const mobileNumber = useAppSelector(
     (state) => state?.app?.user?.data?.mobileNumber,
   );
+  const infoData = useAppSelector((state) => state?.app?.user?.data);
   const email = useAppSelector((state) => state?.app?.user?.data?.email);
   const otp_hash = useAppSelector((state) => state?.app?.user?.data?.otp_hash);
   const [validateEmailOtp, validateEmailOtpStatus] =
     useValidateEmailOtpMutation();
   const [sendOTPToMobile, sendOTPToMobileStatus] = useSendOTPToMobileMutation();
   const toast = useToast();
+  const dispatch = useAppDispatch();
 
   return (
     <Box mt='1.35rem' width={{lg: '468px'}}>
@@ -97,6 +100,14 @@ const EmailOtpInputForm = () => {
                 mobileNumber,
               });
               if (response?.data?.data) {
+                dispatch(
+                  setData({
+                    payload: {
+                      ...infoData,
+                      mobile_hash: response?.data?.data?.otp_hash,
+                    },
+                  }),
+                );
                 toast({
                   title: 'OTP sent to Phone Number',
                   description: 'An OTP has been sent to your Mobile Number',

@@ -17,6 +17,9 @@ const MobileOtpInputForm = () => {
   const mobileNumber = useAppSelector(
     (state) => state?.app?.user?.data?.mobileNumber,
   );
+  const otp_hash = useAppSelector(
+    (state) => state?.app?.user?.data?.mobile_hash,
+  );
   const password = useAppSelector((state) => state?.app?.user?.data?.password);
   const [validateMobileOtp, validateMobileOtpStatus] =
     useValidateMobileOtpMutation();
@@ -80,6 +83,7 @@ const MobileOtpInputForm = () => {
             const res: any = await validateMobileOtp({
               mobileNumber,
               otp_code: otp,
+              otp_hash,
             });
             console.log('resSignUp', res);
             if (res?.data?.data) {

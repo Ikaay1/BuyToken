@@ -116,7 +116,8 @@ const UtilityPaymentInternet = ({
               bundleType: bundleCode?.split('$')[1],
               bundleTypeCode: bundleCode?.split('$')[0],
               CustomerPhone: phone,
-              amount: (
+              amount: bundleCode?.split('$')[2],
+              discount: (
                 Number(bundleCode?.split('$')[2]) * payPercentage
               ).toString(),
               MerchantFK: Number(internetDetails?.merchantId),

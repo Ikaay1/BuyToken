@@ -62,7 +62,7 @@ const SignupForm = () => {
 
           const data = {
             name,
-            mobileNumber: phone,
+            mobileNumber: phone.slice(1),
             email,
             password,
           };
@@ -111,7 +111,7 @@ const SignupForm = () => {
             />
             <Box mt='.8rem'>
               <AuthInput
-                placeholder='Phone Number (should start with 234)'
+                placeholder='Phone Number (should start with +234)'
                 type='tel'
                 icon={IdCardIcon}
                 value='phone'
