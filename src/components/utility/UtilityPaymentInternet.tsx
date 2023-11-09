@@ -96,7 +96,7 @@ const UtilityPaymentInternet = ({
             });
             return;
           }
-          if (!phone.startsWith("234")) {
+          /* if (!phone.startsWith("234")) {
             toast({
               title: "Invalid phone number",
               description:
@@ -107,7 +107,7 @@ const UtilityPaymentInternet = ({
               position: "top-right",
             });
             return;
-          }
+          }*/
           if (!bundleCode) {
             setBundleCodeError("Please select a Data Bundle");
             return;
