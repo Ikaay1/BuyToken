@@ -59,7 +59,8 @@ const UtilityPaymentAirtime = ({
             const res: any = await buyAirtime({
               phoneNumber: phone,
               serviceType: airtimeDetails?.merchantId,
-              amount: Number(amount) * payPercentage,
+              amount: Number(amount),
+              discount: Number(amount) * payPercentage,
             });
             console.log('buyResp', res);
             if (res?.data?.data) {

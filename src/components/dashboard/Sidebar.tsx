@@ -200,7 +200,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                     lineHeight='26px'
                     color='#1E1E1F'
                   >
-                    {phone}
+                    {'+' + phone}
                   </Text>
                 </Box>
                 <Icon
