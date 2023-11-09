@@ -78,11 +78,7 @@ const UtilityServices = () => {
   useEffect(() => {
     if (utility) {
       setState('Provider');
-      if (utility !== 'Data') {
-        setProvider(utility);
-      } else {
-        setProvider('Internet');
-      }
+      setProvider(utility);
       dispatch(clearUtility({payload: {}}));
     }
   }, [utility]);
@@ -160,8 +156,8 @@ const UtilityServices = () => {
               ? 'Electricity'
               : provider === 'Borrow'
               ? 'Borrow Electricity'
-              : provider === 'Internet'
-              ? 'Internet'
+              : provider === 'Data'
+              ? 'Data'
               : provider === 'Airtime'
               ? 'Airtime'
               : 'Cable'
@@ -238,7 +234,7 @@ const UtilityServices = () => {
                 setState={setState}
                 setAirtimeDetails={setAirtimeDetails}
               />
-            ) : provider === 'Internet' ? (
+            ) : provider === 'Data' ? (
               <UtilityProviderInternet
                 setInternetDetails={setInternetDetails}
                 setState={setState}
@@ -277,7 +273,7 @@ const UtilityServices = () => {
             />
           ) : provider === 'Airtime' ? (
             <UtilityPaymentAirtime airtimeDetails={airtimeDetails} />
-          ) : provider === 'Internet' ? (
+          ) : provider === 'Data' ? (
             <UtilityPaymentInternet internetDetails={internetDetails} />
           ) : (
             <UtilityPaymentCable cableDetails={cableDetails} />

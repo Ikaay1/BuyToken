@@ -21,7 +21,7 @@ const Service = ({
           {icon: BulbIcon, name: 'Electricity'},
           {icon: PhoneIcon, name: 'Airtime'},
           {icon: ComputerIcon, name: 'Cable TV'},
-          {icon: InternetIcon, name: 'Internet'},
+          {icon: InternetIcon, name: 'Data'},
         ].map(({icon, name}) => (
           <Box key={name} w={{base: '20%', lg: 'auto'}}>
             <Flex
@@ -37,8 +37,8 @@ const Service = ({
                   setProvider('Electricity');
                 } else if (name === 'Airtime') {
                   setProvider('Airtime');
-                } else if (name === 'Internet') {
-                  setProvider('Internet');
+                } else if (name === 'Data') {
+                  setProvider('Data');
                 } else {
                   setProvider('Cable TV');
                 }
