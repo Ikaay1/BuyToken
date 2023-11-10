@@ -260,6 +260,7 @@ const UtilityPaymentInternet = ({
                 fontWeight='600'
                 color='#FFFFFF'
                 w={{base: '100%', lg: 'auto'}}
+                isLoading={priceListStatus.isLoading || buyDataStatus.isLoading}
                 type='submit'
               >
                 Pay{' '}
