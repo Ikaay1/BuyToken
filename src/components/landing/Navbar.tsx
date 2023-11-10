@@ -186,6 +186,7 @@ const Navbar = () => {
                 borderRadius='5px'
                 justifyContent={'center'}
                 alignItems={'center'}
+                cursor='pointer'
                 onClick={() => router.push('/login')}
               >
                 <Icon
