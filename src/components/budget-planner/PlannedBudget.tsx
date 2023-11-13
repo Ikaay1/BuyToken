@@ -1,9 +1,7 @@
 import React from 'react';
 
 import EditIcon from '@/assets/EditIcon';
-import {Box, Flex, Icon, Image, Progress, Text} from '@chakra-ui/react';
-
-import BudgetForm from './BudgetForm';
+import {Box, Flex, Icon, Progress, Text} from '@chakra-ui/react';
 
 const PlannedBudget = () => {
   return (
