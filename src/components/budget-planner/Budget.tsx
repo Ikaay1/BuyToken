@@ -6,8 +6,7 @@ import {Box} from '@chakra-ui/react';
 import Footer from '../dashboard/Footer';
 import Navbar from '../dashboard/Navbar';
 import BudgetPlanner from './BudgetPlanner';
-
-// import PlannedBudget from './PlannedBudget';
+import PlannedBudget from './PlannedBudget';
 
 const Budget = () => {
   return (
@@ -20,8 +19,8 @@ const Budget = () => {
     >
       <Navbar />
       <Box px={{lg: '2rem'}} h='calc(100vh - 77px)'>
-        <BudgetPlanner />
-        {/* <PlannedBudget /> */}
+        {/* <BudgetPlanner /> */}
+        <PlannedBudget />
         <Footer />
       </Box>
     </Box>
