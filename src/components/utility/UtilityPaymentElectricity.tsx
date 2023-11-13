@@ -117,7 +117,8 @@ const UtilityPaymentElectricity = ({
               if (res?.data?.data) {
                 toast({
                   title: 'Purchase successful',
-                  description: 'Your purchase has been successful',
+                  description:
+                    'Your purchase has been successful. Your Token has been sent to your email address',
                   status: 'success',
                   duration: 8000,
                   isClosable: true,

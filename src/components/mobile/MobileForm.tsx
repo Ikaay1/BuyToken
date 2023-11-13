@@ -24,11 +24,25 @@ const MobileForm = () => {
         }}
         enableReinitialize
         validationSchema={Yup.object({
-          mobileNumber: Yup.string().required('Mobile Number is Required'),
+          mobileNumber: Yup.string()
+            .required('Phone Number is Required')
+            .min(14, 'Must be exactly 14 digits')
+            .max(14, 'Must be exactly 14 digits'),
         })}
         onSubmit={async ({mobileNumber}) => {
+          if (!mobileNumber.startsWith('+234')) {
+            toast({
+              title: 'Invalid phone number',
+              description: 'Phone number must start with +234',
+              status: 'error',
+              duration: 8000,
+              isClosable: true,
+              position: 'top-right',
+            });
+            return;
+          }
           const response: any = await sendOTPToMobile({
-            mobileNumber,
+            mobileNumber: mobileNumber.slice(1),
           });
           if (response?.data?.data) {
             toast({
@@ -41,7 +55,10 @@ const MobileForm = () => {
             });
             dispatch(
               setData({
-                payload: {userName: mobileNumber},
+                payload: {
+                  userName: mobileNumber.slice(1),
+                  mobile_hash_reset: response?.data?.data?.otp_hash,
+                },
               }),
             );
             router.push('/mobileResetOtp');
@@ -63,7 +80,7 @@ const MobileForm = () => {
         {(props) => (
           <Form>
             <AuthInput
-              placeholder='Enter Your Mobile Number'
+              placeholder='Enter Your Mobile Number (+2348046578833)'
               type='text'
               icon={MessageIcon}
               value='mobileNumber'

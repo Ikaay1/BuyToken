@@ -12,6 +12,9 @@ const MobileResetOtpInputForm = () => {
   const router = useRouter();
   const [error, setError] = useState('');
   const userName = useAppSelector((state) => state?.app?.user?.data?.userName);
+  const otp_hash = useAppSelector(
+    (state) => state?.app?.user?.data?.mobile_hash_reset,
+  );
   const [validateMobileOtp, validateMobileOtpStatus] =
     useValidateMobileOtpMutation();
   const toast = useToast();
@@ -73,6 +76,7 @@ const MobileResetOtpInputForm = () => {
             const res: any = await validateMobileOtp({
               mobileNumber: userName,
               otp_code: otp,
+              otp_hash,
             });
             console.log('res', res);
             if (res?.data?.data) {
