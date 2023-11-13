@@ -1,6 +1,7 @@
 import {useRouter} from 'next/router';
 import React, {useRef, useState} from 'react';
 
+import BudgetIcon from '@/assets/BudgetIcon';
 import CardIcon from '@/assets/CardIcon';
 import CloseIcon from '@/assets/CloseIcon';
 import HouseIcon from '@/assets/HouseIcon';
@@ -79,7 +80,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
               display={{lg: 'none'}}
             />
           </Flex>
-          <Box ml='1.7rem' mt='4rem'>
+          <Box ml='1.7rem' mt='3rem'>
             <Flex alignItems={'center'} pr='.6rem'>
               <Box position={'relative'} mr='.7rem'>
                 <Image
@@ -220,6 +221,11 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                 name: 'Transaction History',
                 icon: TransactionIcon,
                 route: '/transaction-history',
+              },
+              {
+                name: 'Budget Planner',
+                icon: BudgetIcon,
+                route: '/budget-planner',
               },
             ].map(({name, icon, route}) => (
               <Flex
