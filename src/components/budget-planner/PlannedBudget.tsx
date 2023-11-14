@@ -1,4 +1,5 @@
 import React from 'react';
+import {PieChart} from 'react-minimal-pie-chart';
 
 import EditIcon from '@/assets/EditIcon';
 import {Box, Flex, Icon, Progress, Text} from '@chakra-ui/react';
@@ -45,6 +46,7 @@ const PlannedBudget = () => {
         alignItems={'center'}
         mt='2.5rem'
         maxWidth={{lg: '850px', mlg: '100%'}}
+        mb='8rem'
       >
         <Box w='415px'>
           <Flex
@@ -94,6 +96,55 @@ const PlannedBudget = () => {
               </Box>
             ))}
           </Box>
+        </Box>
+        <Box width='285px' h='285px'>
+          <Text
+            fontFamily='Raleway'
+            fontWeight='700'
+            fontSize='20px'
+            color='#000000'
+            textAlign={'center'}
+            mb='.65rem'
+          >
+            Distribution
+          </Text>
+          <PieChart
+            data={[
+              {
+                title: 'Electricity',
+                value: 50,
+                color: `rgba(76,173,115,${50 / 100})`,
+              },
+              {
+                title: 'Airtime',
+                value: 60,
+                color: `rgba(76,173,115,${100 / 100})`,
+              },
+              {
+                title: 'Data',
+                value: 80,
+                color: `rgba(76,173,115,${20 / 100})`,
+              },
+              {
+                title: 'CableTV',
+                value: 70,
+                color: `rgba(76,173,115,${70 / 100})`,
+              },
+            ]}
+            label={(props) => {
+              const {value, title} = props.dataEntry;
+              return `${title} - ${value}%`;
+            }}
+            labelStyle={{
+              fontFamily: 'Raleway',
+              fontWeight: '600',
+              fontSize: '3px',
+              lineHeight: '20px',
+              fill: '#FFFFFF',
+            }}
+            labelPosition={50}
+            animate
+          />
         </Box>
       </Flex>
     </Box>
