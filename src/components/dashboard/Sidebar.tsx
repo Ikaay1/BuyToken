@@ -223,7 +223,7 @@ const Sidebar = ({onClose}: {onClose?: () => void}) => {
                 route: '/transaction-history',
               },
               {
-                name: 'Budget Planner',
+                name: 'SmartSpend',
                 icon: BudgetIcon,
                 route: '/budget-planner',
               },

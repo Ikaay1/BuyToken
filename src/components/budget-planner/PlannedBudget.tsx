@@ -22,7 +22,7 @@ const PlannedBudget = () => {
         color='#000000'
         textAlign={'center'}
       >
-        Budget Planner
+        Visualize Your Financial Journey 📊
       </Text>
       <Text
         width='821px'
@@ -34,12 +34,9 @@ const PlannedBudget = () => {
         color='#000000'
         mt='.7rem'
       >
-        We&apos;re here to support your financial goals, providing personalized
-        insights, exclusive discounts, and a streamlined approach to managing
-        your utility expenses. Take a proactive step towards financial
-        discipline
-        <br />– fund your BuyToken account with your intended utility amount for
-        a smarter, more organized budgeting experience.
+        Stay in the know with BuyToken&apos;s SmartSpend. Watch the % of your
+        budget unfold in real-time for electricity, airtime, and data. Your
+        financial clarity begins here!
       </Text>
       <Flex
         justifyContent={'space-between'}
@@ -77,7 +74,7 @@ const PlannedBudget = () => {
                   {name}
                 </Text>
                 <Progress
-                  colorScheme='green'
+                  colorScheme={value > 100 ? 'red' : 'green'}
                   size='md'
                   value={value}
                   borderRadius='10px'

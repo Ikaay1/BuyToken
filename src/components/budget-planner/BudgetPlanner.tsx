@@ -22,7 +22,7 @@ const BudgetPlanner = () => {
         color='#000000'
         textAlign={'center'}
       >
-        Budget Planner
+        Craft Your Budget, Your Way 🎯
       </Text>
       <Text
         width='566px'
@@ -34,17 +34,19 @@ const BudgetPlanner = () => {
         color='#000000'
         mt='.7rem'
       >
-        Set and manage your monthly utility budgets effortlessly, making wise
-        spending decisions while enjoying discounts on essential services.
+        Customize your utility budgets effortlessly. Simply enter your preferred
+        spending for electricity, airtime, and data. BuyToken&apos;s SmartSpend
+        Planner puts financial control at your fingertips.
       </Text>
       <Flex
         justifyContent={'space-between'}
         alignItems={'center'}
-        mt='3rem'
+        mt='2.1rem'
+        mb='8rem'
         maxWidth={{lg: '850px', mlg: '100%'}}
       >
         <Box w={{lg: '455px', mlg: '516px'}}>
-          <Text
+          {/* <Text
             fontFamily='Raleway'
             fontWeight='700'
             fontSize='18px'
@@ -63,7 +65,7 @@ const BudgetPlanner = () => {
             Ensuring your financial comfort is our priority! What&apos;s the
             budget you have in mind for utilities this month? Your preferences
             will help us personalize your utility spending experience.
-          </Text>
+          </Text> */}
           <BudgetForm />
         </Box>
         <Image src='/assets/budget.png' alt='Budget' />
