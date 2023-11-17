@@ -13,23 +13,23 @@ const PlannedBudget = () => {
       pb={{base: '3.2rem', lg: '1.1rem'}}
       mt='1.25rem'
       mx={{base: '.5rem', lg: 0}}
-      px={{base: '1rem', lg: '3.8rem'}}
+      px={{base: '.8rem', lg: '3.8rem'}}
     >
       <Text
         fontFamily='Raleway'
         fontWeight='700'
-        fontSize='20px'
+        fontSize={{lg: '20px'}}
         color='#000000'
-        textAlign={'center'}
+        textAlign={{lg: 'center'}}
       >
         Visualize Your Financial Journey 📊
       </Text>
       <Text
-        width='821px'
+        width={{lg: '821px'}}
         fontFamily='Poppins'
         fontSize='14px'
         lineHeight='21px'
-        textAlign='center'
+        textAlign={{lg: 'center'}}
         mx='auto'
         color='#000000'
         mt='.7rem'
@@ -44,8 +44,9 @@ const PlannedBudget = () => {
         mt='2.5rem'
         maxWidth={{lg: '850px', mlg: '100%'}}
         mb='8rem'
+        display={{base: 'block', lg: 'flex'}}
       >
-        <Box w='415px'>
+        <Box w={{lg: '415px'}}>
           <Flex
             w='85px'
             ml='auto'
@@ -86,7 +87,7 @@ const PlannedBudget = () => {
                   color='#000000'
                   ml={
                     value >= 100
-                      ? `calc(${value}% - 10%)`
+                      ? `calc(${value}% - 12%)`
                       : `calc(${value}% - 3%)`
                   }
                 >{`${value}%`}</Text>
@@ -94,7 +95,12 @@ const PlannedBudget = () => {
             ))}
           </Box>
         </Box>
-        <Box width='285px' h='285px'>
+        <Box
+          width='285px'
+          h='285px'
+          mx={{base: 'auto', lg: '0'}}
+          mt={{base: '1.2rem', lg: 0}}
+        >
           <Text
             fontFamily='Raleway'
             fontWeight='700'

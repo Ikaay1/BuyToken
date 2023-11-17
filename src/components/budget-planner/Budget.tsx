@@ -19,8 +19,8 @@ const Budget = () => {
     >
       <Navbar />
       <Box px={{lg: '2rem'}} h='calc(100vh - 77px)'>
-        {/* <BudgetPlanner /> */}
-        <PlannedBudget />
+        <BudgetPlanner />
+        {/* <PlannedBudget /> */}
         <Footer />
       </Box>
     </Box>

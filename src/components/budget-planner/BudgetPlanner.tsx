@@ -13,23 +13,23 @@ const BudgetPlanner = () => {
       pb={{base: '3.2rem', lg: '1.1rem'}}
       mt='1.25rem'
       mx={{base: '.5rem', lg: 0}}
-      px={{base: '1rem', lg: '3.8rem'}}
+      px={{base: '.8rem', lg: '3.8rem'}}
     >
       <Text
         fontFamily='Raleway'
         fontWeight='700'
-        fontSize='20px'
+        fontSize={{lg: '20px'}}
         color='#000000'
-        textAlign={'center'}
+        textAlign={{lg: 'center'}}
       >
         Craft Your Budget, Your Way 🎯
       </Text>
       <Text
-        width='566px'
+        width={{lg: '821px'}}
         fontFamily='Poppins'
         fontSize='14px'
         lineHeight='21px'
-        textAlign='center'
+        textAlign={{lg: 'center'}}
         mx='auto'
         color='#000000'
         mt='.7rem'
@@ -41,9 +41,10 @@ const BudgetPlanner = () => {
       <Flex
         justifyContent={'space-between'}
         alignItems={'center'}
-        mt='2.1rem'
+        mt={{lg: '2.1rem'}}
         mb='8rem'
         maxWidth={{lg: '850px', mlg: '100%'}}
+        display={{base: 'block', lg: 'flex'}}
       >
         <Box w={{lg: '455px', mlg: '516px'}}>
           {/* <Text
@@ -68,7 +69,14 @@ const BudgetPlanner = () => {
           </Text> */}
           <BudgetForm />
         </Box>
-        <Image src='/assets/budget.png' alt='Budget' />
+        <Image
+          src='/assets/budget.png'
+          alt='Budget'
+          w={{base: '155px', lg: 'auto'}}
+          h={{base: '156px', lg: 'auto'}}
+          mx={{base: 'auto', lg: 0}}
+          mt={{base: '2rem', lg: 0}}
+        />
       </Flex>
     </Box>
   );

@@ -43,19 +43,19 @@ const BudgetForm = () => {
               />
             ))}
             <Flex
-              justifyContent={'flex-end'}
+              justifyContent={{base: 'center', lg: 'flex-end'}}
               mt='1.2rem'
               width={{lg: '433px', mlg: '497px'}}
             >
               <Button
-                width='132px'
-                height='33px'
+                width={{base: '310px', lg: '132px'}}
+                height={{base: '47px', lg: '33px'}}
                 background='#417657'
                 boxShadow='0px 24.2056px 48.4112px 7.26168px rgba(0, 0, 0, 0.1)'
                 borderRadius='5px'
                 fontFamily='Raleway'
                 fontWeight='600'
-                fontSize='13px'
+                fontSize={{lg: '13px'}}
                 color='#FFFFFF'
                 type='submit'
               >

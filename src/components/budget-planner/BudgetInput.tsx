@@ -15,7 +15,7 @@ const BudgetInput = ({
       {({field, form}: any) => (
         <FormControl isInvalid={form.errors[value] && form.touched[value]}>
           <Input
-            width={{lg: '433px', mlg: '497px'}}
+            width={{base: '100%', lg: '433px', mlg: '497px'}}
             height='50px'
             background='#F5F5F5'
             borderRadius='6px'
