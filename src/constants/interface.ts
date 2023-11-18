@@ -25,3 +25,17 @@ export interface TransactionInterface {
   status: string;
   transactionType: string;
 }
+
+export interface PlannedInterface {
+  electricity: number;
+  data: number;
+  airtime: number;
+  cableTv: number;
+}
+
+export interface ExpensesInterface {
+  electricity: number;
+  data: number;
+  airtime: number;
+  cable: number;
+}

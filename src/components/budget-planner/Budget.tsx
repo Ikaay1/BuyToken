@@ -31,10 +31,13 @@ const Budget = () => {
           ></Skeleton>
         ) : !data ? (
           <Box></Box>
-        ) : !data?.data?.electricity ? (
+        ) : !data?.data?.planner?.electricity ? (
           <BudgetPlanner />
         ) : (
-          <PlannedBudget />
+          <PlannedBudget
+            planned={data?.data?.planner}
+            expenses={data?.data?.trans}
+          />
         )}
 
         <Footer />
