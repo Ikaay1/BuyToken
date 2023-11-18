@@ -1,12 +1,12 @@
 import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  persistReducer,
-  persistStore,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
+	FLUSH,
+	PAUSE,
+	PERSIST,
+	persistReducer,
+	persistStore,
+	PURGE,
+	REGISTER,
+	REHYDRATE,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -14,19 +14,20 @@ import userReducer from '@/redux/slices/authSlice';
 import serviceReducer from '@/redux/slices/serviceSlice';
 import utilityReducer from '@/redux/slices/utilitySlice';
 import {
-  Action,
-  combineReducers,
-  configureStore,
-  ThunkAction,
+	Action,
+	combineReducers,
+	configureStore,
+	ThunkAction,
 } from '@reduxjs/toolkit';
-import {setupListeners} from '@reduxjs/toolkit/dist/query';
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
-import {authApi} from '../services/auth.service';
-import {electricityApi} from '../services/electricity.service';
-import {notificationsApi} from '../services/notifications.service';
-import {transactionsApi} from '../services/transactions.service';
-import {userApi} from '../services/user.service';
-import {utilitiesApi} from '../services/utilities.service';
+import { authApi } from '../services/auth.service';
+import { budgetApi } from '../services/budget.service';
+import { electricityApi } from '../services/electricity.service';
+import { notificationsApi } from '../services/notifications.service';
+import { transactionsApi } from '../services/transactions.service';
+import { userApi } from '../services/user.service';
+import { utilitiesApi } from '../services/utilities.service';
 
 const persistConfig = {
   key: 'root',
@@ -49,6 +50,7 @@ export const store: any = configureStore({
     [transactionsApi.reducerPath]: transactionsApi.reducer,
     [notificationsApi.reducerPath]: notificationsApi.reducer,
     [utilitiesApi.reducerPath]: utilitiesApi.reducer,
+    [budgetApi.reducerPath]: budgetApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -62,6 +64,7 @@ export const store: any = configureStore({
       transactionsApi.middleware,
       notificationsApi.middleware,
       utilitiesApi.middleware,
+      budgetApi.middleware,
     ]),
 });
 

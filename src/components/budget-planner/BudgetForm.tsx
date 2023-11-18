@@ -2,11 +2,13 @@ import {Form, Formik} from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
 
+import {useSetBudgetMutation} from '@/redux/services/budget.service';
 import {Box, Button, Flex} from '@chakra-ui/react';
 
 import BudgetInput from './BudgetInput';
 
 const BudgetForm = () => {
+  const [setBudget, setBudgetStatus] = useSetBudgetMutation();
   return (
     <Box mt='.9rem'>
       <Formik
@@ -31,7 +33,15 @@ const BudgetForm = () => {
             .required('Cable TV is Required')
             .typeError('Cable TV must be a number'),
         })}
-        onSubmit={async ({}) => {}}
+        onSubmit={async ({electricity, airtime, data, cabletv}) => {
+          const res: any = await setBudget({
+            electricity: Number(electricity),
+            airtime: Number(airtime),
+            data: Number(data),
+            cableTv: Number(cabletv),
+          });
+          console.log('res', res);
+        }}
       >
         {(props) => (
           <Form>
@@ -58,6 +68,7 @@ const BudgetForm = () => {
                 fontSize={{lg: '13px'}}
                 color='#FFFFFF'
                 type='submit'
+                isLoading={setBudgetStatus.isLoading}
               >
                 Submit
               </Button>
