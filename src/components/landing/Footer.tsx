@@ -81,7 +81,7 @@ const Footer = () => {
             {icon: InstagramIcon, name: 'Instagram'},
             {icon: TikTokIcon, name: 'TikTok'},
           ].map(({name, icon}) => (
-            <Flex key={name} mt='1rem'>
+            <Flex key={name} mt='1rem' alignItems={'center'}>
               <Icon as={icon} w='20px' h='20px' mr='.55rem' />
               <Text
                 fontFamily='Poppins'
