@@ -9,6 +9,8 @@ import PhoneIcon from '@/assets/PhoneIcon';
 import RightIcon from '@/assets/RightIcon';
 import {Box, Button, Flex, Icon, Image, Text} from '@chakra-ui/react';
 
+import HamburgerMenu from './HamburgerMenu';
+
 const Header = () => {
   const [showMessage, setShowMessage] = useState(1);
   return (
@@ -19,7 +21,13 @@ const Header = () => {
       pb='3.5rem'
       position={'relative'}
     >
-      <Flex justifyContent='space-between' pl='5rem' pr='3.5rem' pt='2rem'>
+      <Flex
+        justifyContent='space-between'
+        pl='5rem'
+        pr='3.5rem'
+        pt='2rem'
+        display={{base: 'none', lg: 'flex'}}
+      >
         <Image src='/assets/buytoken_logo.png' alt='buytoken logo' />
         <Flex alignItems={'center'}>
           <Flex mr='3.2rem'>
@@ -66,7 +74,31 @@ const Header = () => {
           </Flex>
         </Flex>
       </Flex>
-      <Box mt='10rem'>
+
+      {/* Mobile */}
+      <Flex
+        display={{base: 'flex', lg: 'none'}}
+        justifyContent={'space-between'}
+        py={'1.5rem'}
+        px={'.8rem'}
+        alignItems={'center'}
+      >
+        <HamburgerMenu />
+        <Image src='/assets/buytoken_logo.png' alt='Buy Token logo' h='100%' />
+        <Link href='/login'>
+          <Text
+            fontFamily='Inter'
+            h='100%'
+            fontSize={'10px'}
+            color='#FFFFFF'
+            cursor={'pointer'}
+          >
+            Login/Sign up
+          </Text>
+        </Link>
+      </Flex>
+
+      <Box mt={{base: '8rem', lg: '10rem'}}>
         {[
           {
             number: 1,
@@ -98,7 +130,7 @@ const Header = () => {
               <Text
                 fontFamily='Raleway'
                 fontWeight='700'
-                fontSize='36px'
+                fontSize={{base: '24px', lg: '36px'}}
                 color='#FFFFFF'
                 textAlign={'center'}
               >
@@ -106,17 +138,17 @@ const Header = () => {
               </Text>
               <Text
                 fontFamily='Poppins'
-                fontSize='18px'
+                fontSize={{base: '14px', lg: '18px'}}
                 textAlign='center'
                 color='#FFFFFF'
-                mt='2rem'
+                mt={{base: '.7rem', lg: '2rem'}}
               >
                 {each.description}
               </Text>
             </Box>
           </CSSTransition>
         ))}
-        <Flex justifyContent={'center'} mt='1.15rem'>
+        <Flex justifyContent={'center'} mt={{base: '1.3rem', lg: '1.15rem'}}>
           <Link href='/signup'>
             <Button
               width='221px'
@@ -127,11 +159,17 @@ const Header = () => {
               fontWeight='500'
               color='#FFFFFF'
             >
-              Get Started <Icon ml='.6rem' as={RightIcon} w='7.41px' h='12px' />
+              Get Started{' '}
+              <Icon
+                ml='.6rem'
+                as={RightIcon}
+                w={{base: '4.47px', lg: '7.41px'}}
+                h='12px'
+              />
             </Button>
           </Link>
         </Flex>
-        <Flex justifyContent={'center'} mt='6.5rem'>
+        <Flex justifyContent={'center'} mt={{base: '5rem', lg: '6.5rem'}}>
           {[1, 2, 3].map((each) => (
             <Box
               key={each}
@@ -155,7 +193,7 @@ const Header = () => {
         justifyContent={'space-between'}
         mx={{lg: 'auto'}}
         position={'absolute'}
-        bottom={{base: '-17%', lg: '-19%'}}
+        bottom={{base: '-19%', lg: '-19%'}}
         left='50%'
         transform={'translateX(-50%)'}
       >

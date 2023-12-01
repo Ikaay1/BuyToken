@@ -1,36 +1,41 @@
 import React from 'react';
 
-import ClockSvg from '@/assets/Clocksvg';
+import ClockSvg from '@/assets/ClockSvg';
 import NairaSvg from '@/assets/NairaSvg';
 import SlashedCardIcon from '@/assets/SlashedCardIcon';
 import {Box, Flex, Icon, SimpleGrid, Text} from '@chakra-ui/react';
 
 const WhySection = () => {
   return (
-    <Box pt={{base: '8rem', lg: '11rem'}} pb='3.8rem'>
+    <Box pt={{base: '9.5rem', lg: '11rem'}} pb='3.8rem'>
       <Text
         fontFamily='Raleway'
         fontWeight='600'
-        fontSize='30px'
+        fontSize={{base: '18px', lg: '30px'}}
         color='#929292'
         textAlign={'center'}
       >
         Why BuyToken?{' '}
-        <Text as='span' color='#4CAD73'>
+        <Text as={'span'} color='#4CAD73'>
           Because Your Finances Deserve a Friend 🌟
         </Text>
       </Text>
       <Box
         backgroundImage={'url(/assets/why_bg.png)'}
         backgroundRepeat={'no-repeat'}
-        backgroundPosition={'center right'}
-        h='280px'
-        w='1010px'
+        backgroundPosition={{base: 'center bottom', lg: 'center right'}}
+        h={{base: '745px', lg: '280px'}}
+        w={{lg: '1010px'}}
         mx='auto'
-        px={'2rem'}
+        px={{base: '1.5rem', lg: '2rem'}}
         mt='2.3rem'
       >
-        <SimpleGrid columns={2} spacing={10} spacingY={8} w='690px'>
+        <SimpleGrid
+          columns={{base: 1, lg: 2}}
+          spacing={10}
+          spacingY={8}
+          w={{lg: '690px'}}
+        >
           {[
             {
               icon: NairaSvg,

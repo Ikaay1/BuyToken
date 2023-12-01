@@ -19,7 +19,7 @@ const FrequentlyQuestions = ({index, text}: {index: number; text: string}) => {
         borderRadius='5px'
         justifyContent={'space-between'}
         alignItems={'center'}
-        px='1.3rem'
+        px={{base: '.6rem', lg: '1.3rem'}}
       >
         <Text
           fontFamily='Raleway'
@@ -33,6 +33,8 @@ const FrequentlyQuestions = ({index, text}: {index: number; text: string}) => {
           <Icon
             as={AddIcon}
             onClick={() => setShow(true)}
+            w={{base: '12px', lg: '15px'}}
+            h={{base: '12px', lg: '15px'}}
             color='#929292'
             cursor='pointer'
           />
@@ -41,6 +43,8 @@ const FrequentlyQuestions = ({index, text}: {index: number; text: string}) => {
             as={RemoveIcon}
             onClick={() => setShow(false)}
             color='#929292'
+            w={{base: '12px', lg: '14px'}}
+            h={{base: '12px', lg: '14px'}}
             cursor='pointer'
           />
         )}
@@ -63,7 +67,7 @@ const FrequentlyQuestions = ({index, text}: {index: number; text: string}) => {
             <Icon as={SmallPlayIcon} w='10px' h='10px' mr='.15rem' />
             <Text
               fontFamily='Raleway'
-              fontSize='11px'
+              fontSize={{base: '12px', lg: '11px'}}
               textDecoration='underline'
               color='#929292'
             >

@@ -16,8 +16,17 @@ const VideoSection = () => {
     }
   };
   return (
-    <Box background='rgba(76, 173, 115, 0.2)' py='3rem'>
-      <Box width='766px' maxH='484px' mx='auto' position={'relative'}>
+    <Box
+      background='rgba(76, 173, 115, 0.2)'
+      py={{base: '1.8rem', lg: '3rem'}}
+      px={{base: '1.4rem', lg: 0}}
+    >
+      <Box
+        width={{lg: '766px'}}
+        maxH={{base: '238px', lg: '484px'}}
+        mx='auto'
+        position={'relative'}
+      >
         <video src='/assets/share.mp4' ref={videoRef}></video>
         {isPlaying ? (
           <Icon
@@ -26,8 +35,8 @@ const VideoSection = () => {
             top='50%'
             left='50%'
             transform={'translate(-50%, -50%)'}
-            w='66px'
-            h='66px'
+            w={{base: '32.45px', lg: '66px'}}
+            h={{base: '32.45px', lg: '66px'}}
             cursor='pointer'
             onClick={handlePlay}
           />
@@ -38,8 +47,8 @@ const VideoSection = () => {
             top='50%'
             left='50%'
             transform={'translate(-50%, -50%)'}
-            w='66px'
-            h='66px'
+            w={{base: '32.45px', lg: '66px'}}
+            h={{base: '32.45px', lg: '66px'}}
             cursor='pointer'
             onClick={handlePlay}
           />

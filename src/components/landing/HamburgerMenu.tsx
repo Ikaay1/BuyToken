@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import React, {useState} from 'react';
+import {AiOutlineCloseCircle} from 'react-icons/ai';
+import {GiHamburgerMenu} from 'react-icons/gi';
 
 import {
-	Box,
-	Flex,
-	Icon,
-	Image,
-	Modal,
-	ModalContent,
-	ModalOverlay,
-	Text,
-	useDisclosure,
+  Box,
+  Flex,
+  Icon,
+  Image,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  Text,
+  useDisclosure,
 } from '@chakra-ui/react';
 
 const HamburgerMenu = () => {
@@ -56,7 +56,7 @@ const HamburgerMenu = () => {
                 />
               </Flex>
               <Image
-                src='/assets/bt_logo.png'
+                src='/assets/buytoken_logo.png'
                 mt='.5rem'
                 alt='Kruz logo'
                 h='100%'
