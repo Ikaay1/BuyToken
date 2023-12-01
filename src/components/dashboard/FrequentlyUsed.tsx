@@ -1,5 +1,5 @@
-import {useRouter} from 'next/router';
-import React, {useState} from 'react';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
 import BulbIcon from '@/assets/BulbIcon';
 import CancelIcon from '@/assets/CancelIcon';
@@ -8,11 +8,11 @@ import EditIcon from '@/assets/EditIcon';
 import InternetIcon from '@/assets/InternetIcon';
 import PhoneIcon from '@/assets/PhoneIcon';
 import RemoveIcon from '@/assets/RemoveIcon';
-import {useAppDispatch, useAppSelector} from '@/redux/app/hooks';
-import {useRemoveFavoriteUtilitiesMutation} from '@/redux/services/utilities.service';
-import {setUserProfile} from '@/redux/slices/authSlice';
-import {setUtility} from '@/redux/slices/serviceSlice';
-import {Box, Flex, Icon, Skeleton, Text, useToast} from '@chakra-ui/react';
+import { useAppDispatch, useAppSelector } from '@/redux/app/hooks';
+import { useRemoveFavoriteUtilitiesMutation } from '@/redux/services/utilities.service';
+import { setUserProfile } from '@/redux/slices/authSlice';
+import { setUtility } from '@/redux/slices/serviceSlice';
+import { Box, Flex, Icon, Skeleton, Text, useToast } from '@chakra-ui/react';
 
 import EditUtilities from './EditUtilities';
 import UpdateUtilities from './UpdateUtilities';
@@ -105,6 +105,7 @@ const FrequentlyUsed = () => {
                         top='-4px'
                         right='-4px'
                         as={RemoveIcon}
+                        color="#C20B0B"
                         cursor={'pointer'}
                         onClick={(e) => {
                           e.stopPropagation();

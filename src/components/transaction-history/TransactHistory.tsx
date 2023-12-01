@@ -239,7 +239,7 @@ const TransactHistory = () => {
         </Flex>
         <Text
           width='260px'
-          fontFamily="'Inter'"
+          fontFamily='Inter'
           fontSize={{base: '13px', lg: '14px'}}
           lineHeight='20px'
           textAlign='center'

@@ -40,6 +40,7 @@ const UpdateUtilities = ({
     <>
       <Icon
         as={AddIcon}
+        color='#D7D7D7'
         onClick={(e) => {
           e.stopPropagation();
           onOpen();
