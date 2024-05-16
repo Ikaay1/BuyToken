@@ -46,6 +46,13 @@ using Next.js.
    - Electricity purchased
    - ![image](/src/assets/images/receipt.jpg)
 
+7. Smart Spend 
+   - Input your budget for utilities for the month
+   - ![image](/src/assets/images/smartspend.jpg)
+
+   - Manage your spending using charts and graphs
+   - ![image](/src/assets/images/graph.jpg)
+
 ### Tools and Languages: 
 1.  **Next.js**
 2.  **TypeScript**
