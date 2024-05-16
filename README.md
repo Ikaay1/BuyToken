@@ -4,7 +4,7 @@ Utility Purchase solutions with `BuyToken`
 using Next.js.
 
 <p align="center">
-<a href="https://unite-apurva.herokuapp.com/landing">
+<a href="https://buytoken.app">
 <img src="/src/assets/images/logo.png" alt="BuyToken-logo"/>
 </a>
 </p>
